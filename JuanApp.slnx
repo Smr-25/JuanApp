@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="JuanApp.BLL/JuanApp.BLL.csproj" />
+  <Project Path="JuanApp.Core/JuanApp.Core.csproj" />
+  <Project Path="JuanApp.DLL/JuanApp.DLL.csproj" />
+  <Project Path="JuanApp.PL/JuanApp.PL.csproj" />
+</Solution>
