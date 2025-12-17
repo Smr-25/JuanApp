@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string env = "Code";
+string env = "Mac";
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{env}.json",

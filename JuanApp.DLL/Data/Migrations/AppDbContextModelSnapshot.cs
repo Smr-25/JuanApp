@@ -21,6 +21,92 @@ namespace JuanApp.DLL.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("JuanApp.Domain.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Building responsive and robust web applications.",
+                            Icon = "policy-1.png",
+                            Name = "Web Development"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Creating user-friendly mobile applications.",
+                            Icon = "policy-2.png",
+                            Name = "Mobile App Development"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Scalable and secure cloud computing services.",
+                            Icon = "policy-3.png",
+                            Name = "Cloud Solutions"
+                        });
+                });
+
             modelBuilder.Entity("JuanApp.Domain.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -31,15 +117,18 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.Property<string>("ButtonLink")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ButtonText")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -47,15 +136,39 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.Property<string>("SubTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Sliders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ButtonLink = "/about",
+                            ButtonText = "Learn More",
+                            Description = "Your trusted partner in software solutions.",
+                            ImageUrl = "slider-1.jpg",
+                            SubTitle = "Quality Software Solutions",
+                            Title = "Welcome to JuanApp"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ButtonLink = "/services",
+                            ButtonText = "Our Services",
+                            Description = "Transforming ideas into reality.",
+                            ImageUrl = "slider-2.jpg",
+                            SubTitle = "Cutting-Edge Technology",
+                            Title = "Innovative Solutions"
+                        });
                 });
 #pragma warning restore 612, 618
         }
