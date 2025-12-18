@@ -3,6 +3,7 @@ using JuanApp.DLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JuanApp.DLL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251218061513_mig_4")]
+    partial class mig_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,38 +58,6 @@ namespace JuanApp.DLL.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A comprehensive suite of productivity tools.",
-                            DiscountPercentage = 10,
-                            ImageUrl = "product-1.jpg",
-                            InStock = true,
-                            Name = "Productivity Suite",
-                            Price = 99.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Streamline your project workflows.",
-                            DiscountPercentage = 15,
-                            ImageUrl = "product-2.jpg",
-                            InStock = true,
-                            Name = "Project Management Tool",
-                            Price = 49.99m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Gain insights with our analytics platform.",
-                            DiscountPercentage = 20,
-                            ImageUrl = "product-3.jpg",
-                            InStock = false,
-                            Name = "Analytics Platform",
-                            Price = 149.99m
-                        });
                 });
 
             modelBuilder.Entity("JuanApp.Domain.Models.Service", b =>

@@ -28,4 +28,9 @@
 	  <ProjectReference Include="..\JuanApp.BLL\JuanApp.BLL.csproj" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Product\Detail.cshtml" />
+	</ItemGroup>
+
 </Project>

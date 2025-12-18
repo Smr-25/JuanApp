@@ -10,4 +10,5 @@ public class Product : BaseEntity
     public string ImageUrl { get; set; }
     public bool InStock { get; set; }
     public int DiscountPercentage { get; set; }
+    List<ProductImage> ProductImages { get; set; }
 }

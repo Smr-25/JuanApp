@@ -23,7 +23,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 ImageUrl = "slider-1.jpg",
                 ButtonText = "Learn More",
                 ButtonLink = "/about"
-
             },
             new Slider
             {
@@ -36,7 +35,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 ButtonLink = "/services"
             }
         );
-        
+
         modelBuilder.Entity<Service>().HasData(
             new Service
             {
@@ -59,9 +58,39 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 Description = "Scalable and secure cloud computing services.",
                 Icon = "policy-3.png"
             }
-            
         );
-        
+
+        modelBuilder.Entity<Product>().HasData(
+            new Product
+            {
+                Id = 1,
+                Name = "Productivity Suite",
+                Description = "A comprehensive suite of productivity tools.",
+                Price = 99.99m,
+                ImageUrl = "product-1.jpg",
+                InStock = true,
+                DiscountPercentage = 10
+            },
+            new Product
+            {
+                Id = 2,
+                Name = "Project Management Tool",
+                Description = "Streamline your project workflows.",
+                Price = 49.99m,
+                ImageUrl = "product-2.jpg",
+                InStock = true,
+                DiscountPercentage = 15
+            },
+            new Product
+            {
+                Id = 3,
+                Name = "Analytics Platform",
+                Description = "Gain insights with our analytics platform.",
+                Price = 149.99m,
+                ImageUrl = "product-3.jpg",
+                InStock = false,
+                DiscountPercentage = 20
+            }
+        );
     }
-    
 }
