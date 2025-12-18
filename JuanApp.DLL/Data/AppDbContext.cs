@@ -1,4 +1,5 @@
-﻿using JuanApp.Domain.Models;
+﻿using JuanApp.Core.Models;
+using JuanApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.DLL.Data;
@@ -8,7 +9,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Slider> Sliders { get; set; }
     public DbSet<Service> Services { get; set; }
     public DbSet<Product> Products { get; set; }
-
+    public DbSet<Setting> Settings { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -22,7 +23,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 Description = "Your trusted partner in software solutions.",
                 ImageUrl = "slider-1.jpg",
                 ButtonText = "Learn More",
-                ButtonLink = "/about"
+                ButtonLink = "/about",
             },
             new Slider
             {
@@ -92,5 +93,48 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 DiscountPercentage = 20
             }
         );
+        modelBuilder.Entity<Setting>().HasData(
+            new Setting
+            { 
+                Key = "Logo",
+                Value = "logo.png"
+            },
+            new Setting
+            {
+                Key = "ContactEmail",
+                Value = "myemail@gmail.com"
+            },
+            new Setting
+            {
+
+                Key = "ContactPhone",
+                Value = "+ 00 123 254565"
+            },
+            new Setting
+            {
+                Key = "Address",
+                Value = "1234 Street Name, City, Country"
+            },
+            new Setting
+            {
+                Key = "FacebookUrl",
+                Value = "https://facebook.com/yourpage"
+            },
+            new Setting
+            {
+                Key = "TwitterUrl",
+                Value = "https://twitter.com/yourprofile"
+            },
+            new Setting
+            {
+                Key = "LinkedInUrl",
+                Value = "https://linkedin.com/in/yourprofile"
+            },
+            new Setting
+            {
+                Key = "InstagramUrl",
+                Value = "https://instagram.com/yourprofile"
+            }
+            );
     }
 }

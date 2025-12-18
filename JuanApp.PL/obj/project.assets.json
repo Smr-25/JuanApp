@@ -6917,32 +6917,40 @@
     ]
   },
   "packageFolders": {
-    "/Users/asmrofficialfinder/.nuget/packages/": {}
+    "C:\\Users\\samiraa\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/JuanApp.PL.csproj",
+      "projectUniqueName": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\JuanApp.PL.csproj",
       "projectName": "JuanApp.PL",
-      "projectPath": "/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/JuanApp.PL.csproj",
-      "packagesPath": "/Users/asmrofficialfinder/.nuget/packages/",
-      "outputPath": "/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/obj/",
+      "projectPath": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\JuanApp.PL.csproj",
+      "packagesPath": "C:\\Users\\samiraa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/asmrofficialfinder/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\samiraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.BLL/JuanApp.BLL.csproj": {
-              "projectPath": "/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.BLL/JuanApp.BLL.csproj"
+            "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\JuanApp.BLL.csproj": {
+              "projectPath": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\JuanApp.BLL.csproj"
             }
           }
         }
@@ -7015,7 +7023,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

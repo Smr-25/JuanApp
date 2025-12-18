@@ -21,6 +21,62 @@ namespace JuanApp.DLL.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("JuanApp.Core.Models.Setting", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("Settings", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "Logo",
+                            Value = "logo.png"
+                        },
+                        new
+                        {
+                            Key = "ContactEmail",
+                            Value = "myemail@gmail.com"
+                        },
+                        new
+                        {
+                            Key = "ContactPhone",
+                            Value = "+ 00 123 254565"
+                        },
+                        new
+                        {
+                            Key = "Address",
+                            Value = "1234 Street Name, City, Country"
+                        },
+                        new
+                        {
+                            Key = "FacebookUrl",
+                            Value = "https://facebook.com/yourpage"
+                        },
+                        new
+                        {
+                            Key = "TwitterUrl",
+                            Value = "https://twitter.com/yourprofile"
+                        },
+                        new
+                        {
+                            Key = "LinkedInUrl",
+                            Value = "https://linkedin.com/in/yourprofile"
+                        },
+                        new
+                        {
+                            Key = "InstagramUrl",
+                            Value = "https://instagram.com/yourprofile"
+                        });
+                });
+
             modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -54,7 +110,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -113,7 +169,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
 
                     b.HasData(
                         new
@@ -178,7 +234,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders");
+                    b.ToTable("Sliders", (string)null);
 
                     b.HasData(
                         new

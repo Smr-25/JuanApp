@@ -14,5 +14,7 @@ public class SliderConfiguration : IEntityTypeConfiguration<Slider>
         builder.Property(s => s.Description).IsRequired().HasMaxLength(500);
         builder.Property(s => s.ButtonText).IsRequired().HasMaxLength(50);
         builder.Property(s => s.ButtonLink).IsRequired().HasMaxLength(200);
+        builder.Property(s => s.IsMain).IsRequired();
+
     }
 }

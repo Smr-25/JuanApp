@@ -14,5 +14,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.ImageUrl).IsRequired();
         builder.Property(p => p.InStock).IsRequired();
         builder.Property(p => p.DiscountPercentage).IsRequired();
+        builder.Property(p => p.IsNew).IsRequired();
+        builder.Property(p => p.IsMain).IsRequired();
     }
 }

@@ -1,9 +1,10 @@
+using JuanApp.BLL.Services;
 using JuanApp.DLL.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string env = "Mac";
+string env = "Code";
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{env}.json",
@@ -14,7 +15,7 @@ builder.Configuration
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<LayoutService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
