@@ -3,48 +3,104 @@
   "WorkspaceRootPath": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\configurations\\sliderconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\configurations\\sliderconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\configurations\\serviceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\configurations\\serviceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.core\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|solutionrelative:juanapp.core\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.core\\models\\slider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|solutionrelative:juanapp.core\\models\\slider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\configurations\\settingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\configurations\\settingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\configurations\\sliderconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\configurations\\sliderconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\interfaces\\ilayoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\interfaces\\ilayoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.core\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|solutionrelative:juanapp.core\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\layoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\layoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.core\\models\\slider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|solutionrelative:juanapp.core\\models\\slider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\viewmodel\\homevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\viewmodel\\homevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\advantageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\advantageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.core\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{24B3035C-1BCB-094F-26CF-6F2B8FFCAF26}|JuanApp.Core\\JuanApp.Core.csproj|solutionrelative:juanapp.core\\models\\setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\dtos\\homeproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\dtos\\homeproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\dtos\\homeadvantagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\dtos\\homeadvantagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\dtos\\homesliderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\dtos\\homesliderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\sliderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\sliderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\layoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\layoutservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\interfaces\\isliderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\interfaces\\isliderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.dll\\data\\migrations\\20251219123014_mig_7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66C6A0A8-DF0C-D6DA-FD58-8BA059565532}|JuanApp.DLL\\JuanApp.DLL.csproj|solutionrelative:juanapp.dll\\data\\migrations\\20251219123014_mig_7.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,8 +110,73 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20251219135525_mig_11.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Migrations\\20251219135525_mig_11.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:55:26.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ServiceConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\ServiceConfiguration.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Configurations\\ServiceConfiguration.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\ServiceConfiguration.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Configurations\\ServiceConfiguration.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwB0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:49:02.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SettingConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SettingConfiguration.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Configurations\\SettingConfiguration.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SettingConfiguration.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Configurations\\SettingConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:49:00.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Setting.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Setting.cs",
+              "RelativeDocumentMoniker": "JuanApp.Core\\Models\\Setting.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Setting.cs",
+              "RelativeToolTip": "JuanApp.Core\\Models\\Setting.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:46:15.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SliderConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswCQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:38:46.726Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -64,61 +185,178 @@
               "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Configurations\\ProductConfiguration.cs",
               "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\ProductConfiguration.cs",
               "RelativeToolTip": "JuanApp.DLL\\Data\\Configurations\\ProductConfiguration.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAUwBEAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAUwBoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:28:34.102Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SliderConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
-              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
-              "RelativeToolTip": "JuanApp.DLL\\Data\\Configurations\\SliderConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:28:09.423Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "JuanApp.Core\\Models\\Product.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Product.cs",
-              "RelativeToolTip": "JuanApp.Core\\Models\\Product.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAwA4AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:25:47.722Z",
+              "WhenOpened": "2025-12-19T13:37:03.653Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "JuanApp.Core\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Product.cs",
+              "RelativeToolTip": "JuanApp.Core\\Models\\Product.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:37:00.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "JuanApp.PL\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "JuanApp.PL\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAK0BAAAAAAAAAAAAALkBAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T12:46:06.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Slider.cs",
               "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Slider.cs",
               "RelativeDocumentMoniker": "JuanApp.Core\\Models\\Slider.cs",
               "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Slider.cs",
               "RelativeToolTip": "JuanApp.Core\\Models\\Slider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:24:25.108Z",
+              "WhenOpened": "2025-12-19T13:44:04.331Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ILayoutService.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Interfaces\\ILayoutService.cs",
-              "RelativeDocumentMoniker": "JuanApp.BLL\\Interfaces\\ILayoutService.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Interfaces\\ILayoutService.cs",
-              "RelativeToolTip": "JuanApp.BLL\\Interfaces\\ILayoutService.cs",
+              "DocumentIndex": 7,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "JuanApp.PL\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "JuanApp.PL\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAmwBEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:28:53.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20251219134432_mig_9.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Migrations\\20251219134432_mig_9.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:24:01.613Z",
+              "WhenOpened": "2025-12-19T13:44:32.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "20251219133239_mig_8.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Migrations\\20251219133239_mig_8.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:32:39.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:28:39.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AdvantageService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\AdvantageService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\AdvantageService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\AdvantageService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Services\\AdvantageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:27:44.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Program.cs",
+              "RelativeDocumentMoniker": "JuanApp.PL\\Program.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Program.cs",
+              "RelativeToolTip": "JuanApp.PL\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:09:18.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "HomeProductDto.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeProductDto.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Dtos\\HomeProductDto.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeProductDto.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Dtos\\HomeProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:59:45.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomeVm.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\ViewModel\\HomeVm.cs",
+              "RelativeDocumentMoniker": "JuanApp.PL\\ViewModel\\HomeVm.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\ViewModel\\HomeVm.cs",
+              "RelativeToolTip": "JuanApp.PL\\ViewModel\\HomeVm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:45:33.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomeAdvantageDto.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeAdvantageDto.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Dtos\\HomeAdvantageDto.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeAdvantageDto.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Dtos\\HomeAdvantageDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:25:07.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\ProductService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\ProductService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Services\\ProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T13:00:43.758Z",
               "EditorCaption": ""
             },
             {
@@ -127,80 +365,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "JuanApp.PL\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "JuanApp.PL\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T13:22:14.934Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "JuanApp.DLL\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAcwGEAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T11:37:48.582Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Program.cs",
-              "RelativeDocumentMoniker": "JuanApp.PL\\Program.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Program.cs",
-              "RelativeToolTip": "JuanApp.PL\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T12:34:01.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "JuanApp.PL\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "JuanApp.PL\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-18T12:30:47.707Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 21,
               "Title": "LayoutService.cs",
               "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\LayoutService.cs",
               "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\LayoutService.cs",
               "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\LayoutService.cs",
               "RelativeToolTip": "JuanApp.BLL\\Services\\LayoutService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T12:04:52.672Z",
+              "WhenOpened": "2025-12-19T12:39:53.579Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Setting.cs",
-              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Setting.cs",
-              "RelativeDocumentMoniker": "JuanApp.Core\\Models\\Setting.cs",
-              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.Core\\Models\\Setting.cs",
-              "RelativeToolTip": "JuanApp.Core\\Models\\Setting.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 18,
+              "Title": "HomeSliderDto.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeSliderDto.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Dtos\\HomeSliderDto.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Dtos\\HomeSliderDto.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Dtos\\HomeSliderDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T11:36:01.56Z",
+              "WhenOpened": "2025-12-19T12:36:44.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ISliderService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Interfaces\\ISliderService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Interfaces\\ISliderService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Interfaces\\ISliderService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Interfaces\\ISliderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:40:40.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "SliderService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\SliderService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\SliderService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\SliderService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Services\\SliderService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA2wA8AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:35:10.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "20251219123014_mig_7.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219123014_mig_7.cs",
+              "RelativeDocumentMoniker": "JuanApp.DLL\\Data\\Migrations\\20251219123014_mig_7.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.DLL\\Data\\Migrations\\20251219123014_mig_7.cs",
+              "RelativeToolTip": "JuanApp.DLL\\Data\\Migrations\\20251219123014_mig_7.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAqwHIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T12:30:14.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "JuanApp.PL\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "JuanApp.PL\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T12:31:10.782Z",
               "EditorCaption": ""
             }
           ]
