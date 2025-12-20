@@ -1,3 +1,5 @@
+using JuanApp.BLL.Interfaces;
+using JuanApp.BLL.Services;
 using JuanApp.DLL.Data;
 using JuanApp.PL.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -5,15 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.Controllers;
 
-public class HomeController(AppDbContext db)  : Controller
+public class HomeController(ISliderService sliderService,IProductService productService,AdvantageService advantageService) : Controller
 {
-    public IActionResult Index()
-    { 
+    public async Task<IActionResult> Index()
+    {
         var homeVm = new HomeVm
         {
-            Sliders = db.Sliders.ToList(),
-            Services = db.Services.ToList(),
-            Products = db.Products.ToList()
+            Slider = await sliderService.GetAllSlidersAsync(),
+            Product = await productService.GetAllProductsAsync(),
+            Advantage = await advantageService.GetAllAdvantagesAsync()
         };
 
         return View(homeVm);

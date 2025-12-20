@@ -22,8 +22,4 @@
 	  <ProjectReference Include="..\JuanApp.DLL\JuanApp.DLL.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Dtos\" />
-	</ItemGroup>
-
 </Project>

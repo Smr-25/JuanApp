@@ -24,15 +24,17 @@ namespace JuanApp.DLL.Data.Migrations
             modelBuilder.Entity("JuanApp.Core.Models.Setting", b =>
                 {
                     b.Property<string>("Key")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Key");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
 
                     b.HasData(
                         new
@@ -77,75 +79,7 @@ namespace JuanApp.DLL.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("DiscountPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A comprehensive suite of productivity tools.",
-                            DiscountPercentage = 10,
-                            ImageUrl = "product-1.jpg",
-                            InStock = true,
-                            Name = "Productivity Suite",
-                            Price = 99.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Streamline your project workflows.",
-                            DiscountPercentage = 15,
-                            ImageUrl = "product-2.jpg",
-                            InStock = true,
-                            Name = "Project Management Tool",
-                            Price = 49.99m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Gain insights with our analytics platform.",
-                            DiscountPercentage = 20,
-                            ImageUrl = "product-3.jpg",
-                            InStock = false,
-                            Name = "Analytics Platform",
-                            Price = 149.99m
-                        });
-                });
-
-            modelBuilder.Entity("JuanApp.Domain.Models.Service", b =>
+            modelBuilder.Entity("JuanApp.Domain.Models.Advantage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,7 +103,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Advantages");
 
                     b.HasData(
                         new
@@ -195,6 +129,146 @@ namespace JuanApp.DLL.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Advanced smartwatch with health tracking features.",
+                            DiscountPercentage = 10,
+                            ImageUrl = "product-1.jpg",
+                            InStock = true,
+                            IsMain = true,
+                            IsNew = false,
+                            Name = "Smart Watch Pro",
+                            Price = 199.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Noise cancelling over-ear wireless headphones.",
+                            DiscountPercentage = 15,
+                            ImageUrl = "product-2.jpg",
+                            InStock = true,
+                            IsMain = true,
+                            IsNew = false,
+                            Name = "Wireless Headphones",
+                            Price = 149.50m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Mechanical keyboard with RGB backlight.",
+                            DiscountPercentage = 0,
+                            ImageUrl = "product-3.jpg",
+                            InStock = true,
+                            IsMain = true,
+                            IsNew = false,
+                            Name = "Gaming Keyboard",
+                            Price = 89.99m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Portable speaker with deep bass and clear sound.",
+                            DiscountPercentage = 5,
+                            ImageUrl = "product-4.jpg",
+                            InStock = true,
+                            IsMain = false,
+                            IsNew = true,
+                            Name = "Bluetooth Speaker",
+                            Price = 59.99m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Lightweight tracker for daily activity monitoring.",
+                            DiscountPercentage = 0,
+                            ImageUrl = "product-5.jpg",
+                            InStock = true,
+                            IsMain = false,
+                            IsNew = true,
+                            Name = "Fitness Tracker",
+                            Price = 49.99m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Multiport USB-C hub for modern laptops.",
+                            DiscountPercentage = 20,
+                            ImageUrl = "product-6.jpg",
+                            InStock = true,
+                            IsMain = false,
+                            IsNew = true,
+                            Name = "USB-C Hub",
+                            Price = 39.99m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Waterproof action camera for outdoor adventures.",
+                            DiscountPercentage = 0,
+                            ImageUrl = "product-7.jpg",
+                            InStock = false,
+                            IsMain = false,
+                            IsNew = true,
+                            Name = "4K Action Camera",
+                            Price = 129.99m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Ergonomic wireless mouse with long battery life.",
+                            DiscountPercentage = 10,
+                            ImageUrl = "product-8.jpg",
+                            InStock = true,
+                            IsMain = false,
+                            IsNew = true,
+                            Name = "Wireless Mouse",
+                            Price = 29.99m
+                        });
+                });
+
             modelBuilder.Entity("JuanApp.Domain.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -204,23 +278,23 @@ namespace JuanApp.DLL.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ButtonLink")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ButtonText")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SubTitle")
                         .IsRequired()
@@ -234,7 +308,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders", (string)null);
+                    b.ToTable("Sliders");
 
                     b.HasData(
                         new
@@ -244,6 +318,7 @@ namespace JuanApp.DLL.Data.Migrations
                             ButtonText = "Learn More",
                             Description = "Your trusted partner in software solutions.",
                             ImageUrl = "slider-1.jpg",
+                            IsMain = true,
                             SubTitle = "Quality Software Solutions",
                             Title = "Welcome to JuanApp"
                         },
@@ -254,8 +329,25 @@ namespace JuanApp.DLL.Data.Migrations
                             ButtonText = "Our Services",
                             Description = "Transforming ideas into reality.",
                             ImageUrl = "slider-2.jpg",
+                            IsMain = true,
                             SubTitle = "Cutting-Edge Technology",
                             Title = "Innovative Solutions"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "banner-3.jpg",
+                            IsMain = false,
+                            SubTitle = "Stay Connected",
+                            Title = "Join Our Community"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "banner-4.jpg",
+                            IsMain = false,
+                            SubTitle = "We're Here to Help",
+                            Title = "Expert Support"
                         });
                 });
 #pragma warning restore 612, 618
