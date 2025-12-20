@@ -301,8 +301,8 @@
                                             <i class="ion-ios-gear-outline"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <li><a href="login-register.html">login</a></li>
-                                            <li><a href="login-register.html">register</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                                            <li><a asp-controller="Account" asp-action="Register">Register</a></li>
                                             <li><a href="my-account.html">my account</a></li>
                                         </ul>
                                     </li>
@@ -818,6 +818,7 @@
 <script src="~/assets/js/active.js"></script>
 <!-- Main Js -->
 <script src="~/assets/js/main.js"></script>
+@RenderSection("Scripts", required: false)
 </body>
 
 <!-- Mirrored from demo.hasthemes.com/juan-preview-v1/juan/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Mar 2021 22:36:53 GMT -->

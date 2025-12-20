@@ -1,0 +1,57 @@
+@model UserRegisterVm
+@{
+    Layout = "_Layout";
+}
+
+<div class=" justify-content-center m-3">
+    <div class="login-reg-form-wrap signup-form">
+        <h2>Register Form</h2>
+        <form action="#" method="post">
+            <div class="single-input-item"> 
+                <label asp-for="accountRegisterDto.FullName"></label>
+                <input asp-for="accountRegisterDto.FullName"/>
+            </div>
+            <span asp-validation-for="accountRegisterDto.FullName" class="text-danger"></span>
+            <div class="single-input-item">
+                <label asp-for="accountRegisterDto.Email"></label>
+                <input asp-for="accountRegisterDto.Email"/>
+            </div>
+            <span asp-validation-for="accountRegisterDto.Email" class="text-danger"></span>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-input-item">
+                        <label asp-for="accountRegisterDto.Password"></label>
+                        <input asp-for="accountRegisterDto.Password"/>
+                    </div>
+                    <span asp-validation-for="accountRegisterDto.Password" class="text-danger"></span> 
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-input-item">
+                        <label asp-for="accountRegisterDto.ConfirmPassword"></label>
+                        <input asp-for="accountRegisterDto.ConfirmPassword"/>
+                    </div>
+                    <span asp-validation-for="accountRegisterDto.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="single-input-item">
+                <div class="login-reg-form-meta">
+                    <div class="remember-meta">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="subnewsletter">
+                            <label class="custom-control-label" for="subnewsletter">Subscribe Our Newsletter</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+            <div class="single-input-item">
+                <button class="btn">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
