@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.BLL.Services;
 
-public class LayoutService(AppDbContext dbContext) : ILayoutService
+public class LayoutService(AppDbContext db) : ILayoutService
 {
     public async Task<Dictionary<string, string>> GetSettingsAsync()
     {
-        return await dbContext.Settings
+        return await db.Settings
             .ToDictionaryAsync(s => s.Key, s => s.Value);
     }
 }

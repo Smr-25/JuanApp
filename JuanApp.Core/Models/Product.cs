@@ -12,6 +12,6 @@ public class Product : BaseEntity
     public int DiscountPercentage { get; set; }
     public bool IsNew { get; set; }
     public bool IsMain { get; set; }
-    List<ProductImage> ProductImages { get; set; }
+    public List<ProductImage> ProductImages { get; set; } = new();
 
 }

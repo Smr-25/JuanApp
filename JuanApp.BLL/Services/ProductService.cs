@@ -1,5 +1,6 @@
 ﻿using JuanApp.BLL.Dtos;
 using JuanApp.DLL.Data;
+using JuanApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.BLL.Interfaces;
@@ -17,5 +18,16 @@ public class ProductService(AppDbContext db) : IProductService
             MainProducts = mainProducts,
             NewProducts = newProducts
         };
+    }
+
+    public async Task<Product> GetProductByIdAsync(int productId)
+    {
+        var product = await db.Products
+            .Include(p => p.ProductImages)
+            .FirstOrDefaultAsync(p => p.Id == productId);
+        if (product == null)
+            return null;
+
+        return product;
     }
 }

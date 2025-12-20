@@ -1,10 +1,11 @@
 ﻿using JuanApp.BLL.Dtos;
+using JuanApp.BLL.Interfaces;
 using JuanApp.DLL.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.BLL.Services;
 
-public class AdvantageService(AppDbContext db)
+public class AdvantageService(AppDbContext db) : IAdvantagesService
 {
     public async Task<HomeAdvantageDto> GetAllAdvantagesAsync()
     {

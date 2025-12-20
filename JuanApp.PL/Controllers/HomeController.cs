@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.Controllers;
 
-public class HomeController(ISliderService sliderService,IProductService productService,AdvantageService advantageService) : Controller
+public class HomeController(ISliderService sliderService,IProductService productService,IAdvantagesService advantageService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -17,7 +17,6 @@ public class HomeController(ISliderService sliderService,IProductService product
             Product = await productService.GetAllProductsAsync(),
             Advantage = await advantageService.GetAllAdvantagesAsync()
         };
-
         return View(homeVm);
     }
 

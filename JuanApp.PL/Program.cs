@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string env = "Code";
+string env = "Mac";
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{env}.json",
@@ -19,7 +19,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ILayoutService,LayoutService>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<AdvantageService>();
+builder.Services.AddScoped<IAdvantagesService, AdvantageService>();
+builder.Services.AddScoped<IProductDetailsService, ProductDetailsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

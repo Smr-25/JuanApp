@@ -43,7 +43,7 @@ public class SliderConfiguration : IEntityTypeConfiguration<Slider>
                 Id = 3,
                 Title = "Join Our Community",
                 SubTitle = "Stay Connected",
-                ImageUrl = "banner-3.jpg",
+                ImageUrl = "banner-1.jpg",
                 IsMain = false
             },
             new Slider
@@ -51,7 +51,7 @@ public class SliderConfiguration : IEntityTypeConfiguration<Slider>
                 Id = 4,
                 Title = "Expert Support",
                 SubTitle = "We're Here to Help",
-                ImageUrl = "banner-4.jpg",
+                ImageUrl = "banner-2.jpg",
                 IsMain = false
             }
      );

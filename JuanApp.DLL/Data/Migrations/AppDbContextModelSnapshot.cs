@@ -269,6 +269,223 @@ namespace JuanApp.DLL.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("JuanApp.Domain.Models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 5
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 6
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 7
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ImageUrl = "product-details-img1.jpg",
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 30,
+                            ImageUrl = "product-details-img2.jpg",
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ImageUrl = "product-details-img3.jpg",
+                            ProductId = 8
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ImageUrl = "product-details-img4.jpg",
+                            ProductId = 8
+                        });
+                });
+
             modelBuilder.Entity("JuanApp.Domain.Models.Slider", b =>
                 {
                     b.Property<int>("Id")
@@ -336,7 +553,7 @@ namespace JuanApp.DLL.Data.Migrations
                         new
                         {
                             Id = 3,
-                            ImageUrl = "banner-3.jpg",
+                            ImageUrl = "banner-1.jpg",
                             IsMain = false,
                             SubTitle = "Stay Connected",
                             Title = "Join Our Community"
@@ -344,11 +561,27 @@ namespace JuanApp.DLL.Data.Migrations
                         new
                         {
                             Id = 4,
-                            ImageUrl = "banner-4.jpg",
+                            ImageUrl = "banner-2.jpg",
                             IsMain = false,
                             SubTitle = "We're Here to Help",
                             Title = "Expert Support"
                         });
+                });
+
+            modelBuilder.Entity("JuanApp.Domain.Models.ProductImage", b =>
+                {
+                    b.HasOne("JuanApp.Domain.Models.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
+                {
+                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }
