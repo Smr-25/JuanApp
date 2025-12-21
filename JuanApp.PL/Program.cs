@@ -35,9 +35,11 @@ builder.Services.AddScoped<ILayoutService, LayoutService>();
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAdvantagesService, AdvantageService>();
-builder.Services.AddScoped<IProductDetailsService, ProductDetailsService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();
 

@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JuanApp.Controllers;
 
-public class ProductController(IProductDetailsService productDetailsService,IProductService productService) : Controller
+public class ProductController(IProductService productService) : Controller
 {
     public async Task<IActionResult> Details(int id)
     {
         var productVm = new ProductVm
         {
-            ProductDetails = await productDetailsService.GetProductDetailsAsync(id)
+            ProductDetails = await productService.GetProductDetailsAsync(id)
         };
         return View(productVm);
     }
