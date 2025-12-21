@@ -9,4 +9,6 @@ public interface IAccountService
     Task<SignInResult> LoginAsync(AccountLoginDto accountLoginDto);
     Task LogoutAsync();
     Task<IdentityResult> ConfirmEmailAsync(string userEmail, string token);
+    Task SendPasswordResetEmailAsync(string email);
+    Task<IdentityResult> ResetPasswordAsync(string email, string token, string newPassword,string confirmationPassword);
 }

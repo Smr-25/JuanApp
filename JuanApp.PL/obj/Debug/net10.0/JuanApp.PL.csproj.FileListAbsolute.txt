@@ -1010,3 +1010,5 @@ C:/Users/samiraa/Desktop/MiniAppAll/JuanApp/JuanApp.PL/obj/Debug/net10.0/staticw
 /Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/bin/Debug/net10.0/BouncyCastle.Cryptography.dll
 /Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/bin/Debug/net10.0/MailKit.dll
 /Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/bin/Debug/net10.0/MimeKit.dll
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/d6fqyiiq6q-{0}-xlevjywcvx-xlevjywcvx.gz
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/2vel9fulz9-{0}-0wfr52ugfr-0wfr52ugfr.gz

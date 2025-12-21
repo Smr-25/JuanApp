@@ -96,4 +96,46 @@ public class AccountService(
 
         return result;
     }
+
+    public async Task SendPasswordResetEmailAsync(string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null || !(await userManager.IsEmailConfirmedAsync(user)))
+        {
+            return;
+        }
+
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        var resetLink =
+            $"https://localhost:7062/Account/ResetPassword?userEmail={user.Email}&token={Uri.EscapeDataString(token)}";
+
+        FileStream fileStream = new FileStream("wwwroot/EmailTemplates/PasswordReset.html", FileMode.Open);
+        using var streamReader = new StreamReader(fileStream);
+        var emailBody = await streamReader.ReadToEndAsync();
+        emailBody = emailBody.Replace("{{username}}", user.UserName);
+        emailBody = emailBody.Replace("{{ResetLink}}", resetLink);
+
+        await emailService.SendEmailAsync(user.Email, "Reset Your Password", emailBody);
+    }
+
+    public async Task<IdentityResult> ResetPasswordAsync(string email, string token, string newPassword,
+        string confirmationPassword)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+        }
+
+        var result = await userManager.VerifyUserTokenAsync(user, userManager.Options.Tokens.PasswordResetTokenProvider,
+            "ResetPassword", token);
+        if (!result)
+            return IdentityResult.Failed(new IdentityError { Description = "Invalid or expired token." });
+        var resetResult = await userManager.ResetPasswordAsync(user, token, newPassword);
+        if (resetResult.Succeeded)
+        {
+            await userManager.UpdateSecurityStampAsync(user);
+        }
+        return resetResult;
+    }
 }

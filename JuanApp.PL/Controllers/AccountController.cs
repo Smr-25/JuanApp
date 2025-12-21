@@ -1,4 +1,5 @@
 using JuanApp.BLL.Interfaces;
+using JuanApp.PL.ViewModel;
 using JuanApp.PL.ViewModel.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ public class AccountController(IAccountService accountService) : Controller
 
         return View(userRegisterVm);
     }
-    
+
     public async Task<IActionResult> Login()
     {
         return View();
@@ -59,12 +60,12 @@ public class AccountController(IAccountService accountService) : Controller
         await accountService.LogoutAsync();
         return RedirectToAction("Index", "Home");
     }
-    
+
     public async Task<IActionResult> Profile()
     {
         return View();
     }
-    
+
     public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
     {
         var result = await accountService.ConfirmEmailAsync(userEmail, token);
@@ -74,5 +75,53 @@ public class AccountController(IAccountService accountService) : Controller
         }
 
         return BadRequest("Email confirmation failed.");
+    }
+
+    public async Task<IActionResult> ForgotPassword()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordVm forgotPasswordVm)
+    {
+        if (!ModelState.IsValid)
+            return View(forgotPasswordVm);
+
+        await accountService.SendPasswordResetEmailAsync(forgotPasswordVm.Email);
+        return RedirectToAction("Login", "Account");
+    }
+    
+    public async Task<IActionResult> ResetPassword(string token, string email)
+    {
+        var resetPasswordVm = new ResetPasswordVm
+        {
+            Token = token,
+            Email = email
+        };
+        return View(resetPasswordVm);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(ResetPasswordVm resetPasswordVm)
+    {
+        if (!ModelState.IsValid)
+            return View(resetPasswordVm);
+        
+        var result = await accountService.ResetPasswordAsync(resetPasswordVm.Email, resetPasswordVm.Token,
+            resetPasswordVm.Password, resetPasswordVm.ConfirmPassword);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+
+        return View(resetPasswordVm);
+            
+           
     }
 }
