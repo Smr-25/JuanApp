@@ -4,5 +4,5 @@ namespace JuanApp.PL.ViewModel.Users;
 
 public class UserLoginVm
 {
-    public AccountLoginDto accountLoginDto;
+    public AccountLoginDto accountLoginDto { get; set; }
 }

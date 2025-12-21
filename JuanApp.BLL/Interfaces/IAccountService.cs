@@ -8,4 +8,5 @@ public interface IAccountService
     Task<IdentityResult> RegisterAsync(AccountRegisterDto accountRegisterDto);
     Task<SignInResult> LoginAsync(AccountLoginDto accountLoginDto);
     Task LogoutAsync();
+    Task<IdentityResult> ConfirmEmailAsync(string userEmail, string token);
 }

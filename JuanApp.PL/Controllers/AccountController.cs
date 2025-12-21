@@ -59,4 +59,20 @@ public class AccountController(IAccountService accountService) : Controller
         await accountService.LogoutAsync();
         return RedirectToAction("Index", "Home");
     }
+    
+    public async Task<IActionResult> Profile()
+    {
+        return View();
+    }
+    
+    public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
+    {
+        var result = await accountService.ConfirmEmailAsync(userEmail, token);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        return BadRequest("Email confirmation failed.");
+    }
 }

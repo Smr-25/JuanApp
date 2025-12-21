@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.DLL.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<IdentityUser>(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser>(options)
 {
     public DbSet<Slider> Sliders { get; set; }
     public DbSet<Advantage> Advantages { get; set; }

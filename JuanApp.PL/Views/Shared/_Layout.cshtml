@@ -301,9 +301,32 @@
                                             <i class="ion-ios-gear-outline"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                                            <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                                            <li><a href="my-account.html">my account</a></li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li>
+                                                    <form asp-controller="Account"
+                                                          asp-action="Logout"
+                                                          method="post"
+                                                          style="display:inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="submit" style="background:none;border:none;padding:0;">
+                                                            Logout
+                                                        </button>
+                                                    </form>
+                                                </li>
+
+                                                <li>
+                                                    <a asp-controller="Account" asp-action="Profile">
+                                                        @User.Identity.Name
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                                                <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                                                <li><a href="my-account.html">My Account</a></li>
+                                            }
                                         </ul>
                                     </li>
                                     <li>

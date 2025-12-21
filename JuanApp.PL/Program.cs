@@ -25,6 +25,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
         options.Password.RequireUppercase = true;
         options.Password.RequireDigit = true;
         options.User.RequireUniqueEmail = true;
+        options.SignIn.RequireConfirmedEmail = true;    
         options.Lockout.MaxFailedAccessAttempts = 3;
         options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
         options.Lockout.AllowedForNewUsers = true;
@@ -36,6 +37,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAdvantagesService, AdvantageService>();
 builder.Services.AddScoped<IProductDetailsService, ProductDetailsService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

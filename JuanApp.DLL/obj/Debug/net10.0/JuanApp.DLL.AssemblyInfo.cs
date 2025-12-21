@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JuanApp.DLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1bba1934f0deaeb66c21ec3b232ecbb98367ddf1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e74daa5c0ccafb3f1909143e8f6871c903cb55b")]
 [assembly: System.Reflection.AssemblyProductAttribute("JuanApp.DLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JuanApp.DLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
