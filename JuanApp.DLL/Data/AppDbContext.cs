@@ -14,6 +14,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
     public DbSet<Setting> Settings { get; set; }
     
     public DbSet<ProductImage> ProductImages { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Color> Colors { get; set; }
+    public DbSet<Size> Sizes { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

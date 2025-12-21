@@ -1,4 +1,5 @@
 using JuanApp.Core.Common;
+using JuanApp.Core.Models;
 
 namespace JuanApp.Domain.Models;
 
@@ -13,5 +14,10 @@ public class Product : BaseEntity
     public bool IsNew { get; set; }
     public bool IsMain { get; set; }
     public List<ProductImage> ProductImages { get; set; } = new();
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
+    public List<Color> Colors { get; set; } = new();
+    public List<Size> Sizes { get; set; } = new();
+    public List<Tag> Tags { get; set; } = new();
 
 }
