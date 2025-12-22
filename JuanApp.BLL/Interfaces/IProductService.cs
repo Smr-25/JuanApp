@@ -8,4 +8,6 @@ public interface IProductService
     Task<HomeProductDto> GetAllProductsAsync();
     Task<Product> GetProductByIdAsync(int productId);
     Task<ProductDetailsDto> GetProductDetailsAsync(int productId);
+    Task<(IEnumerable<ProductDto> Products, int TotalCount)> GetFilteredProductsAsync(
+        ProductFilterDto productFilterDto);
 }
