@@ -1,3 +1,4 @@
+using JuanApp.BLL.Dtos;
 using JuanApp.BLL.Interfaces;
 using JuanApp.BLL.Services;
 using JuanApp.DLL.Data;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string env = "Mac";
+string env = "Code";
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{env}.json",
@@ -40,7 +41,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IColorService, ColorService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
-builder.Services.Configure<EmailService>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<EmailSettingsDto>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

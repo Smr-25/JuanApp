@@ -36,8 +36,9 @@ public class AccountService(
         FileStream fileStream = new FileStream("wwwroot/EmailTemplates/EmailConfirmation.html", FileMode.Open);
         using var streamReader = new StreamReader(fileStream);
         var emailBody = await streamReader.ReadToEndAsync();
-        emailBody = emailBody.Replace("{{username}}", user.UserName);
+        emailBody = emailBody.Replace("{{UserName}}", user.UserName);
         emailBody = emailBody.Replace("{{ConfirmationLink}}", confirmationLink);
+        emailBody = emailBody.Replace("{{ConfirmationLink}}", "dsadasdasd");
 
         await emailService.SendEmailAsync(user.Email, "Confirm Your Email", emailBody);
 

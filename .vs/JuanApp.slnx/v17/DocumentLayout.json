@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\appsettings.code.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\appsettings.code.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.bll\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{652842FF-8BE7-0381-A90E-F7B8E5A1D031}|JuanApp.BLL\\JuanApp.BLL.csproj|solutionrelative:juanapp.bll\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|c:\\users\\samiraa\\desktop\\miniappall\\juanapp\\juanapp.pl\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8BAA9E25-E424-AF2E-BD95-E4CCE46BB4BA}|JuanApp.PL\\JuanApp.PL.csproj|solutionrelative:juanapp.pl\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Code.json",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\appsettings.Code.json",
+              "RelativeDocumentMoniker": "JuanApp.PL\\appsettings.Code.json",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\appsettings.Code.json",
+              "RelativeToolTip": "JuanApp.PL\\appsettings.Code.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-22T13:32:49.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\appsettings.json",
+              "RelativeDocumentMoniker": "JuanApp.PL\\appsettings.json",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.PL\\appsettings.json",
+              "RelativeToolTip": "JuanApp.PL\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-22T13:32:47.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\AccountService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\AccountService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\AccountService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Services\\AccountService.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAlwCMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T13:32:13.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "JuanApp.BLL\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\samiraa\\Desktop\\MiniAppAll\\JuanApp\\JuanApp.BLL\\Services\\EmailService.cs",
+              "RelativeToolTip": "JuanApp.BLL\\Services\\EmailService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T13:31:16.763Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
