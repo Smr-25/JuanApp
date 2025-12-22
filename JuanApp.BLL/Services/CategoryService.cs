@@ -14,7 +14,8 @@ public class CategoryService(AppDbContext db) : ICategoryService
         var categoryDtos = categories.Select(c => new ProductCategoryDto
         {
             Id = c.Id,
-            Name = c.Name
+            Name = c.Name,
+            ProductCount = db.Products.Count(p => p.CategoryId == c.Id)
         }).ToList();
         return categoryDtos;
     }

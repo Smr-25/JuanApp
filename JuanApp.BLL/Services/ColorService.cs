@@ -13,7 +13,8 @@ public class ColorService(AppDbContext db) : IColorService
         var colorDtos = colors.Select(c => new ProductColorDto
         {
             Id = c.Id,
-            Name = c.Name
+            Name = c.Name,
+            ProductCount = db.Products.Include(p=>p.Colors).Count(p => p.Colors.Any(color => color.Id == c.Id))
         }).ToList();
         return colorDtos;
     }

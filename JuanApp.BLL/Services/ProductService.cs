@@ -37,7 +37,6 @@ public class ProductService(AppDbContext db) : IProductService
             .Where(p => p.CategoryId == categoryId)
             .ToListAsync();
         return products;
-
     }
 
     public async Task<ProductDetailsDto> GetProductDetailsAsync(int productId)
@@ -74,35 +73,42 @@ public class ProductService(AppDbContext db) : IProductService
             .Include(p => p.Category)
             .Include(p => p.Colors)
             .Include(p => p.Sizes)
+            .Include(p => p.ProductImages) // image lazımdır
             .AsQueryable();
 
-        if (productFilterDto.CategoryId != 0)
+        if (productFilterDto.CategoryId.HasValue && productFilterDto.CategoryId.Value != 0)
         {
-            query = query.Where(p => p.CategoryId == productFilterDto.CategoryId);
+            query = query.Where(p => p.CategoryId == productFilterDto.CategoryId.Value);
         }
 
-        if (productFilterDto.SizeId != 0)
+        if (productFilterDto.ColorId != null && productFilterDto.ColorId.Any())
         {
-            query = query.Where(p => p.Sizes.Any(s => s.Id == productFilterDto.SizeId));
+            query = query.Where(p => p.Colors.Any(c => productFilterDto.ColorId.Contains(c.Id)));
         }
 
-        if (productFilterDto.ColorId != 0)
+        if (productFilterDto.SizeId != null && productFilterDto.SizeId.Any())
         {
-            query = query.Where(p => p.Colors.Any(c => c.Id == productFilterDto.ColorId));
+            query = query.Where(p => p.Sizes.Any(s => productFilterDto.SizeId.Contains(s.Id)));
         }
 
-        switch (productFilterDto.SortBy)
+        if (productFilterDto.MinPrice.HasValue)
+            query = query.Where(p => p.Price >= productFilterDto.MinPrice.Value);
+
+        if (productFilterDto.MaxPrice.HasValue)
+            query = query.Where(p => p.Price <= productFilterDto.MaxPrice.Value);
+
+        switch (productFilterDto.SortBy?.ToLower())
         {
-            case "price_asc":
+            case "price-asc":
                 query = query.OrderBy(p => p.Price);
                 break;
-            case "price_desc":
+            case "price-desc":
                 query = query.OrderByDescending(p => p.Price);
                 break;
-            case "name_asc":
+            case "name-asc":
                 query = query.OrderBy(p => p.Name);
                 break;
-            case "name_desc":
+            case "name-desc":
                 query = query.OrderByDescending(p => p.Name);
                 break;
             default:
@@ -111,6 +117,7 @@ public class ProductService(AppDbContext db) : IProductService
         }
 
         var totalCount = await query.CountAsync();
+
         var products = await query
             .Skip((productFilterDto.Page - 1) * productFilterDto.PageSize)
             .Take(productFilterDto.PageSize)
@@ -120,7 +127,8 @@ public class ProductService(AppDbContext db) : IProductService
                 Name = p.Name,
                 Price = p.Price,
                 DiscountPercentage = p.DiscountPercentage,
-                ImageUrl = p.ProductImages.FirstOrDefault().ImageUrl
+                ImageUrl = p.ProductImages.FirstOrDefault().ImageUrl,
+                Description = p.Description
             })
             .ToListAsync();
 

@@ -288,14 +288,14 @@
 
                                             <div class="product-item mb-50">
                                                 <div class="product-thumb">
-                                                    <a href="#">
-                                                        <img src="assets/img/product/@item.ImageUrl" alt="@item.Name"/>
+                                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
+                                                        <img src="~/assets/img/product/@item.ImageUrl" alt="@item.Name"/>
                                                     </a>
                                                 </div>
 
                                                 <div class="product-content">
                                                     <h5 class="product-name">
-                                                        <a href="#">@item.Name</a>
+                                                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
                                                     </h5>
 
                                                     <div class="price-box">
