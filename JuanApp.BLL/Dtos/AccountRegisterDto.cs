@@ -17,4 +17,6 @@ public class AccountRegisterDto
     [DataType(DataType.Password)]
     [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
     public string ConfirmPassword { get; set; }
+    
+    public bool Subscribe { get; set; }
 }

@@ -1,0 +1,76 @@
+@model JuanApp.BLL.Dtos.HomeSliderDto
+
+@{
+    ViewData["Title"] = "Edit Slider";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Slider</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label">Title</label>
+                        <input asp-for="Title" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="SubTitle" class="form-label">Subtitle</label>
+                        <input asp-for="SubTitle" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="ButtonText" class="form-label">Button Text</label>
+                        <input asp-for="ButtonText" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="ButtonLink" class="form-label">Button Link</label>
+                        <input asp-for="ButtonLink" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Current Image</label>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <div>
+                        <img src="@Model.ImageUrl" alt="@Model.Title" style="max-width: 300px; border-radius: 5px;" class="mb-2">
+                    </div>
+                }
+                <label for="imageFile" class="form-label">Change Image (optional)</label>
+                <input type="file" name="imageFile" id="imageFile" class="form-control" accept="image/*" />
+            </div>
+            
+            <div class="mb-3 form-check">
+                <input asp-for="IsMain" class="form-check-input" />
+                <label asp-for="IsMain" class="form-check-label">Set as Main Slider</label>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Update
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+

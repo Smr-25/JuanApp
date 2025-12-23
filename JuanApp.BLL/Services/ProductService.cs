@@ -22,9 +22,12 @@ public class ProductService(AppDbContext db) : IProductService
 
     public async Task<Product> GetProductByIdAsync(int productId)
     {
-        var product = await db.Products
+        var product =await db.Products
             .Include(p => p.ProductImages)
-            .FirstOrDefaultAsync(p => p.Id == productId);
+            .Include(p => p.Category)
+            .Include(p => p.Sizes)
+            .Include(p => p.Colors)
+            .FirstOrDefaultAsync(p => p.Id == productId); 
         if (product == null)
             return null;
 
@@ -43,6 +46,9 @@ public class ProductService(AppDbContext db) : IProductService
     {
         var product = await db.Products
             .Include(p => p.ProductImages)
+            .Include(p => p.Category)
+            .Include(p => p.Colors)
+            .Include(p => p.Sizes)
             .FirstOrDefaultAsync(p => p.Id == productId);
         if (product == null)
         {
@@ -50,13 +56,11 @@ public class ProductService(AppDbContext db) : IProductService
         }
 
         var relatedProducts = await db.Products
+            .Include(p => p.ProductImages)
+            .Include(p => p.Category)
             .Where(p => p.Id != productId && p.CategoryId == product.CategoryId)
             .Take(4)
             .ToListAsync();
-        if (relatedProducts == null)
-        {
-            return null;
-        }
 
         var productDetailsDto = new ProductDetailsDto
         {

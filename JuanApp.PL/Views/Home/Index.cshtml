@@ -112,15 +112,16 @@
                                         <a href="#" data-toggle="tooltip" title="Wishlist">
                                             <i class="ion-android-favorite-outline"></i>
                                         </a>
-                                        <a href="#" data-toggle="tooltip" title="Add To Cart">
+                                        <a href="javascript:void(0)" 
+                                           onclick="addToCart(@product.Id)" 
+                                           data-toggle="tooltip" 
+                                           title="Add To Cart">
                                             <i class="ion-bag"></i>
                                         </a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view" class="btn-quick-view"
                                            data-id="@product.Id">
                                             <span data-toggle="tooltip" title="Quick View">
-                                                <i class="ion-ios-eye-outline">
-                                                    
-                                                </i>
+                                                <i class="ion-ios-eye-outline"></i>
                                             </span>
                                         </a>
                                     </div>
@@ -223,7 +224,10 @@
                                             <a href="#" data-toggle="tooltip" title="Wishlist">
                                                 <i class="ion-android-favorite-outline"></i>
                                             </a>
-                                            <a href="#" data-toggle="tooltip" title="Add To Cart">
+                                            <a href="javascript:void(0)" 
+                                               onclick="addToCart(@item.Id)" 
+                                               data-toggle="tooltip" 
+                                               title="Add To Cart">
                                                 <i class="ion-bag"></i>
                                             </a>
                                             <a href="#"
@@ -392,6 +396,7 @@
     <!-- brand area end -->
 </main>
 <!-- main wrapper end -->
+
 <!-- Quick View Modal Area Start -->
 <div class="modal" id="quick_view">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -408,3 +413,111 @@
     </div>
 </div>
 
+@section Scripts {
+<script>
+    // Global addToCart funksiyası
+    function addToCart(productId, colorId, sizeId, quantity) {
+        @if (!User.Identity.IsAuthenticated)
+        {
+            @:toastr.warning('Please login to add products to cart');
+            @:setTimeout(function() {
+                @:window.location.href = '@Url.Action("Login", "Account")';
+            @:}, 1500);
+            @:return;
+        }
+
+        colorId = colorId || null;
+        sizeId = sizeId || null;
+        quantity = quantity || 1;
+
+        var btn = event ? event.target.closest('a') : null;
+        var originalHtml = btn ? btn.innerHTML : null;
+        
+        if (btn) {
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+            btn.style.pointerEvents = 'none';
+        }
+
+        $.ajax({
+            url: '@Url.Action("AddToCart", "Basket")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                productId: productId,
+                quantity: quantity,
+                colorId: colorId,
+                sizeId: sizeId
+            }),
+            success: function(response) {
+                if (btn) {
+                    btn.innerHTML = originalHtml;
+                    btn.style.pointerEvents = 'auto';
+                }
+
+                if (response.success) {
+                    toastr.success('Product added to cart successfully!');
+                    updateCartCount(response.itemCount);
+                } else {
+                    toastr.error(response.message || 'Failed to add product');
+                }
+            },
+            error: function(xhr, status, error) {
+                if (btn) {
+                    btn.innerHTML = originalHtml;
+                    btn.style.pointerEvents = 'auto';
+                }
+                console.error('Error:', error);
+                toastr.error('An error occurred. Please try again.');
+            }
+        });
+    }
+
+    // Update cart count
+    function updateCartCount(count) {
+        $('.cart-count').text(count);
+        $('#cart-count').text(count);
+        $('.minicart-btn span').text(count);
+    }
+
+    // Quick View Modal açılışı
+    $(document).on('click', '.btn-quick-view', function(e) {
+        e.preventDefault();
+        var productId = $(this).data('id');
+        
+        $.ajax({
+            url: '@Url.Action("ProductModal", "Product")',
+            type: 'GET',
+            data: { id: productId },
+            beforeSend: function() {
+                $('#quick_view .modal-body').html('<div class="text-center p-5"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
+            },
+            success: function(response) {
+                $('#quick_view .modal-body').html(response);
+                $('#quick_view').modal('show');
+            },
+            error: function() {
+                toastr.error('Failed to load product details');
+            }
+        });
+    });
+
+    // Modal bağlananda content-i təmizlə
+    $('#quick_view').on('hidden.bs.modal', function () {
+        $(this).find('.modal-body').html('');
+    });
+
+    // Load cart count on page load
+    @if (User.Identity.IsAuthenticated)
+    {
+        @:$(document).ready(function() {
+            @:$.ajax({
+                @:url: '@Url.Action("GetItemCount", "Basket")',
+                @:type: 'GET',
+                @:success: function(response) {
+                    @:updateCartCount(response.itemCount);
+                @:}
+            @:});
+        @:});
+    }
+</script>
+}

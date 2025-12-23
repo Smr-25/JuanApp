@@ -1,0 +1,154 @@
+@model JuanApp.BLL.Dtos.ProductUpdateDto
+
+@{
+    ViewData["Title"] = "Edit Product";
+    var categories = ViewBag.Categories as List<JuanApp.BLL.Dtos.ProductCategoryDto>;
+    var colors = ViewBag.Colors as List<JuanApp.BLL.Dtos.ProductColorDto>;
+    var sizes = ViewBag.Sizes as List<JuanApp.BLL.Dtos.ProductSizeDto>;
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Product</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Product Name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label">Price</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label asp-for="DiscountPercentage" class="form-label">Discount %</label>
+                        <input asp-for="DiscountPercentage" class="form-control" />
+                        <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label">Category</label>
+                        <select asp-for="CategoryId" class="form-select">
+                            <option value="">Select Category</option>
+                            @if (categories != null)
+                            {
+                                @foreach (var category in categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Current Main Image</label>
+                        @if (!string.IsNullOrEmpty(Model.ExistingImageUrl))
+                        {
+                            <div class="mb-2">
+                                <img src="@Model.ExistingImageUrl" alt="Product" style="max-width: 200px; border-radius: 5px;">
+                            </div>
+                        }
+                        <label asp-for="MainImage" class="form-label">Change Main Image (optional)</label>
+                        <input asp-for="MainImage" class="form-control" type="file" accept="image/*" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="AdditionalImages" class="form-label">Add More Images (optional)</label>
+                <input asp-for="AdditionalImages" class="form-control" type="file" accept="image/*" multiple />
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Colors</label>
+                        @if (colors != null)
+                        {
+                            @foreach (var color in colors)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ColorIds" value="@color.Id" id="color_@color.Id">
+                                    <label class="form-check-label" for="color_@color.Id">
+                                        @color.Name
+                                    </label>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Sizes</label>
+                        @if (sizes != null)
+                        {
+                            @foreach (var size in sizes)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="SizeIds" value="@size.Id" id="size_@size.Id">
+                                    <label class="form-check-label" for="size_@size.Id">
+                                        @size.Name
+                                    </label>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3 form-check">
+                        <input asp-for="InStock" class="form-check-input" />
+                        <label asp-for="InStock" class="form-check-label">In Stock</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="mb-3 form-check">
+                        <input asp-for="IsNew" class="form-check-input" />
+                        <label asp-for="IsNew" class="form-check-label">Mark as New</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Update Product
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+

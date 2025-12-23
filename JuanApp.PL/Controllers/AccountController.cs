@@ -92,7 +92,7 @@ public class AccountController(IAccountService accountService) : Controller
         return RedirectToAction("Login", "Account");
     }
     
-    public async Task<IActionResult> ResetPassword(string token, string email)
+    public async Task<IActionResult> ResetPassword(string email, string token)  // ✅ parametr sırası
     {
         var resetPasswordVm = new ResetPasswordVm
         {

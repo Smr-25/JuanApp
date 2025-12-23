@@ -8,4 +8,7 @@ public class ProductDto
     public decimal Price { get; set; }
     public int DiscountPercentage { get; set; }
     public string ImageUrl { get; set; }
+    public bool InStock { get; set; }
+    public bool IsNew { get; set; }
+    public string? CategoryName { get; set; }
 }

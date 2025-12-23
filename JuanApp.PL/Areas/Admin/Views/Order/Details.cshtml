@@ -1,0 +1,119 @@
+@model JuanApp.BLL.Dtos.OrderDto
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Order Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Order Number:</strong> @Model.OrderNumber</p>
+                        <p><strong>Customer:</strong> @Model.UserFullName</p>
+                        <p><strong>Email:</strong> @Model.UserEmail</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Order Date:</strong> @Model.OrderDate.ToString("MMM dd, yyyy HH:mm")</p>
+                        <p><strong>Phone:</strong> @Model.ContactPhone</p>
+                        <p><strong>Total Amount:</strong> <span class="text-success fs-5">$@Model.TotalAmount</span></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <p><strong>Shipping Address:</strong></p>
+                    <p class="text-muted">@Model.ShippingAddress</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-box me-2"></i>Order Items</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@(item.SelectedColor ?? "-")</td>
+                                <td>@(item.SelectedSize ?? "-")</td>
+                                <td>@item.Quantity</td>
+                                <td>$@item.Price</td>
+                                <td><strong>$@(item.Price * item.Quantity)</strong></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Update Status</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Current Status:</strong></p>
+                <p>
+                    @switch (Model.Status)
+                    {
+                        case "Pending":
+                            <span class="badge bg-warning fs-6">Pending</span>
+                            break;
+                        case "Processing":
+                            <span class="badge bg-info fs-6">Processing</span>
+                            break;
+                        case "Shipped":
+                            <span class="badge bg-primary fs-6">Shipped</span>
+                            break;
+                        case "Delivered":
+                            <span class="badge bg-success fs-6">Delivered</span>
+                            break;
+                        case "Cancelled":
+                            <span class="badge bg-danger fs-6">Cancelled</span>
+                            break;
+                    }
+                </p>
+                
+                <form asp-action="UpdateStatus" method="post" class="mt-3">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Change Status:</label>
+                        <select name="status" class="form-select">
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-save me-2"></i>Update Status
+                    </button>
+                </form>
+                
+                <a asp-action="Index" class="btn btn-secondary w-100 mt-2">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Orders
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
