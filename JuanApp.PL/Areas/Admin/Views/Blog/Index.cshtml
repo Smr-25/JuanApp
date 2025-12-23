@@ -1,0 +1,89 @@
+@model List<JuanApp.Core.Models.Blog>
+
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<div class="page-header">
+    <h1 class="page-title">Blogs</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Blogs</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-newspaper me-2"></i>Blog List (@Model.Count)</h5>
+        <a href="/Admin/Blog/Create" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>New Blog
+        </a>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Views</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blog in Model)
+                        {
+                            <tr>
+                                <td>#@blog.Id</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(blog.ImageUrl))
+                                    {
+                                        <img src="/@blog.ImageUrl" alt="@blog.Title" style="width: 80px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                    }
+                                </td>
+                                <td><strong>@blog.Title</strong></td>
+                                <td>@blog.Author</td>
+                                <td><span class="badge bg-info">@blog.Category</span></td>
+                                <td>@blog.ViewCount</td>
+                                <td>@blog.PublishedDate.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="/Admin/Blog/Edit/@blog.Id" class="btn btn-sm btn-warning">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <form action="/Admin/Blog/Delete/@blog.Id" method="post" class="d-inline" data-confirm="Delete this blog?">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-newspaper empty-state-icon"></i>
+                <h3 class="empty-state-title">No blogs yet</h3>
+                <p class="empty-state-description">Create your first blog post</p>
+                <a href="/Admin/Blog/Create" class="btn btn-primary">
+                    <i class="bi bi-plus-lg me-2"></i>Create Blog
+                </a>
+            </div>
+        }
+    </div>
+</div>
+

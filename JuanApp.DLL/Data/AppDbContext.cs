@@ -22,6 +22,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Subscriber> Subscribers { get; set; }
+    public DbSet<ProductReview> ProductReviews { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

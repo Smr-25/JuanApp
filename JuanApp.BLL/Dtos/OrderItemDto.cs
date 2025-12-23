@@ -9,4 +9,5 @@ public class OrderItemDto
 
     public string SelectedColor { get; set; }
     public string SelectedSize { get; set; }
+    public decimal TotalPrice { get; set; }
 }

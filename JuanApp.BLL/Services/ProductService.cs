@@ -49,6 +49,7 @@ public class ProductService(AppDbContext db) : IProductService
             .Include(p => p.Category)
             .Include(p => p.Colors)
             .Include(p => p.Sizes)
+            .Include(p => p.Reviews)
             .FirstOrDefaultAsync(p => p.Id == productId);
         if (product == null)
         {
@@ -77,8 +78,19 @@ public class ProductService(AppDbContext db) : IProductService
             .Include(p => p.Category)
             .Include(p => p.Colors)
             .Include(p => p.Sizes)
-            .Include(p => p.ProductImages) // image lazımdır
+            .Include(p => p.ProductImages)
             .AsQueryable();
+
+        // Search functionality
+        if (!string.IsNullOrWhiteSpace(productFilterDto.SearchQuery))
+        {
+            var searchTerm = productFilterDto.SearchQuery.ToLower();
+            query = query.Where(p => 
+                p.Name.ToLower().Contains(searchTerm) || 
+                p.Description.ToLower().Contains(searchTerm) ||
+                p.Category.Name.ToLower().Contains(searchTerm)
+            );
+        }
 
         if (productFilterDto.CategoryId.HasValue && productFilterDto.CategoryId.Value != 0)
         {

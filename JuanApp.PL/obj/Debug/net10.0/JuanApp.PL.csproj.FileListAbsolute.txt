@@ -1018,3 +1018,5 @@ C:/Users/samiraa/Desktop/MiniAppAll/JuanApp/JuanApp.PL/obj/Debug/net10.0/compres
 C:/Users/samiraa/Desktop/MiniAppAll/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/2vel9fulz9-{0}-hz9sghh3qq-hz9sghh3qq.gz
 C:/Users/samiraa/Desktop/MiniAppAll/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/q9wicl1zcm-{0}-7wi02vws6n-7wi02vws6n.gz
 C:/Users/samiraa/Desktop/MiniAppAll/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/n24mzpktgm-{0}-7wi02vws6n-7wi02vws6n.gz
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/r8gp9fa0jx-{0}-h4vhqflt51-h4vhqflt51.gz
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.PL/obj/Debug/net10.0/compressed/7f3xen9id7-{0}-mkx4c3lu7i-mkx4c3lu7i.gz

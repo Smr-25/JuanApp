@@ -1,0 +1,159 @@
+@model JuanApp.Core.Models.Blog
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area bg-img" data-bg="/assets/img/banner/breadcrumb-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">Blog Details</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- blog main wrapper start -->
+    <div class="blog-main-wrapper section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-2">
+                    <div class="blog-widget-wrapper">
+                        <!-- widget item start -->
+                        <div class="blog-widget">
+                            <h4 class="blog-widget-title">Search</h4>
+                            <form class="widget-search-form" asp-controller="Blog" asp-action="Index" method="get">
+                                <input placeholder="Search blog..." type="text" name="search" class="search-field">
+                                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <!-- widget item end -->
+
+                        <!-- widget item start -->
+                        <div class="blog-widget">
+                            <h4 class="blog-widget-title">Categories</h4>
+                            <ul class="blog-categories">
+                                <li><a href="#">Fashion</a><span>(12)</span></li>
+                                <li><a href="#">Lifestyle</a><span>(8)</span></li>
+                                <li><a href="#">Shopping</a><span>(15)</span></li>
+                                <li><a href="#">Trends</a><span>(10)</span></li>
+                            </ul>
+                        </div>
+                        <!-- widget item end -->
+
+                        <!-- widget item start -->
+                        <div class="blog-widget">
+                            <h4 class="blog-widget-title">Tags</h4>
+                            <div class="blog-tag">
+                                @if (Model.Tags != null && Model.Tags.Any())
+                                {
+                                    @foreach (var tag in Model.Tags)
+                                    {
+                                        <a href="#">@tag</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a href="#">Fashion</a>
+                                    <a href="#">Style</a>
+                                    <a href="#">Shopping</a>
+                                    <a href="#">Trends</a>
+                                }
+                            </div>
+                        </div>
+                        <!-- widget item end -->
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- blog single item start -->
+                            <div class="blog-post-item">
+                                <div class="blog-thumb">
+                                    <img src="/@Model.ImageUrl" alt="@Model.Title">
+                                </div>
+                                <div class="blog-content blog-details">
+                                    <h3 class="blog-title">@Model.Title</h3>
+                                    <ul class="blog-meta">
+                                        <li><span>By: </span>@Model.Author</li>
+                                        <li><span>On: </span>@Model.PublishedDate.ToString("dd MMM yyyy")</li>
+                                        <li><span>Views: </span>@Model.ViewCount</li>
+                                        @if (!string.IsNullOrEmpty(Model.Category))
+                                        {
+                                            <li><span>Category: </span>@Model.Category</li>
+                                        }
+                                    </ul>
+                                    <div class="blog-description">
+                                        <p>@Model.Description</p>
+                                    </div>
+                                    <div class="blog-full-content">
+                                        @Html.Raw(Model.Content)
+                                    </div>
+
+                                    <!-- Share Icons -->
+                                    <div class="blog-share mt-4">
+                                        <h5>Share This Post:</h5>
+                                        <div class="share-icon">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- blog single item end -->
+
+                            <!-- comment area start -->
+                            <div class="comment-section section-padding">
+                                <h5>Leave a Comment</h5>
+                                <p>Your email address will not be published. Required fields are marked *</p>
+                                <form class="comment-form">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label>Comment *</label>
+                                            <textarea name="comment" placeholder="Write your comment here..." rows="5"
+                                                      required></textarea>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <label>Name *</label>
+                                            <input type="text" class="form-control" placeholder="Your Name" required>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <label>Email *</label>
+                                            <input type="email" class="form-control" placeholder="Your Email" required>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <label>Website</label>
+                                            <input type="text" class="form-control" placeholder="Your Website">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="comment-btn mt-3">
+                                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- comment area end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blog main wrapper end -->
+</main>

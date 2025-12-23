@@ -138,6 +138,19 @@
                 <!-- shop products -->
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="shop-product-wrapper">
+                        
+                        @if (ViewBag.HasSearchQuery == true)
+                        {
+                            <div class="alert alert-info">
+                                <i class="fa fa-search"></i> 
+                                Search results for: <strong>"@ViewBag.SearchQuery"</strong> 
+                                - Found @Model.TotalCount product(s)
+                                <a asp-action="Index" class="btn btn-sm btn-secondary ms-2">
+                                    <i class="fa fa-times"></i> Clear Search
+                                </a>
+                            </div>
+                        }
+                        
                         <div class="shop-top-bar">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-4 col-md-3 order-2 order-md-1">

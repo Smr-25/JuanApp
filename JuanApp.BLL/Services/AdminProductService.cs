@@ -62,6 +62,33 @@ public class AdminProductService(
         };
     }
 
+    public async Task<ProductUpdateDto?> GetProductForEditAsync(int id)
+    {
+        var product = await context.Products
+            .Include(p => p.Category)
+            .Include(p => p.ProductImages)
+            .Include(p => p.Colors)
+            .Include(p => p.Sizes)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (product == null) return null;
+
+        return new ProductUpdateDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            InStock = product.InStock,
+            DiscountPercentage = product.DiscountPercentage,
+            IsNew = product.IsNew,
+            CategoryId = product.CategoryId,
+            ColorIds = product.Colors.Select(c => c.Id).ToList(),
+            SizeIds = product.Sizes.Select(s => s.Id).ToList(),
+            ExistingImageUrl = product.ImageUrl
+        };
+    }
+
     public async Task<bool> CreateProductAsync(ProductCreateDto dto)
     {
         var product = new Product

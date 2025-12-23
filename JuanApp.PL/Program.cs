@@ -50,6 +50,7 @@ builder.Services.AddScoped<IAdminColorService, AdminColorService>();
 builder.Services.AddScoped<IAdminSizeService, AdminSizeService>();
 builder.Services.AddScoped<IAdminSliderService, AdminSliderService>();
 builder.Services.AddScoped<IAdminAdvantageService, AdminAdvantageService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.Configure<EmailSettingsDto>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddAuthorization(options =>

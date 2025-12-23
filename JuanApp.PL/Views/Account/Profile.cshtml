@@ -1,0 +1,154 @@
+@{
+    ViewBag.Title = "My Profile";
+}
+
+<main>
+    <div class="breadcrumb-area bg-img" data-bg="/assets/img/banner/breadcrumb-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">My Account</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li class="breadcrumb-item active">My Account</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-account-wrapper section-padding">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="myaccount-page-wrapper">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <div class="myaccount-tab-menu nav" role="tablist">
+                                    <a href="#orders" class="active" data-toggle="tab">
+                                        <i class="fa fa-cart-arrow-down"></i> Orders
+                                    </a>
+                                    <a href="#account-info" data-toggle="tab">
+                                        <i class="fa fa-user"></i> Account Details
+                                    </a>
+                                    <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
+                                        <i class="fa fa-sign-out"></i> Logout
+                                    </a>
+                                </div>
+                                <form id="logoutForm" asp-controller="Account" asp-action="Logout" method="post" style="display: none;">
+                                    @Html.AntiForgeryToken()
+                                </form>
+                            </div>
+
+                            <div class="col-lg-9 col-md-8">
+                                <div class="tab-content" id="myaccountContent">
+                                    <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>My Orders</h3>
+                                            <div class="myaccount-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th>Order</th>
+                                                            <th>Date</th>
+                                                            <th>Status</th>
+                                                            <th>Total</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="ordersTableBody">
+                                                        <tr><td colspan="5">Loading orders...</td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>Account Details</h3>
+                                            <div class="account-details-form">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="single-input-item">
+                                                                <label>Full Name</label>
+                                                                <input type="text" id="fullName" readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="single-input-item">
+                                                                <label>Email Address</label>
+                                                                <input type="email" id="email" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            loadUserInfo();
+            loadOrders();
+        });
+
+        function loadUserInfo() {
+            $('#fullName').val('@User.Identity.Name');
+            $('#email').val('@User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value');
+        }
+
+        function loadOrders() {
+            $.ajax({
+                url: '/Order/GetMyOrders',
+                type: 'GET',
+                success: function(orders) {
+                    const tbody = $('#ordersTableBody');
+                    if (!orders || orders.length === 0) {
+                        tbody.html('<tr><td colspan="5">No orders found</td></tr>');
+                        return;
+                    }
+                    
+                    tbody.empty();
+                    orders.forEach(function(order) {
+                        const statusClass = 
+                            order.status === 'Completed' ? 'success' : 
+                            order.status === 'Processing' ? 'warning' : 
+                            order.status === 'Pending' ? 'info' : 'danger';
+                        
+                        const statusBadge = '<span class="badge badge-' + statusClass + '">' + order.status + '</span>';
+                        
+                        tbody.append(
+                            '<tr>' +
+                            '<td>#' + order.orderNumber + '</td>' +
+                            '<td>' + new Date(order.createdAt).toLocaleDateString() + '</td>' +
+                            '<td>' + statusBadge + '</td>' +
+                            '<td>₼' + order.totalPrice.toFixed(2) + '</td>' +
+                            '<td><a href="/Order/Details/' + order.id + '" class="btn btn-sm">View</a></td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function() {
+                    $('#ordersTableBody').html('<tr><td colspan="5">Error loading orders</td></tr>');
+                }
+            });
+        }
+    </script>
+}
+

@@ -176,6 +176,53 @@ namespace JuanApp.DLL.Data.Migrations
                     b.ToTable("BasketItems");
                 });
 
+            modelBuilder.Entity("JuanApp.Core.Models.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.PrimitiveCollection<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Blogs");
+                });
+
             modelBuilder.Entity("JuanApp.Core.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -229,6 +276,10 @@ namespace JuanApp.DLL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("HexCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -242,31 +293,37 @@ namespace JuanApp.DLL.Data.Migrations
                         new
                         {
                             Id = 1,
+                            HexCode = "#FF0000",
                             Name = "Red"
                         },
                         new
                         {
                             Id = 2,
+                            HexCode = "#0000FF",
                             Name = "Blue"
                         },
                         new
                         {
                             Id = 3,
+                            HexCode = "#00FF00",
                             Name = "Green"
                         },
                         new
                         {
                             Id = 4,
+                            HexCode = "#FFFF00",
                             Name = "Yellow"
                         },
                         new
                         {
                             Id = 5,
+                            HexCode = "#000000",
                             Name = "Black"
                         },
                         new
                         {
                             Id = 6,
+                            HexCode = "#FFFFFF",
                             Name = "White"
                         });
                 });
@@ -346,6 +403,44 @@ namespace JuanApp.DLL.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("JuanApp.Core.Models.ProductReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductReviews");
+                });
+
             modelBuilder.Entity("JuanApp.Core.Models.Setting", b =>
                 {
                     b.Property<string>("Key")
@@ -412,6 +507,10 @@ namespace JuanApp.DLL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SizeType")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -425,32 +524,50 @@ namespace JuanApp.DLL.Data.Migrations
                         new
                         {
                             Id = 1,
-                            SizeType = "XS"
+                            Name = "Small",
+                            SizeType = "Clothing"
                         },
                         new
                         {
                             Id = 2,
-                            SizeType = "S"
+                            Name = "Medium",
+                            SizeType = "Clothing"
                         },
                         new
                         {
                             Id = 3,
-                            SizeType = "M"
+                            Name = "Large",
+                            SizeType = "Clothing"
                         },
                         new
                         {
                             Id = 4,
-                            SizeType = "L"
+                            Name = "X-Large",
+                            SizeType = "Clothing"
                         },
                         new
                         {
                             Id = 5,
-                            SizeType = "XL"
+                            Name = "6",
+                            SizeType = "Shoes"
                         },
                         new
                         {
                             Id = 6,
-                            SizeType = "XXL"
+                            Name = "7",
+                            SizeType = "Shoes"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "8",
+                            SizeType = "Shoes"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "9",
+                            SizeType = "Shoes"
                         });
                 });
 
@@ -612,6 +729,9 @@ namespace JuanApp.DLL.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("SalesCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -630,7 +750,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = true,
                             IsNew = true,
                             Name = "Classic White T-Shirt",
-                            Price = 19.99m
+                            Price = 19.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -643,7 +764,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Blue Denim Jeans",
-                            Price = 49.99m
+                            Price = 49.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -656,7 +778,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Red Hoodie",
-                            Price = 39.99m
+                            Price = 39.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -669,7 +792,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = true,
                             IsNew = false,
                             Name = "Black Leather Jacket",
-                            Price = 99.99m
+                            Price = 99.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -682,7 +806,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Green Chinos",
-                            Price = 44.99m
+                            Price = 44.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -695,7 +820,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Yellow Summer Dress",
-                            Price = 59.99m
+                            Price = 59.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -708,7 +834,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Gray Sweatpants",
-                            Price = 29.99m
+                            Price = 29.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -721,7 +848,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = true,
                             IsNew = false,
                             Name = "Navy Blue Blazer",
-                            Price = 79.99m
+                            Price = 79.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -734,7 +862,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Pink Floral Skirt",
-                            Price = 34.99m
+                            Price = 34.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -747,7 +876,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Brown Ankle Boots",
-                            Price = 89.99m
+                            Price = 89.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -760,7 +890,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "White Sneakers",
-                            Price = 59.99m
+                            Price = 59.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -773,7 +904,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = true,
                             IsNew = false,
                             Name = "Black Formal Shoes",
-                            Price = 99.99m
+                            Price = 99.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -786,7 +918,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Orange Sports T-Shirt",
-                            Price = 24.99m
+                            Price = 24.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -799,7 +932,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Green Running Shorts",
-                            Price = 19.99m
+                            Price = 19.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -812,7 +946,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Black Fitness Gloves",
-                            Price = 15.50m
+                            Price = 15.50m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -825,7 +960,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Blue Yoga Mat",
-                            Price = 35.00m
+                            Price = 35.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -838,7 +974,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Red Gym Bag",
-                            Price = 45.00m
+                            Price = 45.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -851,7 +988,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "White Sneakers",
-                            Price = 75.00m
+                            Price = 75.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -864,7 +1002,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Black Hoodie",
-                            Price = 55.00m
+                            Price = 55.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -877,7 +1016,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = false,
                             Name = "Gray Sweatpants",
-                            Price = 40.00m
+                            Price = 40.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -890,7 +1030,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Pink Sports Bra",
-                            Price = 30.00m
+                            Price = 30.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -903,7 +1044,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Navy Running Shoes",
-                            Price = 85.00m
+                            Price = 85.00m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -916,7 +1058,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Yellow Cap",
-                            Price = 12.99m
+                            Price = 12.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -929,7 +1072,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Purple Headband",
-                            Price = 7.99m
+                            Price = 7.99m,
+                            SalesCount = 0
                         },
                         new
                         {
@@ -942,7 +1086,8 @@ namespace JuanApp.DLL.Data.Migrations
                             IsMain = false,
                             IsNew = true,
                             Name = "Orange Water Bottle",
-                            Price = 14.99m
+                            Price = 14.99m,
+                            SalesCount = 0
                         });
                 });
 
@@ -1495,6 +1640,25 @@ namespace JuanApp.DLL.Data.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("JuanApp.Core.Models.ProductReview", b =>
+                {
+                    b.HasOne("JuanApp.Domain.Models.Product", "Product")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
                 {
                     b.HasOne("JuanApp.Core.Models.Category", "Category")
@@ -1616,6 +1780,8 @@ namespace JuanApp.DLL.Data.Migrations
             modelBuilder.Entity("JuanApp.Domain.Models.Product", b =>
                 {
                     b.Navigation("ProductImages");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

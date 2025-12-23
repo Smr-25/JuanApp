@@ -4,32 +4,32 @@
     <div class="row">
         <!-- Images -->
         <div class="col-lg-5">
-            <div class="product-large-slider mb-20">
+            <div class="product-large-slider-modal mb-20" id="modal-large-slider-@Model.Id">
                 @if (Model.ProductImages != null && Model.ProductImages.Any())
                 {
-                @foreach (var img in Model.ProductImages)
-                {
-                <div class="pro-large-img img-zoom">
-                    <img src="~/assets/img/product/@img.ImageUrl" alt="product thumb"/>
-                </div>
-                }
+                    @foreach (var img in Model.ProductImages)
+                    {
+                        <div class="pro-large-img img-zoom">
+                            <img src="/@img.ImageUrl" alt="@Model.Name"/>
+                        </div>
+                    }
                 }
                 else
                 {
-                <div class="pro-large-img">
-                    <img src="~/assets/img/product/@Model.ImageUrl" alt="@Model.Name"/>
-                </div>
+                    <div class="pro-large-img">
+                        <img src="/@Model.ImageUrl" alt="@Model.Name"/>
+                    </div>
                 }
             </div>
-            <div class="pro-nav slick-row-5">
+            <div class="pro-nav-modal slick-row-5" id="modal-nav-slider-@Model.Id">
                 @if (Model.ProductImages != null && Model.ProductImages.Any())
                 {
-                @foreach (var img in Model.ProductImages)
-                {
-                <div class="pro-nav-thumb">
-                    <img src="~/assets/img/product/@img.ImageUrl" alt=""/>
-                </div>
-                }
+                    @foreach (var img in Model.ProductImages)
+                    {
+                        <div class="pro-nav-thumb">
+                            <img src="/@img.ImageUrl" alt=""/>
+                        </div>
+                    }
                 }
             </div>
         </div>
@@ -41,45 +41,50 @@
                 <div class="price-box">
                     @if (Model.DiscountPercentage > 0)
                     {
-                    var priceAfterDiscount = Model.Price - (Model.Price * Model.DiscountPercentage / 100);
-                    <span class="regular-price">$@priceAfterDiscount.ToString("F2")</span>
-                    <span class="old-price"><del>$@Model.Price.ToString("F2")</del></span>
+                        var priceAfterDiscount = Model.Price - (Model.Price * Model.DiscountPercentage / 100);
+                        <span class="regular-price">₼@priceAfterDiscount.ToString("F2")</span>
+                        <span class="old-price"><del>₼@Model.Price.ToString("F2")</del></span>
                     }
                     else
                     {
-                    <span class="regular-price">$@Model.Price.ToString("F2")</span>
+                        <span class="regular-price">₼@Model.Price.ToString("F2")</span>
                     }
                 </div>
-                <p>@Model.Description</p>
+                <p class="mb-20">@Model.Description</p>
 
                 <!-- Color Selection -->
                 @if (Model.Colors != null && Model.Colors.Any())
                 {
-                <div class="color-list-wrapper mb-20">
-                    <h5 class="cat-title">Color:</h5>
-                    <select id="quickview-color-@Model.Id" class="form-control" style="width: 200px;">
-                        <option value="">Choose color</option>
-                        @foreach (var color in Model.Colors)
-                        {
-                        <option value="@color.Id">@color.Name</option>
-                        }
-                    </select>
-                </div>
+                    <div class="color-list-wrapper mb-20">
+                        <h5 class="cat-title">Color:</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var color in Model.Colors)
+                            {
+                                <label class="color-option" style="cursor: pointer;">
+                                    <input type="radio" name="quickview-color-@Model.Id" value="@color.Name" style="display: none;">
+                                    <span style="display: inline-block; width: 30px; height: 30px; background-color: @color.HexCode; border: 2px solid #ddd; border-radius: 4px; vertical-align: middle;"></span>
+                                    <span class="ms-1">@color.Name</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
                 }
 
                 <!-- Size Selection -->
                 @if (Model.Sizes != null && Model.Sizes.Any())
                 {
-                <div class="size-list-wrapper mb-20">
-                    <h5 class="cat-title">Size:</h5>
-                    <select id="quickview-size-@Model.Id" class="form-control" style="width: 200px;">
-                        <option value="">Choose size</option>
-                        @foreach (var size in Model.Sizes)
-                        {
-                        <option value="@size.Id">@size.SizeType</option>
-                        }
-                    </select>
-                </div>
+                    <div class="size-list-wrapper mb-20">
+                        <h5 class="cat-title">Size:</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var size in Model.Sizes)
+                            {
+                                <label class="size-option" style="cursor: pointer;">
+                                    <input type="radio" name="quickview-size-@Model.Id" value="@size.Name" style="display: none;">
+                                    <span style="display: inline-block; padding: 8px 15px; border: 2px solid #ddd; border-radius: 4px;">@size.Name</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
                 }
 
                 <!-- Quantity + Add to Cart -->
@@ -90,7 +95,7 @@
                         </div>
                     </div>
                     <button type="button"
-                            onclick="handleQuickViewAddToCart(@Model.Id, @((Model.Colors != null && Model.Colors.Any()).ToString().ToLower()), @((Model.Sizes != null && Model.Sizes.Any()).ToString().ToLower()))"
+                            onclick="handleQuickViewAddToCart(@Model.Id)"
                             class="btn btn-default"
                             id="quickview-btn-@Model.Id">
                         Add To Cart
@@ -102,11 +107,11 @@
                     <h5 class="cat-title">Availability:</h5>
                     @if (Model.InStock)
                     {
-                    <span class="text-success">In Stock</span>
+                        <span class="text-success"><i class="fa fa-check"></i> In Stock</span>
                     }
                     else
                     {
-                    <span class="text-danger">Out of Stock</span>
+                        <span class="text-danger"><i class="fa fa-times"></i> Out of Stock</span>
                     }
                 </div>
 
@@ -116,7 +121,7 @@
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
                     <a href="#"><i class="fa fa-pinterest"></i></a>
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -124,19 +129,42 @@
 </div>
 
 <script>
-    // Initialize quantity buttons
-    (function() {
+    $(document).ready(function() {
+        // Initialize sliders for modal
+        setTimeout(function() {
+            var largeSlider = $('#modal-large-slider-@Model.Id');
+            var navSlider = $('#modal-nav-slider-@Model.Id');
+            
+            if (largeSlider.length && !largeSlider.hasClass('slick-initialized')) {
+                largeSlider.slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '#modal-nav-slider-@Model.Id'
+                });
+            }
+            
+            if (navSlider.length && !navSlider.hasClass('slick-initialized')) {
+                navSlider.slick({
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    asNavFor: '#modal-large-slider-@Model.Id',
+                    dots: false,
+                    arrows: true,
+                    focusOnSelect: true
+                });
+            }
+        }, 300);
+
+        // Initialize quantity buttons
         var $proQty = $('#pro-qty-@Model.Id');
         var $input = $('#quickview-qty-@Model.Id');
         
-        // Remove existing buttons
         $proQty.find('.qtybtn').remove();
-        
-        // Add new buttons
         $proQty.prepend('<span class="dec qtybtn">-</span>');
         $proQty.append('<span class="inc qtybtn">+</span>');
         
-        // Button click handlers
         $proQty.find('.qtybtn').on('click', function() {
             var $button = $(this);
             var oldValue = parseFloat($input.val());
@@ -149,55 +177,50 @@
             }
             $input.val(newVal);
         });
-    })();
+
+        // Color selection styling
+        $('input[name="quickview-color-@Model.Id"]').on('change', function() {
+            $('input[name="quickview-color-@Model.Id"]').parent().find('span').first().css('border', '2px solid #ddd');
+            $(this).parent().find('span').first().css('border', '3px solid #333');
+        });
+
+        // Size selection styling
+        $('input[name="quickview-size-@Model.Id"]').on('change', function() {
+            $('input[name="quickview-size-@Model.Id"]').parent().find('span').css({'border': '2px solid #ddd', 'background': 'white', 'color': '#333'});
+            $(this).parent().find('span').css({'border': '2px solid #333', 'background': '#333', 'color': 'white'});
+        });
+    });
 
     // Handle Add to Cart from Quick View
-    function handleQuickViewAddToCart(productId, hasColors, hasSizes) {
+    function handleQuickViewAddToCart(productId) {
         var quantity = parseInt($('#quickview-qty-' + productId).val()) || 1;
-        var colorId = $('#quickview-color-' + productId).val();
-        var sizeId = $('#quickview-size-' + productId).val();
+        var color = $('input[name="quickview-color-' + productId + '"]:checked').val() || '';
+        var size = $('input[name="quickview-size-' + productId + '"]:checked').val() || '';
 
-        // Validation
-        if (hasColors && !colorId) {
-            toastr.warning('Please select a color');
-            return;
-        }
+        var data = {
+            productId: productId,
+            quantity: quantity,
+            selectedColor: color,
+            selectedSize: size
+        };
 
-        if (hasSizes && !sizeId) {
-            toastr.warning('Please select a size');
-            return;
-        }
-
-        // Show loading
         var btn = $('#quickview-btn-' + productId);
         var originalText = btn.html();
-        btn.html('<i class="fa fa-spinner fa-spin"></i> Adding...');
-        btn.prop('disabled', true);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> Adding...').prop('disabled', true);
 
-        // Call AJAX
         $.ajax({
-            url: '@Url.Action("AddToCart", "Basket")',
+            url: '/Basket/AddToBasket',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({
-                productId: productId,
-                quantity: quantity,
-                colorId: colorId || null,
-                sizeId: sizeId || null
-            }),
+            data: JSON.stringify(data),
             success: function(response) {
-                btn.html(originalText);
-                btn.prop('disabled', false);
+                btn.html(originalText).prop('disabled', false);
 
                 if (response.success) {
-                    toastr.success('Product added to cart successfully!');
-                    
-                    // Update cart count
+                    toastr.success('Product added to cart!');
                     if (typeof updateCartCount === 'function') {
-                        updateCartCount(response.itemCount);
+                        updateCartCount();
                     }
-                    
-                    // Close modal after short delay
                     setTimeout(function() {
                         $('#quick_view').modal('hide');
                     }, 800);
@@ -205,10 +228,8 @@
                     toastr.error(response.message || 'Failed to add product');
                 }
             },
-            error: function(xhr, status, error) {
-                btn.html(originalText);
-                btn.prop('disabled', false);
-                console.error('Error:', error);
+            error: function() {
+                btn.html(originalText).prop('disabled', false);
                 toastr.error('An error occurred. Please try again.');
             }
         });

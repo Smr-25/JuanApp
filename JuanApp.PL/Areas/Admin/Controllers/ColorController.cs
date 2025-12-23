@@ -21,7 +21,7 @@ public class ColorController(IAdminColorService colorService) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(string name)
+    public async Task<IActionResult> Create(string name, string hexCode)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -29,7 +29,13 @@ public class ColorController(IAdminColorService colorService) : Controller
             return View();
         }
 
-        await colorService.CreateColorAsync(name);
+        if (string.IsNullOrWhiteSpace(hexCode))
+        {
+            ModelState.AddModelError("HexCode", "Color code is required");
+            return View();
+        }
+
+        await colorService.CreateColorAsync(name, hexCode);
         TempData["Success"] = "Color created successfully!";
         return RedirectToAction("Index");
     }
@@ -43,7 +49,7 @@ public class ColorController(IAdminColorService colorService) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, string name)
+    public async Task<IActionResult> Edit(int id, string name, string hexCode)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -52,7 +58,14 @@ public class ColorController(IAdminColorService colorService) : Controller
             return View(color);
         }
 
-        var result = await colorService.UpdateColorAsync(id, name);
+        if (string.IsNullOrWhiteSpace(hexCode))
+        {
+            ModelState.AddModelError("HexCode", "Color code is required");
+            var color = await colorService.GetColorByIdAsync(id);
+            return View(color);
+        }
+
+        var result = await colorService.UpdateColorAsync(id, name, hexCode);
         if (result)
         {
             TempData["Success"] = "Color updated successfully!";

@@ -1,66 +1,120 @@
 @model List<JuanApp.BLL.Dtos.OrderDto>
 
 @{
-    ViewData["Title"] = "Orders Management";
+    ViewData["Title"] = "Orders / Sales";
 }
+
+<div class="page-header">
+    <h1 class="page-title">Orders & Sales</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Admin/Dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Orders</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Total Orders</h5>
+                <h2>@Model.Count</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>Completed</h5>
+                <h2>@Model.Count(o => o.Status == "Completed")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5>Processing</h5>
+                <h2>@Model.Count(o => o.Status == "Processing")</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5>Total Revenue</h5>
+                <h2>₼@Model.Where(o => o.Status == "Completed").Sum(o => o.TotalPrice).ToString("F2")</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card">
     <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>All Orders</h5>
+        <h5 class="mb-0"><i class="bi bi-cart-check me-2"></i>All Orders</h5>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Order #</th>
-                        <th>Customer</th>
-                        <th>Email</th>
-                        <th>Total Amount</th>
-                        <th>Status</th>
-                        <th>Order Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var order in Model)
-                    {
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover data-table">
+                    <thead>
                         <tr>
-                            <td><strong>@order.OrderNumber</strong></td>
-                            <td>@order.UserFullName</td>
-                            <td>@order.UserEmail</td>
-                            <td><strong>$@order.TotalAmount</strong></td>
-                            <td>
-                                @switch (order.Status)
-                                {
-                                    case "Pending":
-                                        <span class="badge bg-warning">Pending</span>
-                                        break;
-                                    case "Processing":
-                                        <span class="badge bg-info">Processing</span>
-                                        break;
-                                    case "Shipped":
-                                        <span class="badge bg-primary">Shipped</span>
-                                        break;
-                                    case "Delivered":
-                                        <span class="badge bg-success">Delivered</span>
-                                        break;
-                                    case "Cancelled":
-                                        <span class="badge bg-danger">Cancelled</span>
-                                        break;
-                                }
-                            </td>
-                            <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i> View
-                                </a>
-                            </td>
+                            <th>Order #</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.OrderByDescending(o => o.CreatedAt))
+                        {
+                            <tr>
+                                <td><strong>#@order.OrderNumber</strong></td>
+                                <td>@order.UserFullName</td>
+                                <td>@order.UserEmail</td>
+                                <td><strong>₼@order.TotalPrice.ToString("F2")</strong></td>
+                                <td>
+                                    @if (order.Status == "Completed")
+                                    {
+                                        <span class="badge bg-success">@order.Status</span>
+                                    }
+                                    else if (order.Status == "Processing")
+                                    {
+                                        <span class="badge bg-warning">@order.Status</span>
+                                    }
+                                    else if (order.Status == "Pending")
+                                    {
+                                        <span class="badge bg-info">@order.Status</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">@order.Status</span>
+                                    }
+                                </td>
+                                <td>@order.CreatedAt.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    <a href="/Admin/Order/Details/@order.Id" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-cart-x empty-state-icon"></i>
+                <h3 class="empty-state-title">No orders yet</h3>
+                <p class="empty-state-description">Orders will appear here</p>
+            </div>
+        }
     </div>
 </div>
 

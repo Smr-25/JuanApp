@@ -20,10 +20,13 @@ public class OrderService(AppDbContext context) : IOrderService
         return orders.Select(o => new OrderDto
         {
             Id = o.Id,
+            UserId = o.UserId,
             OrderNumber = o.OrderNumber,
             UserFullName = o.User.FullName,
             UserEmail = o.User.Email,
             TotalAmount = o.TotalAmount,
+            TotalPrice = o.TotalAmount,
+            CreatedAt = o.OrderDate,
             Status = o.Status.ToString(),
             OrderDate = o.OrderDate,
             ShippingAddress = o.ShippingAddress,
@@ -34,6 +37,7 @@ public class OrderService(AppDbContext context) : IOrderService
                 ProductName = oi.Product.Name,
                 Quantity = oi.Quantity,
                 Price = oi.Price,
+                TotalPrice = oi.Price * oi.Quantity,
                 SelectedColor = oi.SelectedColor,
                 SelectedSize = oi.SelectedSize
             }).ToList()
@@ -53,10 +57,13 @@ public class OrderService(AppDbContext context) : IOrderService
         return new OrderDto
         {
             Id = order.Id,
+            UserId = order.UserId,
             OrderNumber = order.OrderNumber,
             UserFullName = order.User.FullName,
             UserEmail = order.User.Email,
             TotalAmount = order.TotalAmount,
+            TotalPrice = order.TotalAmount,
+            CreatedAt = order.OrderDate,
             Status = order.Status.ToString(),
             OrderDate = order.OrderDate,
             ShippingAddress = order.ShippingAddress,
@@ -67,6 +74,7 @@ public class OrderService(AppDbContext context) : IOrderService
                 ProductName = oi.Product.Name,
                 Quantity = oi.Quantity,
                 Price = oi.Price,
+                TotalPrice = oi.Price * oi.Quantity,
                 SelectedColor = oi.SelectedColor,
                 SelectedSize = oi.SelectedSize
             }).ToList()
@@ -101,10 +109,13 @@ public class OrderService(AppDbContext context) : IOrderService
         return orders.Select(o => new OrderDto
         {
             Id = o.Id,
+            UserId = o.UserId,
             OrderNumber = o.OrderNumber,
             UserFullName = o.User.FullName,
             UserEmail = o.User.Email,
             TotalAmount = o.TotalAmount,
+            TotalPrice = o.TotalAmount,
+            CreatedAt = o.OrderDate,
             Status = o.Status.ToString(),
             OrderDate = o.OrderDate,
             ShippingAddress = o.ShippingAddress,
@@ -115,6 +126,7 @@ public class OrderService(AppDbContext context) : IOrderService
                 ProductName = oi.Product.Name,
                 Quantity = oi.Quantity,
                 Price = oi.Price,
+                TotalPrice = oi.Price * oi.Quantity,
                 SelectedColor = oi.SelectedColor,
                 SelectedSize = oi.SelectedSize
             }).ToList()

@@ -118,7 +118,7 @@
                                     <ul>
                                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                                         <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
-                                        <li><a href="#">Blog</a></li>
+                                        <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
                                         <li><a href="#">Contact us</a></li>
                                     </ul>
                                 </nav>
@@ -218,7 +218,7 @@
     <!-- mobile header end -->
 </header>
 
-<!-- Mobile Menu -->
+<!-- Search Off-Canvas -->
 <aside class="off-canvas-wrapper">
     <div class="off-canvas-overlay"></div>
     <div class="off-canvas-inner-content">
@@ -227,9 +227,9 @@
         </div>
         <div class="off-canvas-inner">
             <div class="search-box-offcanvas">
-                <form>
-                    <input type="text" placeholder="Search Here..."/>
-                    <button class="search-btn">
+                <form asp-controller="Shop" asp-action="Index" method="get">
+                    <input type="text" name="search" placeholder="Search products..." value="@ViewBag.SearchQuery"/>
+                    <button type="submit" class="search-btn">
                         <i class="ion-ios-search-strong"></i>
                     </button>
                 </form>
@@ -240,7 +240,7 @@
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
                         <li><a asp-controller="Basket" asp-action="Index">Cart</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
@@ -286,9 +286,25 @@
                                 <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                                 <li><a asp-controller="Shop" asp-action="Index">Shop</a></li>
                                 <li><a asp-controller="Basket" asp-action="Index">Cart</a></li>
-                                <li><a href="#">About Us</a></li>
+                                <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="widget-item mt-40">
+                        <h5 class="widget-title">Newsletter</h5>
+                        <div class="widget-body">
+                            <p class="mb-3">Subscribe to get updates on new products and offers!</p>
+                            <form id="subscribeForm" onsubmit="subscribe(event)">
+                                <div class="input-group">
+                                    <input type="email" id="subscribeEmail" class="form-control" placeholder="Your email" required>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -371,6 +387,38 @@
     $(document).ready(function() {
         loadCartCount();
     });
+
+    // Subscribe function
+    function subscribe(event) {
+        event.preventDefault();
+        const email = document.getElementById('subscribeEmail').value;
+
+        if (!email) {
+            toastr.warning('Please enter your email');
+            return;
+        }
+
+        fetch('/Subscriber/Subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(email)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                toastr.success(data.message);
+                document.getElementById('subscribeEmail').value = '';
+            } else {
+                toastr.error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            toastr.error('An error occurred. Please try again.');
+        });
+    }
 </script>
 
 @RenderSection("Scripts", required: false)

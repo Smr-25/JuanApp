@@ -45,7 +45,7 @@ public class AccountService(
 
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
         var confirmationLink =
-            $"https://localhost:7062/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+            $"http://localhost:5119/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
         try
         {

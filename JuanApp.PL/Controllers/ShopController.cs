@@ -11,7 +11,9 @@ public class ShopController(
     ICategoryService categoryService,
     ISizeService sizeService) : Controller
 {
-    public async Task<IActionResult> Index(int? categoryId,
+    public async Task<IActionResult> Index(
+        string search,
+        int? categoryId,
         int[] colorIds,
         int[] sizeIds,
         decimal? minPrice,
@@ -23,6 +25,7 @@ public class ShopController(
         const int pageSize = 12;
         var filterDto = new ProductFilterDto
         {
+            SearchQuery = search,
             CategoryId = categoryId,
             ColorId = colorIds,
             SizeId = sizeIds,
@@ -46,6 +49,8 @@ public class ShopController(
             TotalCount = totalCount
         };
 
+        ViewBag.SearchQuery = search;
+        ViewBag.HasSearchQuery = !string.IsNullOrWhiteSpace(search);
         return View(shopVm);
     }
 }

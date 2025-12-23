@@ -70,7 +70,7 @@ public class ProductController : Controller
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var product = await _adminProductService.GetProductByIdAsync(id);
+        var product = await _adminProductService.GetProductForEditAsync(id);
 
         if (product == null)
         {

@@ -1,24 +1,26 @@
+@using JuanApp.Core.Models
 @model ProductVm
 @{
-    ViewBag.Title = "Detail Page";
+    ViewBag.Title = Model.ProductDetails.Product.Name;
     var product = Model.ProductDetails.Product;
     var relatedProducts = Model.ProductDetails.RelatedProducts;
+    var reviews = product.Reviews ?? new List<ProductReview>();
+    var avgRating = reviews.Any() ? reviews.Average(r => r.Rating) : 0;
 }
-
 
 <main>
     <!-- breadcrumb area start -->
-    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+    <div class="breadcrumb-area bg-img" data-bg="/assets/img/banner/breadcrumb-banner.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb-wrap text-center">
                         <nav aria-label="breadcrumb">
-                            <h1 class="breadcrumb-title">shop</h1>
+                            <h1 class="breadcrumb-title">Product Details</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item"><a href="shop.html">Shop</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Shop" asp-action="Index">Shop</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">@product.Name</li>
                             </ul>
                         </nav>
                     </div>
@@ -39,20 +41,32 @@
                             <!-- Images -->
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
-                                    @foreach (var p in product.ProductImages)
+                                    @if (product.ProductImages != null && product.ProductImages.Any())
+                                    {
+                                        @foreach (var img in product.ProductImages)
+                                        {
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="/@img.ImageUrl" alt="@product.Name"/>
+                                            </div>
+                                        }
+                                    }
+                                    else
                                     {
                                         <div class="pro-large-img img-zoom">
-                                            <img src="~/assets/img/product/@p.ImageUrl" alt=""/>
+                                            <img src="/@product.ImageUrl" alt="@product.Name"/>
                                         </div>
                                     }
                                 </div>
 
                                 <div class="pro-nav slick-row-5">
-                                    @foreach (var p in product.ProductImages)
+                                    @if (product.ProductImages != null && product.ProductImages.Any())
                                     {
-                                        <div class="pro-nav-thumb">
-                                            <img src="~/assets/img/product/@p.ImageUrl" alt=""/>
-                                        </div>
+                                        @foreach (var img in product.ProductImages)
+                                        {
+                                            <div class="pro-nav-thumb">
+                                                <img src="/@img.ImageUrl" alt="@product.Name"/>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -63,50 +77,96 @@
                                     <h3 class="pro-det-title">@product.Name</h3>
 
                                     <div class="pro-review">
-                                        <span><a href="#">1 Review(s)</a></span>
+                                        <div class="rating">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= avgRating)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <span><a href="#reviews">@reviews.Count Review(s)</a></span>
                                     </div>
 
                                     <div class="price-box">
                                         @if (product.DiscountPercentage > 0)
                                         {
-                                            var priceAfterDiscount =
-                                                product.Price - (product.Price * product.DiscountPercentage / 100);
-
-                                            <span class="regular-price">
-                            $@priceAfterDiscount.ToString("F2")
-                        </span>
-                                            <span class="old-price">
-                            <del>$@product.Price.ToString("F2")</del>
-                        </span>
+                                            var priceAfterDiscount = product.Price - (product.Price * product.DiscountPercentage / 100);
+                                            <span class="regular-price">₼@priceAfterDiscount.ToString("F2")</span>
+                                            <span class="old-price"><del>₼@product.Price.ToString("F2")</del></span>
                                         }
                                         else
                                         {
-                                            <span class="regular-price">
-                            $@product.Price.ToString("F2")
-                        </span>
+                                            <span class="regular-price">₼@product.Price.ToString("F2")</span>
                                         }
                                     </div>
 
-                                    <p>@product.Description</p>
+                                    <p class="pro-desc">@product.Description</p>
 
-                                    <div class="quantity-cart-box d-flex align-items-center mb-20">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1"/>
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        <form id="addToCartForm">
+                                            <input type="hidden" id="productId" value="@product.Id" />
+                                            
+                                            @if (product.Colors != null && product.Colors.Any())
+                                            {
+                                                <div class="color-option mb-20">
+                                                    <h5 class="cat-title">Color:</h5>
+                                                    <select id="colorSelect" class="form-select" style="max-width: 200px;">
+                                                        <option value="">Select Color</option>
+                                                        @foreach (var color in product.Colors)
+                                                        {
+                                                            <option value="@color.Name">@color.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            }
+
+                                            @if (product.Sizes != null && product.Sizes.Any())
+                                            {
+                                                <div class="size-option mb-20">
+                                                    <h5 class="cat-title">Size:</h5>
+                                                    <select id="sizeSelect" class="form-select" style="max-width: 200px;">
+                                                        <option value="">Select Size</option>
+                                                        @foreach (var size in product.Sizes)
+                                                        {
+                                                            <option value="@size.Name">@size.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            }
+
+                                            <div class="quantity-cart-box d-flex align-items-center mb-20">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
+                                                        <input type="text" id="quantity" value="1"/>
+                                                    </div>
+                                                </div>
+                                                <button type="button" onclick="addToCart()" class="btn btn-default">Add To Cart</button>
                                             </div>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info">
+                                            Please <a asp-controller="Account" asp-action="Login" class="alert-link">login</a> to add products to cart.
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Add To Cart</a>
-                                    </div>
+                                    }
 
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Availability:</h5>
                                         @if (product.InStock)
                                         {
-                                            <span>In Stock</span>
+                                            <span class="text-success"><i class="fa fa-check"></i> In Stock</span>
                                         }
                                         else
                                         {
-                                            <span>Not In Stock</span>
+                                            <span class="text-danger"><i class="fa fa-times"></i> Out of Stock</span>
                                         }
                                     </div>
 
@@ -115,14 +175,13 @@
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
                                         <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- product details inner end -->
-
 
                     <!-- product details reviews start -->
                     <div class="product-details-reviews section-padding">
@@ -131,135 +190,131 @@
                                 <div class="product-review-info">
                                     <ul class="nav review-tab">
                                         <li>
-                                            <a class="active" data-toggle="tab" href="#tab_one">description</a>
+                                            <a class="active" data-toggle="tab" href="#tab_one">Description</a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#tab_two">information</a>
+                                            <a data-toggle="tab" href="#tab_two">Information</a>
                                         </li>
                                         <li>
-                                            <a data-toggle="tab" href="#tab_three">reviews</a>
+                                            <a data-toggle="tab" href="#tab_three" id="reviews">Reviews (@reviews.Count)</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
+                                        <!-- Description Tab -->
                                         <div class="tab-pane fade show active" id="tab_one">
                                             <div class="tab-one">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                                    fringilla augue nec est tristique auctor. Ipsum metus feugiat sem,
-                                                    quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce
-                                                    ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate,
-                                                    sapien libero hendrerit est, sed commodo augue nisi non neque.</p>
-                                                <div class="review-description">
-                                                    <div class="tab-thumb">
-                                                        <img src="assets/img/about/services.jpg" alt="">
-                                                    </div>
-                                                    <div class="tab-des">
-                                                        <h3>Product Information :</h3>
-                                                        <ul>
-                                                            <li>Donec non est at libero vulputate rutrum</li>
-                                                            <li>Morbi ornare lectus quis justo gravida</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                            <li>Donec a neque libero</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p>Cras neque metus, consequat et blandit et, luctus a nunc. Etiam
-                                                    gravida vehicula tellus, in imperdiet ligula euismod eget.
-                                                    Pellentesque habitant morbi tristique senectus et netus et malesuada
-                                                    fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin
-                                                    rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam
-                                                    consequat, purus felis vehicula felis, a dapibus enim lorem nec
-                                                    augue. Nunc facilisis sagittis ullamcorper.</p>
-                                                <p>Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus.
-                                                    Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci
-                                                    luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet
-                                                    congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla
-                                                    luctus malesuada tincidunt.</p>
+                                                <p>@product.Description</p>
                                             </div>
                                         </div>
+                                        
+                                        <!-- Information Tab -->
                                         <div class="tab-pane fade" id="tab_two">
                                             <table class="table table-bordered">
                                                 <tbody>
-                                                <tr>
-                                                    <td>color</td>
-                                                    <td>black, blue, red</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>size</td>
-                                                    <td>L, M, S</td>
-                                                </tr>
+                                                    @if (product.Colors != null && product.Colors.Any())
+                                                    {
+                                                        <tr>
+                                                            <td><strong>Available Colors</strong></td>
+                                                            <td>@string.Join(", ", product.Colors.Select(c => c.Name))</td>
+                                                        </tr>
+                                                    }
+                                                    @if (product.Sizes != null && product.Sizes.Any())
+                                                    {
+                                                        <tr>
+                                                            <td><strong>Available Sizes</strong></td>
+                                                            <td>@string.Join(", ", product.Sizes.Select(s => s.Name))</td>
+                                                        </tr>
+                                                    }
+                                                    <tr>
+                                                        <td><strong>Category</strong></td>
+                                                        <td>@product.Category?.Name</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Stock Status</strong></td>
+                                                        <td>@(product.InStock ? "In Stock" : "Out of Stock")</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
+                                        
+                                        <!-- Reviews Tab -->
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" class="review-form">
-                                                <h5>1 review for <span>Chaz Kangeroo Hoodies</span></h5>
-                                                <div class="total-reviews">
-                                                    <div class="rev-avatar">
-                                                        <img src="~/assets/img/about/avatar.jpg" alt="">
-                                                    </div>
-                                                    <div class="review-box">
-                                                        <div class="ratings">
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span><i class="fa fa-star"></i></span>
-                                                        </div>
-                                                        <div class="post-author">
-                                                            <p><span>admin -</span> 30 Nov, 2018</p>
-                                                        </div>
-                                                        <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem
-                                                            varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut
-                                                            venenatis vitae, malesuada ut mi. Quisque iaculis, dui
-                                                            congue placerat pretium, augue erat accumsan lacus</p>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Your Name</label>
-                                                        <input type="text" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Your Email</label>
-                                                        <input type="email" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Your Review</label>
-                                                        <textarea class="form-control" required></textarea>
-                                                        <div class="help-block pt-10"><span
-                                                                class="text-danger">Note:</span> HTML is not translated!
+                                            @if (reviews.Any())
+                                            {
+                                                <h5>@reviews.Count review(s) for <span>@product.Name</span></h5>
+                                                
+                                                @foreach (var review in reviews.OrderByDescending(r => r.CreatedAt))
+                                                {
+                                                    <div class="total-reviews mb-30">
+                                                        <div class="review-box">
+                                                            <div class="post-author">
+                                                                <p><span>@review.UserName -</span> @review.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                                            </div>
+                                                            <div class="rating-box">
+                                                                @for (int i = 1; i <= 5; i++)
+                                                                {
+                                                                    if (i <= review.Rating)
+                                                                    {
+                                                                        <i class="fa fa-star"></i>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <i class="fa fa-star-o"></i>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="review-details">
+                                                                <p>@review.Comment</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
-                                                            Rating</label>
-                                                        &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                        <input type="radio" value="1" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="2" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="3" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="4" name="rating">
-                                                        &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Good
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p>No reviews yet.</p>
+                                            }
+
+                                            @if (User.Identity?.IsAuthenticated == true)
+                                            {
+                                                <form id="reviewForm" class="review-form mt-40">
+                                                    <h5>Add a review</h5>
+                                                    <input type="hidden" id="reviewProductId" value="@product.Id" />
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Your Rating <span class="required">*</span></label>
+                                                                <div class="rating-stars">
+                                                                    <select id="reviewRating" class="form-control" required>
+                                                                        <option value="">Select Rating</option>
+                                                                        <option value="5">5 Stars - Excellent</option>
+                                                                        <option value="4">4 Stars - Good</option>
+                                                                        <option value="3">3 Stars - Average</option>
+                                                                        <option value="2">2 Stars - Poor</option>
+                                                                        <option value="1">1 Star - Terrible</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Your Review <span class="required">*</span></label>
+                                                                <textarea id="reviewComment" class="form-control" rows="4" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button type="button" onclick="submitReview()" class="btn btn-default">Submit Review</button>
+                                                        </div>
                                                     </div>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <div class="alert alert-info mt-40">
+                                                    Please <a asp-controller="Account" asp-action="Login" class="alert-link">login</a> to write a review.
                                                 </div>
-                                                <div class="buttons">
-                                                    <button class="sqr-btn" type="submit">Continue</button>
-                                                </div>
-                                            </form> <!-- end of review-form -->
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -267,87 +322,141 @@
                         </div>
                     </div>
                     <!-- product details reviews end -->
-
-                    <!-- featured product area start -->
-                    <section class="Related-product">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="section-title text-center">
-                                        <h2 class="title">Related Product</h2>
-                                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="product-carousel-4 mbn-50 slick-row-15 slick-arrow-style">
-                                        @foreach (var item in relatedProducts)
-                                        {
-
-                                            <div class="product-item mb-50">
-                                                <div class="product-thumb">
-                                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
-                                                        <img src="~/assets/img/product/@item.ImageUrl" alt="@item.Name"/>
-                                                    </a>
-                                                </div>
-
-                                                <div class="product-content">
-                                                    <h5 class="product-name">
-                                                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-                                                    </h5>
-
-                                                    <div class="price-box">
-                                                        @if (item.DiscountPercentage > 0)
-                                                        {
-                                                            var priceAfterDiscount =
-                                                                item.Price - (item.Price * item.DiscountPercentage / 100);
-
-                                                            <span class="regular-price">
-                                            $@priceAfterDiscount.ToString("F2")
-                                        </span>
-                                                            <span class="old-price">
-                                            <del>$@item.Price.ToString("F2")</del>
-                                        </span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="regular-price">
-                                            $@item.Price.ToString("F2")
-                                        </span>
-                                                        }
-                                                    </div>
-
-                                                    <div class="product-action-link">
-                                                        <a href="#" data-toggle="tooltip" title="Wishlist">
-                                                            <i class="ion-android-favorite-outline"></i>
-                                                        </a>
-
-                                                        <a href="#" data-toggle="tooltip" title="Add To Cart">
-                                                            <i class="ion-bag"></i>
-                                                        </a>
-
-                                                        <a href="#" data-toggle="modal" data-target="#quick_view" data-id="@item.Id" class="btn-quick-view">
-                                        <span data-toggle="tooltip" title="Quick View">
-                                            <i class="ion-ios-eye-outline"></i>
-                                        </span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- featured product area end -->
                 </div>
             </div>
+
+            <!-- Related Products -->
+            @if (relatedProducts != null && relatedProducts.Any())
+            {
+                <section class="related-products section-padding">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title mb-30">
+                                <h2 class="title">Related Products</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in relatedProducts)
+                        {
+                            var itemImage = item.ProductImages?.FirstOrDefault()?.ImageUrl ?? item.ImageUrl;
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-item mb-30">
+                                    <div class="product-thumb">
+                                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
+                                            <img src="/@itemImage" alt="@item.Name">
+                                        </a>
+                                        @if (item.DiscountPercentage > 0)
+                                        {
+                                            <span class="badges">
+                                                <span class="sale">-@item.DiscountPercentage%</span>
+                                            </span>
+                                        }
+                                    </div>
+                                    <div class="product-content">
+                                        <h5 class="product-name">
+                                            <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                                        </h5>
+                                        <div class="price-box">
+                                            @if (item.DiscountPercentage > 0)
+                                            {
+                                                var discPrice = item.Price - (item.Price * item.DiscountPercentage / 100);
+                                                <span class="regular-price">₼@discPrice.ToString("F2")</span>
+                                                <span class="old-price"><del>₼@item.Price.ToString("F2")</del></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="regular-price">₼@item.Price.ToString("F2")</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
         </div>
     </div>
     <!-- product details wrapper end -->
 </main>
-<!-- main wrapper end -->
-                                
+
+@section Scripts {
+    <script>
+        // Add to Cart Function
+        function addToCart() {
+            const productId = document.getElementById('productId').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            const color = document.getElementById('colorSelect')?.value || '';
+            const size = document.getElementById('sizeSelect')?.value || '';
+
+            const data = {
+                productId: parseInt(productId),
+                quantity: quantity,
+                selectedColor: color,
+                selectedSize: size
+            };
+
+            fetch('/Basket/AddToBasket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    toastr.success('Product added to cart!');
+                    updateCartCount();
+                } else {
+                    toastr.error(result.message || 'Failed to add to cart');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toastr.error('An error occurred');
+            });
+        }
+
+        // Submit Review Function
+        function submitReview() {
+            const productId = document.getElementById('reviewProductId').value;
+            const rating = document.getElementById('reviewRating').value;
+            const comment = document.getElementById('reviewComment').value;
+
+            if (!rating || !comment) {
+                toastr.warning('Please fill all fields');
+                return;
+            }
+
+            const data = {
+                productId: parseInt(productId),
+                rating: parseInt(rating),
+                comment: comment
+            };
+
+            fetch('/Product/AddReview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    toastr.success('Review submitted successfully!');
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    toastr.error(result.message || 'Failed to submit review');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toastr.error('An error occurred');
+            });
+        }
+    </script>
+}
+

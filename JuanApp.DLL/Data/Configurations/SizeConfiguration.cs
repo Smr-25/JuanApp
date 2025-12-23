@@ -14,12 +14,14 @@ public class SizeConfiguration : IEntityTypeConfiguration<Size>
         builder.HasMany(s => s.Products)
             .WithMany(p => p.Sizes);
         builder.HasData(
-            new Size { Id = 1, SizeType = "XS" },
-            new Size { Id = 2, SizeType = "S" },
-            new Size { Id = 3, SizeType = "M" },
-            new Size { Id = 4, SizeType = "L" },
-            new Size { Id = 5, SizeType = "XL" },
-            new Size { Id = 6, SizeType = "XXL" }
+            new Size { Id = 1, Name = "Small", SizeType = "Clothing" },
+            new Size { Id = 2, Name = "Medium", SizeType = "Clothing" },
+            new Size { Id = 3, Name = "Large", SizeType = "Clothing" },
+            new Size { Id = 4, Name = "X-Large", SizeType = "Clothing" },
+            new Size { Id = 5, Name = "6", SizeType = "Shoes" },
+            new Size { Id = 6, Name = "7", SizeType = "Shoes" },
+            new Size { Id = 7, Name = "8", SizeType = "Shoes" },
+            new Size { Id = 8, Name = "9", SizeType = "Shoes" }
         );
     }
 }

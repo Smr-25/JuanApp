@@ -14,12 +14,12 @@ public class ColorConfiguration : IEntityTypeConfiguration<Color>
         builder.HasMany(c => c.Products)
             .WithMany(p => p.Colors);
         builder.HasData(
-            new Color { Id = 1, Name = "Red" },
-            new Color { Id = 2, Name = "Blue" },
-            new Color { Id = 3, Name = "Green" },
-            new Color { Id = 4, Name = "Yellow" },
-            new Color { Id = 5, Name = "Black" },
-            new Color { Id = 6, Name = "White" }
+            new Color { Id = 1, Name = "Red" , HexCode =  "#FF0000"},
+            new Color { Id = 2, Name = "Blue", HexCode =  "#0000FF" },
+            new Color { Id = 3, Name = "Green" , HexCode =  "#00FF00"},
+            new Color { Id = 4, Name = "Yellow" , HexCode =   "#FFFF00"},
+            new Color { Id = 5, Name = "Black" , HexCode =  "#000000" },
+            new Color { Id = 6, Name = "White" , HexCode =  "#FFFFFF" }
         );
     }
 }
