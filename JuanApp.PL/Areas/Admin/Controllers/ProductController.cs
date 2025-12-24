@@ -26,9 +26,16 @@ public class ProductController : Controller
         _sizeService = sizeService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string search, int page = 1)
     {
-        var products = await _adminProductService.GetAllProductsAsync();
+        const int pageSize = 10;
+        var (products, totalCount) = await _adminProductService.GetProductsAsync(search, page, pageSize);
+        
+        ViewBag.Search = search;
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+        ViewBag.TotalCount = totalCount;
+        
         return View(products);
     }
 

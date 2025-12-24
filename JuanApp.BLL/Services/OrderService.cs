@@ -132,5 +132,50 @@ public class OrderService(AppDbContext context) : IOrderService
             }).ToList()
         }).ToList();
     }
-}
 
+    public async Task<int> CreateOrderAsync(string userId, CheckoutDto dto)
+    {
+        var basket = await context.Baskets
+            .Include(b => b.BasketItems)
+            .ThenInclude(bi => bi.Product)
+            .FirstOrDefaultAsync(b => b.UserId == userId);
+
+        if (basket == null || !basket.BasketItems.Any())
+        {
+            throw new InvalidOperationException("Cart is empty");
+        }
+
+        var order = new Order
+        {
+            UserId = userId,
+            OrderNumber = "ORD-" + DateTime.Now.Ticks,
+            OrderDate = DateTime.UtcNow,
+            TotalAmount = basket.BasketItems.Sum(bi => bi.Price * bi.Quantity),
+            Status = OrderStatus.Pending,
+            ShippingAddress = dto.Address,
+            ContactPhone = dto.Phone
+        };
+
+        context.Orders.Add(order);
+        await context.SaveChangesAsync();
+
+        foreach (var item in basket.BasketItems)
+        {
+            var orderItem = new OrderItem
+            {
+                OrderId = order.Id,
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+                Price = item.Price,
+                SelectedColor = item.Color?.Name ?? "",
+                SelectedSize = item.Size?.Name ?? ""
+            };
+            context.OrderItems.Add(orderItem);
+        }
+
+        context.BasketItems.RemoveRange(basket.BasketItems);
+        await context.SaveChangesAsync();
+
+        return order.Id;
+    }
+}

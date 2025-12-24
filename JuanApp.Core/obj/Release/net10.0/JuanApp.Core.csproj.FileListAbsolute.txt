@@ -1,0 +1,15 @@
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/bin/Release/net10.0/JuanApp.Core.deps.json
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/bin/Release/net10.0/JuanApp.Core.runtimeconfig.json
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/bin/Release/net10.0/JuanApp.Core.dll
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/bin/Release/net10.0/JuanApp.Core.pdb
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.csproj.AssemblyReference.cache
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.AssemblyInfoInputs.cache
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.AssemblyInfo.cs
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.csproj.CoreCompileInputs.cache
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.sourcelink.json
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.dll
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/refint/JuanApp.Core.dll
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.pdb
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/JuanApp.Core.genruntimeconfig.cache
+/Users/asmrofficialfinder/Documents/CodeAcademyMiniApp/JuanApp/JuanApp.Core/obj/Release/net10.0/ref/JuanApp.Core.dll

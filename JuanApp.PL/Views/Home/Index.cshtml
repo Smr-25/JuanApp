@@ -88,7 +88,7 @@
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
-                                        <img src="~/assets/img/product/@product.ImageUrl" alt=""/>
+                                        <img src="@product.ImageUrl" alt=""/>
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -381,14 +381,14 @@
 </div>
 
 @section Scripts {
-<script>
+    <script>
     // Global addToCart funksiyası
     function addToCart(productId, colorId, sizeId, quantity) {
         @if (!User.Identity.IsAuthenticated)
         {
             @:toastr.warning('Please login to add products to cart');
             @:setTimeout(function() {
-                @:window.location.href = '@Url.Action("Login", "Account")';
+            @:window.location.href = '@Url.Action("Login", "Account")';
             @:}, 1500);
             @:return;
         }
@@ -477,13 +477,13 @@
     @if (User.Identity.IsAuthenticated)
     {
         @:$(document).ready(function() {
-            @:$.ajax({
-                @:url: '@Url.Action("GetItemCount", "Basket")',
-                @:type: 'GET',
-                @:success: function(response) {
-                    @:updateCartCount(response.itemCount);
-                @:}
-            @:});
+        @:$.ajax({
+        @:url: '@Url.Action("GetItemCount", "Basket")',
+        @:type: 'GET',
+        @:success: function(response) {
+        @:updateCartCount(response.itemCount);
+        @:}
+        @:});
         @:});
     }
 </script>

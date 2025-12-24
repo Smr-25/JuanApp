@@ -1,8 +1,7 @@
-using JuanApp.Core.Models;
-using JuanApp.DLL.Data;
+using JuanApp.BLL.Dtos;
+using JuanApp.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.PL.Areas.Admin.Controllers;
 
@@ -10,18 +9,16 @@ namespace JuanApp.PL.Areas.Admin.Controllers;
 [Authorize(Policy = "AdminOnly")]
 public class BlogController : Controller
 {
-    private readonly AppDbContext _context;
-    private readonly IWebHostEnvironment _env;
+    private readonly IBlogService _blogService;
 
-    public BlogController(AppDbContext context, IWebHostEnvironment env)
+    public BlogController(IBlogService blogService)
     {
-        _context = context;
-        _env = env;
+        _blogService = blogService;
     }
 
     public async Task<IActionResult> Index()
     {
-        var blogs = await _context.Blogs.OrderByDescending(b => b.PublishedDate).ToListAsync();
+        var blogs = await _blogService.GetAllAsync();
         return View(blogs);
     }
 
@@ -32,113 +29,74 @@ public class BlogController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(Blog blog, IFormFile? imageFile)
+    public async Task<IActionResult> Create(BlogCreateDto dto)
     {
         if (!ModelState.IsValid)
         {
-            return View(blog);
+            return View(dto);
         }
 
-        if (imageFile != null)
+        var result = await _blogService.CreateAsync(dto);
+        if (result)
         {
-            blog.ImageUrl = await SaveImageAsync(imageFile);
+            TempData["Success"] = "Blog created successfully!";
+            return RedirectToAction("Index");
         }
 
-        blog.PublishedDate = DateTime.UtcNow;
-        _context.Blogs.Add(blog);
-        await _context.SaveChangesAsync();
-
-        TempData["Success"] = "Blog created successfully!";
-        return RedirectToAction("Index");
+        TempData["Error"] = "Failed to create blog!";
+        return View(dto);
     }
 
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
+        var blog = await _blogService.GetByIdAsync(id);
         if (blog == null) return NotFound();
-        return View(blog);
+
+        var dto = new BlogUpdateDto
+        {
+            Id = blog.Id,
+            Title = blog.Title,
+            Description = blog.Description,
+            Content = blog.Content,
+            Author = blog.Author,
+            Category = blog.Category,
+            Tags = blog.Tags,
+            ExistingImageUrl = blog.ImageUrl
+        };
+
+        return View(dto);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(Blog blog, IFormFile? imageFile)
+    public async Task<IActionResult> Edit(BlogUpdateDto dto)
     {
         if (!ModelState.IsValid)
         {
-            return View(blog);
+            return View(dto);
         }
 
-        var existingBlog = await _context.Blogs.FindAsync(blog.Id);
-        if (existingBlog == null) return NotFound();
-
-        existingBlog.Title = blog.Title;
-        existingBlog.Description = blog.Description;
-        existingBlog.Content = blog.Content;
-        existingBlog.Author = blog.Author;
-        existingBlog.Category = blog.Category;
-
-        if (imageFile != null)
+        var result = await _blogService.UpdateAsync(dto);
+        if (result)
         {
-            if (!string.IsNullOrEmpty(existingBlog.ImageUrl))
-            {
-                DeleteImage(existingBlog.ImageUrl);
-            }
-            existingBlog.ImageUrl = await SaveImageAsync(imageFile);
+            TempData["Success"] = "Blog updated successfully!";
+            return RedirectToAction("Index");
         }
 
-        await _context.SaveChangesAsync();
-        TempData["Success"] = "Blog updated successfully!";
-        return RedirectToAction("Index");
+        TempData["Error"] = "Failed to update blog!";
+        return View(dto);
     }
 
     [HttpPost]
     public async Task<IActionResult> Delete(int id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
-        if (blog == null)
+        var result = await _blogService.DeleteAsync(id);
+        if (result)
         {
-            return Json(new { success = false, message = "Blog not found" });
+            return Json(new { success = true, message = "Blog deleted successfully" });
         }
 
-        if (!string.IsNullOrEmpty(blog.ImageUrl))
-        {
-            DeleteImage(blog.ImageUrl);
-        }
-
-        _context.Blogs.Remove(blog);
-        await _context.SaveChangesAsync();
-
-        return Json(new { success = true, message = "Blog deleted successfully" });
-    }
-
-    private async Task<string> SaveImageAsync(IFormFile file)
-    {
-        var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads", "blogs");
-        if (!Directory.Exists(uploadsFolder))
-        {
-            Directory.CreateDirectory(uploadsFolder);
-        }
-
-        var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            await file.CopyToAsync(fileStream);
-        }
-
-        return "uploads/blogs/" + uniqueFileName;
-    }
-
-    private void DeleteImage(string imageUrl)
-    {
-        if (string.IsNullOrEmpty(imageUrl)) return;
-
-        var fullPath = Path.Combine(_env.WebRootPath, imageUrl);
-        if (System.IO.File.Exists(fullPath))
-        {
-            System.IO.File.Delete(fullPath);
-        }
+        return Json(new { success = false, message = "Failed to delete blog" });
     }
 }
 

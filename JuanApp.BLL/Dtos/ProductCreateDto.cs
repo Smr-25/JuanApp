@@ -32,10 +32,4 @@ public class ProductCreateDto
     public List<int>? SizeIds { get; set; }
 }
 
-public class ProductUpdateDto : ProductCreateDto
-{
-    public int Id { get; set; }
-    public string? ExistingImageUrl { get; set; }
-    public List<string>? ExistingAdditionalImages { get; set; }
-}
 

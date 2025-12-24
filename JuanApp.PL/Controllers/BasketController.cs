@@ -1,33 +1,17 @@
 using JuanApp.BLL.Dtos;
 using JuanApp.BLL.Interfaces;
 using JuanApp.Core.Models;
-using JuanApp.DLL.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace JuanApp.Controllers;
 
-public class BasketController : Controller
+public class BasketController(
+    IBasketService basketService,
+    UserManager<AppUser> userManager,
+    IOrderService orderService,
+    ISubscriberService subscriberService) : Controller
 {
-    private readonly IBasketService _basketService;
-    private readonly UserManager<AppUser> _userManager;
-    private readonly AppDbContext _context;
-    private readonly ISubscriberService _subscriberService;
-
-    public BasketController(
-        IBasketService basketService,
-        UserManager<AppUser> userManager,
-        AppDbContext context,
-        ISubscriberService subscriberService)
-    {
-        _basketService = basketService;
-        _userManager = userManager;
-        _context = context;
-        _subscriberService = subscriberService;
-    }
-   
     public async Task<IActionResult> Index()
     {
         if (!User.Identity.IsAuthenticated)
@@ -35,8 +19,8 @@ public class BasketController : Controller
             return RedirectToAction("Login", "Account");
         }
 
-        var userId = _userManager.GetUserId(User);
-        var basket = await _basketService.GetBasketAsync(userId);
+        var userId = userManager.GetUserId(User);
+        var basket = await basketService.GetBasketAsync(userId);
         
         return View(basket);
     }
@@ -49,12 +33,12 @@ public class BasketController : Controller
             return Json(new { success = false, message = "Please login first" });
         }
 
-        var userId = _userManager.GetUserId(User);
-        var result = await _basketService.AddToBasketAsync(userId, dto);
+        var userId = userManager.GetUserId(User);
+        var result = await basketService.AddToBasketAsync(userId, dto);
 
         if (result)
         {
-            var itemCount = await _basketService.GetBasketItemCountAsync(userId);
+            var itemCount = await basketService.GetBasketItemCountAsync(userId);
             return Json(new { success = true, message = "Product added to cart", itemCount });
         }
 
@@ -69,12 +53,12 @@ public class BasketController : Controller
             return Json(new { success = false, message = "Unauthorized" });
         }
 
-        var userId = _userManager.GetUserId(User);
-        var result = await _basketService.UpdateQuantityAsync(userId, basketItemId, quantity);
+        var userId = userManager.GetUserId(User);
+        var result = await basketService.UpdateQuantityAsync(userId, basketItemId, quantity);
 
         if (result)
         {
-            var basket = await _basketService.GetBasketAsync(userId);
+            var basket = await basketService.GetBasketAsync(userId);
             return Json(new 
             { 
                 success = true, 
@@ -94,12 +78,12 @@ public class BasketController : Controller
             return Json(new { success = false, message = "Unauthorized" });
         }
 
-        var userId = _userManager.GetUserId(User);
-        var result = await _basketService.RemoveFromBasketAsync(userId, basketItemId);
+        var userId = userManager.GetUserId(User);
+        var result = await basketService.RemoveFromBasketAsync(userId, basketItemId);
 
         if (result)
         {
-            var basket = await _basketService.GetBasketAsync(userId);
+            var basket = await basketService.GetBasketAsync(userId);
             return Json(new 
             { 
                 success = true, 
@@ -111,20 +95,6 @@ public class BasketController : Controller
         return Json(new { success = false, message = "Failed to remove item" });
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Clear()
-    {
-        if (!User.Identity.IsAuthenticated)
-        {
-            return RedirectToAction("Login", "Account");
-        }
-
-        var userId = _userManager.GetUserId(User);
-        await _basketService.ClearBasketAsync(userId);
-
-        return RedirectToAction("Index");
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetItemCount()
     {
@@ -133,10 +103,9 @@ public class BasketController : Controller
             return Json(new { itemCount = 0 });
         }
 
-        var userId = _userManager.GetUserId(User);
-        var itemCount = await _basketService.GetBasketItemCountAsync(userId);
-
-        return Json(new { itemCount });
+        var userId = userManager.GetUserId(User);
+        var count = await basketService.GetBasketItemCountAsync(userId);
+        return Json(new { itemCount = count });
     }
 
     [HttpGet]
@@ -144,13 +113,36 @@ public class BasketController : Controller
     {
         if (!User.Identity.IsAuthenticated)
         {
-            return Json(new { success = false, message = "Unauthorized" });
+            return Json(new { success = false, requiresLogin = true });
         }
 
-        var userId = _userManager.GetUserId(User);
-        var basket = await _basketService.GetBasketAsync(userId);
+        var userId = userManager.GetUserId(User);
+        var basket = await basketService.GetBasketAsync(userId);
+        
+        var items = basket.Items.Select(i => new
+        {
+            id = i.Id,
+            productName = i.ProductName,
+            price = i.Price,
+            quantity = i.Quantity,
+            imageUrl = i.ProductImage
+        }).ToList();
 
-        return Json(new { success = true, items = basket.Items });
+        return Json(new { success = true, items, totalPrice = basket.TotalPrice });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Clear()
+    {
+        if (!User.Identity.IsAuthenticated)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var userId = userManager.GetUserId(User);
+        await basketService.ClearBasketAsync(userId);
+
+        return RedirectToAction("Index");
     }
 
     [HttpGet]
@@ -174,58 +166,15 @@ public class BasketController : Controller
 
         try
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var basket = await _context.Baskets
-                .Include(b => b.BasketItems)
-                .ThenInclude(bi => bi.Product)
-                .FirstOrDefaultAsync(b => b.UserId == userId);
+            var userId = userManager.GetUserId(User);
+            var orderId = await orderService.CreateOrderAsync(userId, dto);
 
-            if (basket == null || !basket.BasketItems.Any())
+            if (dto.Subscribe && !string.IsNullOrEmpty(dto.Email))
             {
-                return Json(new { success = false, message = "Your cart is empty" });
+                await subscriberService.SubscribeAsync(dto.Email);
             }
 
-            // Create Order
-            var order = new Order
-            {
-                UserId = userId,
-                OrderNumber = "ORD-" + DateTime.Now.Ticks,
-                OrderDate = DateTime.UtcNow,
-                TotalAmount = basket.BasketItems.Sum(bi => bi.Price * bi.Quantity),
-                Status = OrderStatus.Pending,
-                ShippingAddress = dto.Address,
-                ContactPhone = dto.Phone
-            };
-
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
-
-            // Create Order Items
-            foreach (var item in basket.BasketItems)
-            {
-                var orderItem = new OrderItem
-                {
-                    OrderId = order.Id,
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    Price = item.Price,
-                    SelectedColor = item.Color?.Name ?? "",
-                    SelectedSize = item.Size?.Name ?? ""
-                };
-                _context.OrderItems.Add(orderItem);
-            }
-
-            // Clear basket
-            _context.BasketItems.RemoveRange(basket.BasketItems);
-            await _context.SaveChangesAsync();
-
-            // Subscribe if requested
-            if (dto.Subscribe)
-            {
-                await _subscriberService.SubscribeAsync(dto.Email);
-            }
-
-            return Json(new { success = true, message = "Order placed successfully", orderId = order.Id });
+            return Json(new { success = true, message = "Order placed successfully", orderId });
         }
         catch (Exception ex)
         {
@@ -233,3 +182,4 @@ public class BasketController : Controller
         }
     }
 }
+

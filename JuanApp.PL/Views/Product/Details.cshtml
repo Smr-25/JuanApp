@@ -117,13 +117,18 @@
                                             {
                                                 <div class="color-option mb-20">
                                                     <h5 class="cat-title">Color:</h5>
-                                                    <select id="colorSelect" class="form-select" style="max-width: 200px;">
-                                                        <option value="">Select Color</option>
+                                                    <div class="color-selection-wrapper" style="display: flex; gap: 10px; flex-wrap: wrap;">
                                                         @foreach (var color in product.Colors)
                                                         {
-                                                            <option value="@color.Name">@color.Name</option>
+                                                            <label class="color-selection-item" style="cursor: pointer; position: relative;">
+                                                                <input type="radio" name="colorSelect" value="@color.Name" class="color-radio" style="position: absolute; opacity: 0;" />
+                                                                <div class="color-box" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 6px; transition: all 0.3s;">
+                                                                    <span class="color-preview" style="width: 25px; height: 25px; background-color: @color.HexCode; border: 1px solid #ccc; border-radius: 4px; display: inline-block;"></span>
+                                                                    <span class="color-name" style="font-size: 14px; font-weight: 500;">@color.Name</span>
+                                                                </div>
+                                                            </label>
                                                         }
-                                                    </select>
+                                                    </div>
                                                 </div>
                                             }
 
@@ -131,13 +136,17 @@
                                             {
                                                 <div class="size-option mb-20">
                                                     <h5 class="cat-title">Size:</h5>
-                                                    <select id="sizeSelect" class="form-select" style="max-width: 200px;">
-                                                        <option value="">Select Size</option>
+                                                    <div class="size-selection-wrapper" style="display: flex; gap: 10px; flex-wrap: wrap;">
                                                         @foreach (var size in product.Sizes)
                                                         {
-                                                            <option value="@size.Name">@size.Name</option>
+                                                            <label class="size-selection-item" style="cursor: pointer;">
+                                                                <input type="radio" name="sizeSelect" value="@size.Name" class="size-radio" style="position: absolute; opacity: 0;" />
+                                                                <div class="size-box" style="min-width: 50px; padding: 10px 16px; border: 2px solid #ddd; border-radius: 6px; text-align: center; font-weight: 600; transition: all 0.3s;">
+                                                                    @size.Name
+                                                                </div>
+                                                            </label>
                                                         }
-                                                    </select>
+                                                    </div>
                                                 </div>
                                             }
 
@@ -245,10 +254,18 @@
                                                 
                                                 @foreach (var review in reviews.OrderByDescending(r => r.CreatedAt))
                                                 {
-                                                    <div class="total-reviews mb-30">
+                                                    <div class="total-reviews mb-30" id="review-@review.Id">
                                                         <div class="review-box">
-                                                            <div class="post-author">
-                                                                <p><span>@review.UserName -</span> @review.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                                            <div class="d-flex justify-content-between align-items-start">
+                                                                <div class="post-author">
+                                                                    <p><span>@review.UserName -</span> @review.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                                                </div>
+                                                                @if (User.Identity?.IsAuthenticated == true && review.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                                                                {
+                                                                    <button type="button" onclick="deleteReview(@review.Id)" class="btn btn-sm btn-danger">
+                                                                        <i class="fa fa-trash"></i> Delete
+                                                                    </button>
+                                                                }
                                                             </div>
                                                             <div class="rating-box">
                                                                 @for (int i = 1; i <= 5; i++)
@@ -383,12 +400,28 @@
 
 @section Scripts {
     <script>
+        $(document).ready(function() {
+            // Color selection styling
+            $('.color-radio').on('change', function() {
+                $('.color-box').css({'border-color': '#ddd', 'background': 'transparent'});
+                $(this).siblings('.color-box').css({'border-color': '#333', 'background': '#f8f8f8'});
+            });
+
+            // Size selection styling
+            $('.size-radio').on('change', function() {
+                $('.size-box').css({'border-color': '#ddd', 'background': 'white', 'color': '#333'});
+                $(this).siblings('.size-box').css({'border-color': '#333', 'background': '#333', 'color': 'white'});
+            });
+        });
+
         // Add to Cart Function
         function addToCart() {
             const productId = document.getElementById('productId').value;
             const quantity = parseInt(document.getElementById('quantity').value) || 1;
-            const color = document.getElementById('colorSelect')?.value || '';
-            const size = document.getElementById('sizeSelect')?.value || '';
+            const colorRadio = document.querySelector('input[name="colorSelect"]:checked');
+            const sizeRadio = document.querySelector('input[name="sizeSelect"]:checked');
+            const color = colorRadio ? colorRadio.value : '';
+            const size = sizeRadio ? sizeRadio.value : '';
 
             const data = {
                 productId: parseInt(productId),
@@ -450,6 +483,34 @@
                     setTimeout(() => location.reload(), 1500);
                 } else {
                     toastr.error(result.message || 'Failed to submit review');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toastr.error('An error occurred');
+            });
+        }
+
+        // Delete Review Function
+        function deleteReview(reviewId) {
+            if (!confirm('Are you sure you want to delete this review?')) {
+                return;
+            }
+
+            fetch('/Product/DeleteReview?id=' + reviewId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    toastr.success('Review deleted successfully!');
+                    document.getElementById('review-' + reviewId).remove();
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    toastr.error(result.message || 'Failed to delete review');
                 }
             })
             .catch(error => {

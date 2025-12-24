@@ -8,4 +8,6 @@ public class HomeVm
     public HomeSliderDto Slider { get; set; }
     public HomeAdvantageDto Advantage { get; set; }
     public HomeProductDto Product { get; set; }
+    public List<BlogDto> Blogs { get; set; } = new();
 }
+

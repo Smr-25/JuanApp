@@ -1,37 +1,33 @@
-using JuanApp.DLL.Data;
+using JuanApp.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.PL.Controllers;
 
 public class BlogController : Controller
 {
-    private readonly AppDbContext _context;
+    private readonly IBlogService _blogService;
 
-    public BlogController(AppDbContext context)
+    public BlogController(IBlogService blogService)
     {
-        _context = context;
+        _blogService = blogService;
     }
 
     public async Task<IActionResult> Index()
     {
-        var blogs = await _context.Blogs
-            .OrderByDescending(b => b.PublishedDate)
-            .ToListAsync();
+        var blogs = await _blogService.GetAllAsync();
         return View(blogs);
     }
 
     public async Task<IActionResult> Details(int id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
+        var blog = await _blogService.GetByIdAsync(id);
         if (blog == null)
         {
             return NotFound();
         }
 
         // Increment view count
-        blog.ViewCount++;
-        await _context.SaveChangesAsync();
+        await _blogService.IncrementViewCountAsync(id);
 
         return View(blog);
     }

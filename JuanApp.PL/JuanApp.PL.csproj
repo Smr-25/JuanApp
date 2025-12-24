@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="4.14.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="10.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
 		  <PrivateAssets>all</PrivateAssets>
@@ -32,12 +33,12 @@
 
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="Views\Product\Detail.cshtml" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="wwwroot\admin\css\" />
-	  <Folder Include="wwwroot\admin\js\" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\29c5ba13-0c67-4574-a648-825490219666_IMDb DBDesigner.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\42509087-c292-4a8b-bb93-e52f312e73fb_TurboAz DBDesigner.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\8ce0a496-d416-48d0-9001-5756fa8f2a64_Spotify DBDesigner.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\b1169356-411e-46f5-a225-1250c98176e7_Spotify DBDesigner.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\b7650ac8-f49a-4389-a625-faddd92e2138_ERDDBMS.jpg" />
+	  <_ContentIncludedByDefault Remove="wwwroot\uploads\products\f001ef74-730a-46a9-ba71-1a3177616315_3Division.png" />
 	</ItemGroup>
 
 </Project>

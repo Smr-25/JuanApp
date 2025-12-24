@@ -28,5 +28,27 @@ public class SubscriberController : Controller
 
         return Json(new { success = false, message = "This email is already subscribed" });
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Unsubscribe(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            TempData["Error"] = "Invalid email address";
+            return RedirectToAction("Index", "Home");
+        }
+
+        var result = await _subscriberService.UnsubscribeAsync(email);
+        if (result)
+        {
+            TempData["Success"] = "You have been unsubscribed successfully";
+        }
+        else
+        {
+            TempData["Error"] = "Email not found in our subscriber list";
+        }
+
+        return RedirectToAction("Index", "Home");
+    }
 }
 

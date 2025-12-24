@@ -61,6 +61,18 @@ public class SubscriberService(AppDbContext context) : ISubscriberService
         return true;
     }
 
+    public async Task<bool> UnsubscribeAsync(string email)
+    {
+        var subscriber = await context.Subscribers
+            .FirstOrDefaultAsync(s => s.Email == email);
+        
+        if (subscriber == null) return false;
+
+        subscriber.IsActive = false;
+        await context.SaveChangesAsync();
+        return true;
+    }
+
     public async Task<List<string>> GetActiveSubscriberEmailsAsync()
     {
         return await context.Subscribers

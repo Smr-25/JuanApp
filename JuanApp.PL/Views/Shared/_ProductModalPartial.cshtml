@@ -57,13 +57,15 @@
                 {
                     <div class="color-list-wrapper mb-20">
                         <h5 class="cat-title">Color:</h5>
-                        <div class="d-flex flex-wrap gap-2">
+                        <div class="color-selection-wrapper" style="display: flex; gap: 10px; flex-wrap: wrap;">
                             @foreach (var color in Model.Colors)
                             {
-                                <label class="color-option" style="cursor: pointer;">
-                                    <input type="radio" name="quickview-color-@Model.Id" value="@color.Name" style="display: none;">
-                                    <span style="display: inline-block; width: 30px; height: 30px; background-color: @color.HexCode; border: 2px solid #ddd; border-radius: 4px; vertical-align: middle;"></span>
-                                    <span class="ms-1">@color.Name</span>
+                                <label class="color-selection-item-@Model.Id" style="cursor: pointer; position: relative;">
+                                    <input type="radio" name="quickview-color-@Model.Id" value="@color.Name" class="color-radio-@Model.Id" style="position: absolute; opacity: 0;" />
+                                    <div class="color-box-@Model.Id" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 6px; transition: all 0.3s;">
+                                        <span class="color-preview" style="width: 25px; height: 25px; background-color: @color.HexCode; border: 1px solid #ccc; border-radius: 4px; display: inline-block;"></span>
+                                        <span class="color-name" style="font-size: 14px; font-weight: 500;">@color.Name</span>
+                                    </div>
                                 </label>
                             }
                         </div>
@@ -75,12 +77,14 @@
                 {
                     <div class="size-list-wrapper mb-20">
                         <h5 class="cat-title">Size:</h5>
-                        <div class="d-flex flex-wrap gap-2">
+                        <div class="size-selection-wrapper" style="display: flex; gap: 10px; flex-wrap: wrap;">
                             @foreach (var size in Model.Sizes)
                             {
-                                <label class="size-option" style="cursor: pointer;">
-                                    <input type="radio" name="quickview-size-@Model.Id" value="@size.Name" style="display: none;">
-                                    <span style="display: inline-block; padding: 8px 15px; border: 2px solid #ddd; border-radius: 4px;">@size.Name</span>
+                                <label class="size-selection-item-@Model.Id" style="cursor: pointer;">
+                                    <input type="radio" name="quickview-size-@Model.Id" value="@size.Name" class="size-radio-@Model.Id" style="position: absolute; opacity: 0;" />
+                                    <div class="size-box-@Model.Id" style="min-width: 50px; padding: 10px 16px; border: 2px solid #ddd; border-radius: 6px; text-align: center; font-weight: 600; transition: all 0.3s;">
+                                        @size.Name
+                                    </div>
                                 </label>
                             }
                         </div>
@@ -179,15 +183,15 @@
         });
 
         // Color selection styling
-        $('input[name="quickview-color-@Model.Id"]').on('change', function() {
-            $('input[name="quickview-color-@Model.Id"]').parent().find('span').first().css('border', '2px solid #ddd');
-            $(this).parent().find('span').first().css('border', '3px solid #333');
+        $('.color-radio-@Model.Id').on('change', function() {
+            $('.color-box-@Model.Id').css({'border-color': '#ddd', 'background': 'transparent'});
+            $(this).siblings('.color-box-@Model.Id').css({'border-color': '#333', 'background': '#f8f8f8'});
         });
 
         // Size selection styling
-        $('input[name="quickview-size-@Model.Id"]').on('change', function() {
-            $('input[name="quickview-size-@Model.Id"]').parent().find('span').css({'border': '2px solid #ddd', 'background': 'white', 'color': '#333'});
-            $(this).parent().find('span').css({'border': '2px solid #333', 'background': '#333', 'color': 'white'});
+        $('.size-radio-@Model.Id').on('change', function() {
+            $('.size-box-@Model.Id').css({'border-color': '#ddd', 'background': 'white', 'color': '#333'});
+            $(this).siblings('.size-box-@Model.Id').css({'border-color': '#333', 'background': '#333', 'color': 'white'});
         });
     });
 

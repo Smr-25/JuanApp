@@ -20,27 +20,8 @@
     <!-- Toastr CSS (for notifications) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     
-    <style>
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            min-width: 20px;
-            height: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 2px 5px;
-        }
-        .minicart-btn {
-            position: relative;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link href="~/assets/css/custom.css" rel="stylesheet"/>
     
     <script src="~/assets/js/modernizr-2.8.3.min.js"></script>
 </head>
@@ -337,6 +318,98 @@
     <i class="fa fa-angle-up"></i>
 </div>
 
+<style>
+    .mini-cart-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 350px;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        margin-top: 10px;
+        z-index: 9999;
+        padding: 15px;
+    }
+    .mini-cart-item {
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    .mini-cart-item:last-child {
+        border-bottom: none;
+    }
+    .mini-cart-item img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .mini-cart-item h6 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .mini-cart-item p {
+        margin: 5px 0 0 0;
+        font-size: 12px;
+        color: #666;
+    }
+    .mini-cart-total {
+        border-top: 2px solid #DAA841;
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+    .total-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+function subscribe(event) {
+    event.preventDefault();
+    const email = document.getElementById('subscribeEmail').value;
+
+    if (!email) {
+        toastr.warning('Please enter your email');
+        return;
+    }
+
+    const button = event.target.querySelector('button');
+    button.disabled = true;
+    button.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+
+    fetch('/Subscriber/Subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(email)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            toastr.success(data.message || 'Successfully subscribed!');
+            document.getElementById('subscribeEmail').value = '';
+        } else {
+            toastr.error(data.message || 'Failed to subscribe');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        toastr.error('An error occurred. Please try again.');
+    })
+    .finally(() => {
+        button.disabled = false;
+        button.innerHTML = '<i class="fa fa-paper-plane"></i>';
+    });
+}
+</script>
+
 <!-- Scripts -->
 <script src="~/assets/js/vendor.js"></script>
 <script src="~/assets/js/plugins.js"></script>
@@ -346,80 +419,8 @@
 <!-- Toastr JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<!-- Global Cart Script -->
-<script>
-    // Toastr configuration
-    if (typeof toastr !== 'undefined') {
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "timeOut": "3000",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-    }
-
-    // Update cart count in header
-    function updateCartCount(count) {
-        $('.cart-count, #cart-count').text(count);
-    }
-
-    // Load cart count on page load
-    function loadCartCount() {
-        @if (User.Identity.IsAuthenticated)
-        {
-            @:$.ajax({
-            @:    url: '@Url.Action("GetItemCount", "Basket")',
-            @:    type: 'GET',
-            @:    success: function(response) {
-            @:        if (response.itemCount !== undefined) {
-            @:            updateCartCount(response.itemCount);
-            @:        }
-            @:    },
-            @:    error: function(xhr, status, error) {
-            @:        console.error('Failed to load cart count:', error);
-            @:    }
-            @:});
-        }
-    }
-
-    $(document).ready(function() {
-        loadCartCount();
-    });
-
-    // Subscribe function
-    function subscribe(event) {
-        event.preventDefault();
-        const email = document.getElementById('subscribeEmail').value;
-
-        if (!email) {
-            toastr.warning('Please enter your email');
-            return;
-        }
-
-        fetch('/Subscriber/Subscribe', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(email)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                toastr.success(data.message);
-                document.getElementById('subscribeEmail').value = '';
-            } else {
-                toastr.error(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            toastr.error('An error occurred. Please try again.');
-        });
-    }
-</script>
+<!-- Custom JS -->
+<script src="~/assets/js/custom.js"></script>
 
 @RenderSection("Scripts", required: false)
 </body>

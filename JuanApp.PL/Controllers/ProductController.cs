@@ -1,6 +1,5 @@
+using JuanApp.BLL.Dtos;
 using JuanApp.BLL.Interfaces;
-using JuanApp.Core.Models;
-using JuanApp.DLL.Data;
 using JuanApp.PL.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +9,12 @@ namespace JuanApp.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
-    private readonly AppDbContext _context;
+    private readonly IProductReviewService _reviewService;
 
-    public ProductController(IProductService productService, AppDbContext context)
+    public ProductController(IProductService productService, IProductReviewService reviewService)
     {
         _productService = productService;
-        _context = context;
+        _reviewService = reviewService;
     }
 
     public async Task<IActionResult> Details(int id)
@@ -35,7 +34,7 @@ public class ProductController : Controller
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> AddReview([FromBody] ReviewDto reviewDto)
+    public async Task<IActionResult> AddReview([FromBody] ProductReviewCreateDto reviewDto)
     {
         try
         {
@@ -45,31 +44,47 @@ public class ProductController : Controller
                 return Json(new { success = false, message = "User not authenticated" });
             }
 
-            var review = new ProductReview
+            var userName = User.Identity?.Name ?? "Anonymous";
+            var result = await _reviewService.CreateReviewAsync(reviewDto, userId, userName);
+
+            if (result)
             {
-                ProductId = reviewDto.ProductId,
-                UserId = userId,
-                UserName = User.Identity?.Name ?? "Anonymous",
-                Rating = reviewDto.Rating,
-                Comment = reviewDto.Comment,
-                CreatedAt = DateTime.UtcNow
-            };
+                return Json(new { success = true, message = "Review submitted successfully" });
+            }
 
-            _context.ProductReviews.Add(review);
-            await _context.SaveChangesAsync();
-
-            return Json(new { success = true, message = "Review submitted successfully" });
+            return Json(new { success = false, message = "Failed to submit review" });
         }
         catch (Exception ex)
         {
             return Json(new { success = false, message = "Failed to submit review: " + ex.Message });
         }
     }
-}
 
-public class ReviewDto
-{
-    public int ProductId { get; set; }
-    public int Rating { get; set; }
-    public string Comment { get; set; } = string.Empty;
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> DeleteReview(int id)
+    {
+        try
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Json(new { success = false, message = "User not authenticated" });
+            }
+
+            var result = await _reviewService.DeleteReviewAsync(id, userId);
+
+            if (result)
+            {
+                return Json(new { success = true, message = "Review deleted successfully" });
+            }
+
+            return Json(new { success = false, message = "You can only delete your own reviews" });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = "Failed to delete review: " + ex.Message });
+        }
+    }
 }
+   

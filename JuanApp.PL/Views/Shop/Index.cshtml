@@ -205,7 +205,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
-                                                <img src="~/assets/img/product/@product.ImageUrl" alt="@product.Name" />
+                                                <img src="@product.ImageUrl" alt="@product.Name" />
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -253,7 +253,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
-                                                <img src="~/assets/img/product/@product.ImageUrl" alt="@product.Name">
+                                                <img src="@product.ImageUrl" alt="@product.Name">
                                             </a>
                                         </div>
                                         <div class="product-content-list">

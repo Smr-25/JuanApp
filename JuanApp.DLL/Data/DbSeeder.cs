@@ -21,7 +21,7 @@ public static class DbSeeder
         }
 
         // Seed SuperAdmin User
-        var superAdminEmail = "superadmin@juanshop.com";
+        var superAdminEmail = "";
         var superAdminUser = await userManager.FindByEmailAsync(superAdminEmail);
 
         if (superAdminUser == null)
@@ -30,11 +30,11 @@ public static class DbSeeder
             {
                 UserName = superAdminEmail,
                 Email = superAdminEmail,
-                FullName = "Super Admin",
+                FullName = "",
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(adminUser, "Admin123!");
+            var result = await userManager.CreateAsync(adminUser, "");
 
             if (result.Succeeded)
             {
@@ -43,7 +43,7 @@ public static class DbSeeder
         }
         
         // Seed Regular Admin User
-        var adminEmail = "admin@juanshop.com";
+        var adminEmail = "";
         var adminUserCheck = await userManager.FindByEmailAsync(adminEmail);
 
         if (adminUserCheck == null)
@@ -56,7 +56,7 @@ public static class DbSeeder
                 EmailConfirmed = true
             };
 
-            var result = await userManager.CreateAsync(regularAdmin, "Admin123!");
+            var result = await userManager.CreateAsync(regularAdmin, "");
 
             if (result.Succeeded)
             {

@@ -37,6 +37,47 @@ public class AdminProductService(
         }).ToList();
     }
 
+    public async Task<(List<ProductDto> Products, int TotalCount)> GetProductsAsync(string? search = null, int page = 1, int pageSize = 10)
+    {
+        var query = context.Products
+            .Include(p => p.Category)
+            .Include(p => p.ProductImages)
+            .Include(p => p.Colors)
+            .Include(p => p.Sizes)
+            .AsQueryable();
+
+        // Apply search filter
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(p => 
+                p.Name.Contains(search) || 
+                p.Description.Contains(search) ||
+                p.Category.Name.Contains(search));
+        }
+
+        var totalCount = await query.CountAsync();
+
+        var products = await query
+            .OrderByDescending(p => p.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                ImageUrl = p.ImageUrl,
+                InStock = p.InStock,
+                DiscountPercentage = p.DiscountPercentage,
+                IsNew = p.IsNew,
+                CategoryName = p.Category.Name
+            })
+            .ToListAsync();
+
+        return (products, totalCount);
+    }
+
     public async Task<ProductDto?> GetProductByIdAsync(int id)
     {
         var product = await context.Products
@@ -223,7 +264,7 @@ public class AdminProductService(
 
     private async Task<string> SaveFileAsync(Microsoft.AspNetCore.Http.IFormFile file)
     {
-        var uploadsFolder = Path.Combine(env.WebRootPath, "uploads", "products");
+        var uploadsFolder = Path.Combine(env.WebRootPath, "assets", "img", "product");
         if (!Directory.Exists(uploadsFolder))
         {
             Directory.CreateDirectory(uploadsFolder);
@@ -237,7 +278,7 @@ public class AdminProductService(
             await file.CopyToAsync(fileStream);
         }
 
-        return "/uploads/products/" + uniqueFileName;
+        return "/assets/img/product/" + uniqueFileName;
     }
 
     private void DeleteFile(string filePath)
@@ -259,20 +300,60 @@ public class AdminProductService(
             if (!subscribers.Any()) return;
 
             var productLink = $"https://localhost:7062/Product/Details/{product.Id}";
+            var templatePath = Path.Combine(env.WebRootPath, "EmailTemplates", "NewProductEmail.html");
+            
+            if (!File.Exists(templatePath))
+            {
+                Console.WriteLine("Email template not found");
+                return;
+            }
+
+            var template = await File.ReadAllTextAsync(templatePath);
             
             foreach (var email in subscribers)
             {
-                var emailBody = $@"
-                    <h2>New Product Alert! 🎉</h2>
-                    <h3>{product.Name}</h3>
-                    <p>{product.Description}</p>
-                    <p><strong>Price: ${product.Price}</strong></p>
-                    <a href='{productLink}' style='background-color: #4CAF50; color: white; padding: 14px 20px; text-decoration: none; display: inline-block;'>
-                        View Product
-                    </a>
-                ";
+                var emailBody = template
+                    .Replace("{{ProductName}}", product.Name)
+                    .Replace("{{ProductDescription}}", product.Description)
+                    .Replace("{{ProductPrice}}", product.Price.ToString("F2"))
+                    .Replace("{{ProductImageUrl}}", $"http://localhost:5195{product.ImageUrl}")
+                    .Replace("{{ProductUrl}}", productLink)
+                    .Replace("{{DiscountPercentage}}", product.DiscountPercentage.ToString())
+                    .Replace("{{UnsubscribeUrl}}", $"http://localhost:5195/Subscriber/Unsubscribe?email={email}")
+                    .Replace("{{WebsiteUrl}}", "http://localhost:5195")
+                    .Replace("{{FacebookUrl}}", "#")
+                    .Replace("{{TwitterUrl}}", "#")
+                    .Replace("{{InstagramUrl}}", "#")
+                    .Replace("{{LinkedInUrl}}", "#");
 
-                await emailService.SendEmailAsync(email, $"New Product: {product.Name}", emailBody);
+                // Handle conditional sections
+                if (product.DiscountPercentage > 0)
+                {
+                    emailBody = emailBody.Replace("{{#if HasDiscount}}", "").Replace("{{/if}}", "");
+                }
+                else
+                {
+                    emailBody = System.Text.RegularExpressions.Regex.Replace(
+                        emailBody, 
+                        @"\{\{#if HasDiscount\}\}.*?\{\{/if\}\}", 
+                        "", 
+                        System.Text.RegularExpressions.RegexOptions.Singleline);
+                }
+
+                if (product.IsNew)
+                {
+                    emailBody = emailBody.Replace("{{#if IsNew}}", "").Replace("{{/if}}", "");
+                }
+                else
+                {
+                    emailBody = System.Text.RegularExpressions.Regex.Replace(
+                        emailBody, 
+                        @"\{\{#if IsNew\}\}.*?\{\{/if\}\}", 
+                        "", 
+                        System.Text.RegularExpressions.RegexOptions.Singleline);
+                }
+
+                await emailService.SendEmailAsync(email, $"🎉 New Product Alert: {product.Name}", emailBody);
             }
         }
         catch (Exception ex)

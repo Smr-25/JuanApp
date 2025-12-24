@@ -106,7 +106,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("ColorProduct");
+                    b.ToTable("ColorProduct", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.Basket", b =>
@@ -131,7 +131,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Baskets");
+                    b.ToTable("Baskets", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.BasketItem", b =>
@@ -173,7 +173,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("BasketItems");
+                    b.ToTable("BasketItems", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.Blog", b =>
@@ -220,7 +220,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.Category", b =>
@@ -238,7 +238,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -287,7 +287,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
 
                     b.HasData(
                         new
@@ -365,7 +365,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.OrderItem", b =>
@@ -400,7 +400,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.ProductReview", b =>
@@ -438,7 +438,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductReviews");
+                    b.ToTable("ProductReviews", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.Setting", b =>
@@ -454,7 +454,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Key");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
 
                     b.HasData(
                         new
@@ -518,7 +518,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("Sizes", (string)null);
 
                     b.HasData(
                         new
@@ -591,7 +591,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscribers");
+                    b.ToTable("Subscribers", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Core.Models.Tag", b =>
@@ -609,7 +609,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tag", (string)null);
 
                     b.HasData(
                         new
@@ -663,7 +663,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Advantages");
+                    b.ToTable("Advantages", (string)null);
 
                     b.HasData(
                         new
@@ -736,7 +736,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -1111,7 +1111,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
 
                     b.HasData(
                         new
@@ -1347,7 +1347,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders");
+                    b.ToTable("Sliders", (string)null);
 
                     b.HasData(
                         new
@@ -1535,7 +1535,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("SizesId");
 
-                    b.ToTable("ProductSize");
+                    b.ToTable("ProductSize", (string)null);
                 });
 
             modelBuilder.Entity("ProductTag", b =>
@@ -1550,7 +1550,7 @@ namespace JuanApp.DLL.Data.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ProductTag");
+                    b.ToTable("ProductTag", (string)null);
                 });
 
             modelBuilder.Entity("ColorProduct", b =>

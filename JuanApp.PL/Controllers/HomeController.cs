@@ -1,9 +1,6 @@
 using JuanApp.BLL.Interfaces;
-using JuanApp.BLL.Services;
-using JuanApp.DLL.Data;
 using JuanApp.PL.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace JuanApp.Controllers;
 
@@ -12,18 +9,18 @@ public class HomeController : Controller
     private readonly ISliderService _sliderService;
     private readonly IProductService _productService;
     private readonly IAdvantagesService _advantageService;
-    private readonly AppDbContext _context;
+    private readonly IBlogService _blogService;
 
     public HomeController(
         ISliderService sliderService,
         IProductService productService,
         IAdvantagesService advantageService,
-        AppDbContext context)
+        IBlogService blogService)
     {
         _sliderService = sliderService;
         _productService = productService;
         _advantageService = advantageService;
-        _context = context;
+        _blogService = blogService;
     }
 
     public async Task<IActionResult> Index()
@@ -32,14 +29,9 @@ public class HomeController : Controller
         {
             Slider = await _sliderService.GetAllSlidersAsync(),
             Product = await _productService.GetAllProductsAsync(),
-            Advantage = await _advantageService.GetAllAdvantagesAsync()
+            Advantage = await _advantageService.GetAllAdvantagesAsync(),
+            Blogs = await _blogService.GetRecentBlogsAsync(3)
         };
-
-        // Blog-ları ViewBag-ə əlavə edirik
-        ViewBag.Blogs = await _context.Blogs
-            .OrderByDescending(b => b.PublishedDate)
-            .Take(3)
-            .ToListAsync();
 
         return View(homeVm);
     }

@@ -20,7 +20,7 @@ public class AccountService(
         {
             FullName = accountRegisterDto.FullName,
             Email = accountRegisterDto.Email,
-            UserName = accountRegisterDto.Email  // ✅ Email istifadə et, FullName yox
+            UserName = accountRegisterDto.Email
         };
         
         var existingUser = await userManager.FindByEmailAsync(accountRegisterDto.Email);
@@ -31,13 +31,11 @@ public class AccountService(
 
         var result = await userManager.CreateAsync(user, accountRegisterDto.Password);
         
-        // ✅ Yalnız user uğurla yaradıldıqdan sonra email göndər
         if (!result.Succeeded)
         {
             return result;
         }
         
-        // Subscribe if user checked the box
         if (accountRegisterDto.Subscribe)
         {
             await subscriberService.SubscribeAsync(accountRegisterDto.Email);
@@ -45,7 +43,7 @@ public class AccountService(
 
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
         var confirmationLink =
-            $"http://localhost:5119/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+            $"http://localhost:5195/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
         try
         {
@@ -58,7 +56,6 @@ public class AccountService(
         }
         catch (Exception ex)
         {
-            // Email göndərilməsə belə, user yaradılıb - log et
             Console.WriteLine($"Email sending failed: {ex.Message}");
         }
 
@@ -67,7 +64,6 @@ public class AccountService(
 
     public async Task<SignInResult> LoginAsync(AccountLoginDto accountLoginDto)
     {
-        // ✅ Əvvəlcə user-i tap
         var user = await userManager.FindByEmailAsync(accountLoginDto.UsernameOrEmail);
         if (user == null)
         {
@@ -78,18 +74,16 @@ public class AccountService(
             }
         }
 
-        // ✅ Email confirmed yoxlamasını ƏN ƏVVƏL et
         if (!user.EmailConfirmed)
         {
             return SignInResult.Failed;
         }
 
-        // ✅ User object ilə sign in et, username yox
         var result = await signInManager.PasswordSignInAsync(
-            user,  // ✅ User object
+            user,
             accountLoginDto.Password,
             accountLoginDto.RememberMe, 
-            lockoutOnFailure: true);  // ✅ Lockout enable et
+            lockoutOnFailure: true);
 
         return result;
     }
@@ -127,14 +121,14 @@ public class AccountService(
 
         var token = await userManager.GeneratePasswordResetTokenAsync(user);
         var resetLink =
-            $"https://localhost:7062/Account/ResetPassword?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+            $"http://localhost:5195/Account/ResetPassword?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
         try
         {
             FileStream fileStream = new FileStream("wwwroot/EmailTemplates/PasswordReset.html", FileMode.Open);
             using var streamReader = new StreamReader(fileStream);
             var emailBody = await streamReader.ReadToEndAsync();
-            emailBody = emailBody.Replace("{{UserName}}", user.UserName);
+            emailBody = emailBody.Replace("{{userName}}", user.UserName);
             emailBody = emailBody.Replace("{{ResetLink}}", resetLink);
 
             await emailService.SendEmailAsync(user.Email, "Reset Your Password", emailBody);
@@ -154,7 +148,6 @@ public class AccountService(
             return IdentityResult.Failed(new IdentityError { Description = "User not found." });
         }
 
-        // ✅ Bu yoxlama lazım deyil, ResetPasswordAsync özü yoxlayır
         var resetResult = await userManager.ResetPasswordAsync(user, token, newPassword);
         
         if (resetResult.Succeeded)
@@ -164,4 +157,23 @@ public class AccountService(
         
         return resetResult;
     }
+
+    public async Task<IdentityResult> ChangePasswordAsync(string email, string currentPassword, string newPassword)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+        }
+
+        var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        
+        if (result.Succeeded)
+        {
+            await userManager.UpdateSecurityStampAsync(user);
+        }
+
+        return result;
+    }
 }
+
