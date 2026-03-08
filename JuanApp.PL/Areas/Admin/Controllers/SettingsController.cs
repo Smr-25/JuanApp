@@ -22,7 +22,7 @@ public class SettingsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update(Dictionary<string, string> settings)
+    public async Task<IActionResult> Update([FromForm]Dictionary<string, string> settings)
     {
         var result = await _settingService.UpdateSettingsAsync(settings);
         
@@ -35,7 +35,7 @@ public class SettingsController : Controller
             TempData["Error"] = "Failed to update settings!";
         }
         
-        return RedirectToAction("Index");
+        return RedirectToAction("Index","Dashboard");
     }
 }
 

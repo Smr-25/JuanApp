@@ -93,10 +93,10 @@ public class BlogController : Controller
         var result = await _blogService.DeleteAsync(id);
         if (result)
         {
-            return Json(new { success = true, message = "Blog deleted successfully" });
+            return RedirectToAction("Index");
         }
 
-        return Json(new { success = false, message = "Failed to delete blog" });
+        return NotFound();
     }
 }
 

@@ -13,7 +13,7 @@ public class SizeService(AppDbContext db) : ISizeService
         var sizeDtos = sizes.Select(s => new ProductSizeDto
         {
             Id = s.Id,
-            Name = s.SizeType,
+            Name = s.Name,
             ProductCount = db.Products.Include(p=>p.Sizes).Count(p => p.Sizes.Any(size => size.Id == s.Id))
         }).ToList();
         return sizeDtos;

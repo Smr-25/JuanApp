@@ -43,7 +43,7 @@ public class OrderController : Controller
         {
             TempData["Error"] = "Failed to update order status";
         }
-        return RedirectToAction("Details", new { id });
+        return RedirectToAction("Index");
     }
 }
 

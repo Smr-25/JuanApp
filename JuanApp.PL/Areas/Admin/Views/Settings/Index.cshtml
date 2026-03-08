@@ -14,7 +14,7 @@
     </nav>
 </div>
 
-<form asp-action="Update" method="post">
+<form asp-area="Admin" asp-action="Update" method="post">
     <div class="row g-4">
         <div class="col-lg-6">
             <div class="card">
@@ -24,22 +24,22 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="form-label">Company Name</label>
-                        <input type="text" name="settings[CompanyName]" value="@(Model.ContainsKey("CompanyName") ? Model["CompanyName"] : "")" class="form-control" />
+                        <input type="text" name="CompanyName" value="@(Model.ContainsKey("CompanyName") ? Model["CompanyName"] : "")" class="form-control" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Address</label>
-                        <textarea name="settings[Address]" class="form-control" rows="2">@(Model.ContainsKey("Address") ? Model["Address"] : "")</textarea>
+                        <textarea name="Address" class="form-control" rows="2">@(Model.ContainsKey("Address") ? Model["Address"] : "")</textarea>
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Contact Phone</label>
-                        <input type="text" name="settings[ContactPhone]" value="@(Model.ContainsKey("ContactPhone") ? Model["ContactPhone"] : "")" class="form-control" />
+                        <input type="text" name="ContactPhone" value="@(Model.ContainsKey("ContactPhone") ? Model["ContactPhone"] : "")" class="form-control" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Contact Email</label>
-                        <input type="email" name="settings[ContactEmail]" value="@(Model.ContainsKey("ContactEmail") ? Model["ContactEmail"] : "")" class="form-control" />
+                        <input type="email" name="ContactEmail" value="@(Model.ContainsKey("ContactEmail") ? Model["ContactEmail"] : "")" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -53,22 +53,22 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="form-label"><i class="fa fa-facebook me-2"></i>Facebook URL</label>
-                        <input type="url" name="settings[FacebookUrl]" value="@(Model.ContainsKey("FacebookUrl") ? Model["FacebookUrl"] : "")" class="form-control" placeholder="https://facebook.com/yourpage" />
+                        <input type="url" name="FacebookUrl" value="@(Model.ContainsKey("FacebookUrl") ? Model["FacebookUrl"] : "")" class="form-control" placeholder="https://facebook.com/yourpage" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label"><i class="fa fa-twitter me-2"></i>Twitter URL</label>
-                        <input type="url" name="settings[TwitterUrl]" value="@(Model.ContainsKey("TwitterUrl") ? Model["TwitterUrl"] : "")" class="form-control" placeholder="https://twitter.com/yourpage" />
+                        <input type="url" name="TwitterUrl" value="@(Model.ContainsKey("TwitterUrl") ? Model["TwitterUrl"] : "")" class="form-control" placeholder="https://twitter.com/yourpage" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label"><i class="fa fa-instagram me-2"></i>Instagram URL</label>
-                        <input type="url" name="settings[InstagramUrl]" value="@(Model.ContainsKey("InstagramUrl") ? Model["InstagramUrl"] : "")" class="form-control" placeholder="https://instagram.com/yourpage" />
+                        <input type="url" name="InstagramUrl" value="@(Model.ContainsKey("InstagramUrl") ? Model["InstagramUrl"] : "")" class="form-control" placeholder="https://instagram.com/yourpage" />
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label"><i class="fa fa-linkedin me-2"></i>LinkedIn URL</label>
-                        <input type="url" name="settings[LinkedInUrl]" value="@(Model.ContainsKey("LinkedInUrl") ? Model["LinkedInUrl"] : "")" class="form-control" placeholder="https://linkedin.com/company/yourpage" />
+                        <input type="url" name="LinkedInUrl" value="@(Model.ContainsKey("LinkedInUrl") ? Model["LinkedInUrl"] : "")" class="form-control" placeholder="https://linkedin.com/company/yourpage" />
                     </div>
                 </div>
             </div>
@@ -87,4 +87,3 @@
         </div>
     </div>
 </form>
-

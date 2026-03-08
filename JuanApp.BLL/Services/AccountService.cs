@@ -20,7 +20,7 @@ public class AccountService(
         {
             FullName = accountRegisterDto.FullName,
             Email = accountRegisterDto.Email,
-            UserName = accountRegisterDto.Email
+            UserName = accountRegisterDto.FullName
         };
         
         var existingUser = await userManager.FindByEmailAsync(accountRegisterDto.Email);

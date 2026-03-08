@@ -105,7 +105,7 @@
                     }
                 </p>
                 
-                <form asp-action="UpdateStatus" method="post" class="mt-3">
+                <form asp-area="Admin" asp-controller="Order" asp-action="UpdateStatus" method="post" class="mt-3">
                     <input type="hidden" name="id" value="@Model.Id" />
                     <label class="form-label"><strong>Update Status:</strong></label>
                     <select name="status" class="form-select mb-2">

@@ -14,7 +14,7 @@ public class AdminSizeService(AppDbContext context) : IAdminSizeService
         return sizes.Select(s => new ProductSizeDto
         {
             Id = s.Id,
-            Name = s.SizeType
+            Name = s.Name
         }).ToList();
     }
 
@@ -26,13 +26,13 @@ public class AdminSizeService(AppDbContext context) : IAdminSizeService
         return new ProductSizeDto
         {
             Id = size.Id,
-            Name = size.SizeType
+            Name = size.Name
         };
     }
 
     public async Task<bool> CreateSizeAsync(string name)
     {
-        var size = new Size { SizeType = name };
+        var size = new Size { Name = name };
         context.Sizes.Add(size);
         await context.SaveChangesAsync();
         return true;
@@ -43,7 +43,7 @@ public class AdminSizeService(AppDbContext context) : IAdminSizeService
         var size = await context.Sizes.FindAsync(id);
         if (size == null) return false;
 
-        size.SizeType = name;
+        size.Name = name;
         await context.SaveChangesAsync();
         return true;
     }

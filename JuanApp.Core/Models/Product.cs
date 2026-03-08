@@ -21,5 +21,6 @@ public class Product : BaseEntity
     public List<Size> Sizes { get; set; } = new();
     public List<Tag> Tags { get; set; } = new();
     public List<ProductReview> Reviews { get; set; } = new();
+    public List<BasketItem> BasketItems { get; set; } = new();
 }
 

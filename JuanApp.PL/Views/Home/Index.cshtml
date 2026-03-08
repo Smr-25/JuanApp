@@ -9,7 +9,6 @@
     var advantages = Model.Advantage.Advantages;
 }
 
-<!-- main wrapper start -->
 <main>
     <!-- hero slider section start -->
     <section class="hero-slider">
@@ -25,29 +24,25 @@
                                      data-bg="@Url.Content("~/assets/img/slider/" + slider.ImageUrl)">
                                     <div class="hero-slider-content slide-1">
                                         <h5 class="slide-subtitle">@slider.SubTitle</h5>
-                                        <h2 class="slide-title"> @slider.Title</h2>
-                                        <p class="slide-desc">
-                                            @slider.Description
-                                        </p>
+                                        <h2 class="slide-title">@slider.Title</h2>
+                                        <p class="slide-desc">@slider.Description</p>
                                         <a href="@slider.ButtonLink" class="btn btn-hero">@slider.ButtonText</a>
                                     </div>
                                 </div>
                             </div>
                         }
-
                         <!-- single slider item end -->
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- hero slider section end -->
+
     <!-- service features start -->
     <section class="service-policy-area">
         <div class="container">
             <div class="row">
-                <!-- single policy item start -->
                 @foreach (var service in advantages)
                 {
                     <div class="col-lg-4">
@@ -66,6 +61,7 @@
         </div>
     </section>
     <!-- service features end -->
+
     <!-- our product area start -->
     <section class="our-product section-padding">
         <div class="container">
@@ -73,9 +69,7 @@
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title">Our Product</h2>
-                        <p class="sub-title">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                        </p>
+                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
                     </div>
                 </div>
             </div>
@@ -84,11 +78,11 @@
                     <div class="product-carousel-4 mbn-50 slick-row-15 slick-arrow-style">
                         @foreach (var product in mainProducts)
                         {
-                            <!-- product single item start -->
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">
-                                        <img src="@product.ImageUrl" alt=""/>
+                                        <!-- DƏYİŞİKLİK: Product image path standartizə olundu -->
+                                        <img src="@Url.Content("~/assets/img/product/" + product.ImageUrl)" alt=""/>
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -105,17 +99,16 @@
                                         }
                                         else
                                         {
-                                            <span class="price-old">@product.Price.ToString("F2")</span>
+                                            <span class="price-old">$@product.Price.ToString("F2")</span>
                                         }
                                     </div>
                                     <div class="product-action-link">
                                         <a href="#" data-toggle="tooltip" title="Wishlist">
                                             <i class="ion-android-favorite-outline"></i>
                                         </a>
-                                        <a href="javascript:void(0)" 
-                                           onclick="addToCart(@product.Id)" 
-                                           data-toggle="tooltip" 
-                                           title="Add To Cart">
+                                        <!-- DƏYİŞİKLİK: event JS funksiyasına ötürülür, səhifə reload olmur -->
+                                        <a href="javascript:void(0)" onclick="addToCart(event, @product.Id)" 
+                                           data-toggle="tooltip" title="Add To Cart">
                                             <i class="ion-bag"></i>
                                         </a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view" class="btn-quick-view"
@@ -127,28 +120,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- product single item start -->
                         }
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- our product area end -->
-    <!-- banner statistic area start -->
 
+    <!-- banner statistic area start -->
     <div class="banner-statistics">
         <div class="container">
             <div class="row no-gutters mtn-30">
-
                 @foreach (var banner in sliders)
                 {
                     <div class="col-md-6">
                         <div class="img-container mt-30">
                             <a asp-controller="Product" asp-action="Details" asp-route-id="@banner.Id">
-                                <img src="~/assets/img/banner/@banner.ImageUrl"
-                                     alt="banner-image"/>
+                                <img src="@Url.Content("~/assets/img/banner/" + banner.ImageUrl)" alt="banner-image"/>
                             </a>
                             <div class="banner-text">
                                 <h5 class="banner-subtitle">@banner.Title</h5>
@@ -160,8 +149,8 @@
             </div>
         </div>
     </div>
-
     <!-- banner statistic area end -->
+
     <!-- new products area start -->
     <section class="top-seller-area section-padding">
         <div class="container">
@@ -169,9 +158,7 @@
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title">New Products</h2>
-                        <p class="sub-title">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                        </p>
+                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
                     </div>
                 </div>
             </div>
@@ -179,21 +166,19 @@
                 <div class="col-xl-4 col-lg-5 col-md-5">
                     <div class="product-banner">
                         <a href="#">
-                            <img src="~/assets/img/banner/banner-3.jpg"
-                                 alt="product banner"/>
+                            <img src="~/assets/img/banner/banner-3.jpg" alt="product banner"/>
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-7 col-md-7">
                     <div class="top-seller-carousel slick-row-15 mtn-30">
-                        <!-- product item start -->
                         @foreach (var item in newProducts)
                         {
                             <div class="slide-item">
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
-                                            <img src="~/assets/img/product/@item.ImageUrl" alt=""/>
+                                            <img src="@Url.Content("~/assets/img/product/" + item.ImageUrl)" alt=""/>
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -210,7 +195,7 @@
                                             }
                                             else
                                             {
-                                                <span class="price-old">@item.Price.ToString("F2")</span>
+                                                <span class="price-old">$@item.Price.ToString("F2")</span>
                                             }
                                         </div>
                                         <div class="ratings">
@@ -224,16 +209,14 @@
                                             <a href="#" data-toggle="tooltip" title="Wishlist">
                                                 <i class="ion-android-favorite-outline"></i>
                                             </a>
-                                            <a href="javascript:void(0)" 
-                                               onclick="addToCart(@item.Id)" 
-                                               data-toggle="tooltip" 
-                                               title="Add To Cart">
+                                            <!-- DƏYİŞİKLİK: event JS funksiyasına ötürülür -->
+                                            <a href="javascript:void(0)" onclick="addToCart(event, @item.Id)" 
+                                               data-toggle="tooltip" title="Add To Cart">
                                                 <i class="ion-bag"></i>
                                             </a>
-                                            <a href="#"
-                                               data-toggle="modal"
-                                               data-target="#quick_view" data-id="@item.Id" class="btn-quick-view">
-                                                <span data-toggle="tooltip" title="Quick View" >
+                                            <a href="#" data-toggle="modal" data-target="#quick_view" 
+                                               data-id="@item.Id" class="btn-quick-view">
+                                                <span data-toggle="tooltip" title="Quick View">
                                                     <i class="ion-ios-eye-outline"></i>
                                                 </span>
                                             </a>
@@ -242,23 +225,21 @@
                                 </div>
                             </div>
                         }
-                        <!-- product item start -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- new products area end -->
+
     <!-- latest blog area start -->
     <section class="latest-blog-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title">our blog</h2>
-                        <p class="sub-title">
-                            Latest news and updates from our blog
-                        </p>
+                        <h2 class="title">Our Blog</h2>
+                        <p class="sub-title">Latest news and updates from our blog</p>
                     </div>
                 </div>
             </div>
@@ -269,18 +250,15 @@
                         {
                             @foreach (var blog in (List<JuanApp.Core.Models.Blog>)ViewBag.Blogs)
                             {
-                                <!-- blog single item start -->
                                 <div class="blog-post-item">
                                     <div class="blog-thumb">
                                         <a asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id">
-                                            <img src="/@blog.ImageUrl" alt="@blog.Title"/>
+                                            <img src="@Url.Content("~/"+blog.ImageUrl)" alt="@blog.Title"/>
                                         </a>
                                     </div>
                                     <div class="blog-content">
                                         <h5 class="blog-title">
-                                            <a asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id">
-                                                @blog.Title
-                                            </a>
+                                            <a asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id">@blog.Title</a>
                                         </h5>
                                         <ul class="blog-meta">
                                             <li><span>By: </span>@blog.Author,</li>
@@ -290,24 +268,16 @@
                                         <a asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id" class="read-more">Read More...</a>
                                     </div>
                                 </div>
-                                <!-- blog single item end -->
                             }
                         }
                         else
                         {
-                            <!-- blog single item start -->
                             <div class="blog-post-item">
                                 <div class="blog-thumb">
-                                    <a href="#">
-                                        <img src="~/assets/img/blog/blog-1.jpg" alt="blog thumb"/>
-                                    </a>
+                                    <a href="#"><img src="~/assets/img/blog/blog-1.jpg" alt="blog thumb"/></a>
                                 </div>
                                 <div class="blog-content">
-                                    <h5 class="blog-title">
-                                        <a href="#">
-                                            No blogs available yet
-                                        </a>
-                                    </h5>
+                                    <h5 class="blog-title"><a href="#">No blogs available yet</a></h5>
                                     <ul class="blog-meta">
                                         <li><span>By: </span>Admin,</li>
                                         <li><span>On: </span>Coming Soon</li>
@@ -315,7 +285,6 @@
                                     <a href="#" class="read-more">Read More...</a>
                                 </div>
                             </div>
-                            <!-- blog single item end -->
                         }
                     </div>
                 </div>
@@ -323,38 +292,18 @@
         </div>
     </section>
     <!-- latest blog area end -->
-    
+
     <!-- brand logo area start -->
     <div class="brand-logo-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="brand-active-carousel">
-                        <div class="brand-item">
-                            <a href="#">
-                                <img src="~/assets/img/brand/br1.png" alt="brand image"/>
-                            </a>
-                        </div>
-                        <div class="brand-item">
-                            <a href="#">
-                                <img src="~/assets/img/brand/br2.png" alt="brand image"/>
-                            </a>
-                        </div>
-                        <div class="brand-item">
-                            <a href="#">
-                                <img src="~/assets/img/brand/br3.png" alt="brand image"/>
-                            </a>
-                        </div>
-                        <div class="brand-item">
-                            <a href="#">
-                                <img src="~/assets/img/brand/br4.png" alt="brand image"/>
-                            </a>
-                        </div>
-                        <div class="brand-item">
-                            <a href="#">
-                                <img src="~/assets/img/brand/br5.png" alt="brand image"/>
-                            </a>
-                        </div>
+                        <div class="brand-item"><a href="#"><img src="~/assets/img/brand/br1.png" alt="brand image"/></a></div>
+                        <div class="brand-item"><a href="#"><img src="~/assets/img/brand/br2.png" alt="brand image"/></a></div>
+                        <div class="brand-item"><a href="#"><img src="~/assets/img/brand/br3.png" alt="brand image"/></a></div>
+                        <div class="brand-item"><a href="#"><img src="~/assets/img/brand/br4.png" alt="brand image"/></a></div>
+                        <div class="brand-item"><a href="#"><img src="~/assets/img/brand/br5.png" alt="brand image"/></a></div>
                     </div>
                 </div>
             </div>
@@ -362,129 +311,107 @@
     </div>
     <!-- brand area end -->
 </main>
-<!-- main wrapper end -->
 
 <!-- Quick View Modal Area Start -->
 <div class="modal" id="quick_view">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            
+                <!-- DƏYİŞİKLİK: AJAX ilə PartialView yüklənəcək -->
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    <script>
-    // Global addToCart funksiyası
-    function addToCart(productId, colorId, sizeId, quantity) {
-        @if (!User.Identity.IsAuthenticated)
-        {
-            @:toastr.warning('Please login to add products to cart');
-            @:setTimeout(function() {
-            @:window.location.href = '@Url.Action("Login", "Account")';
-            @:}, 1500);
-            @:return;
-        }
+<script>
+// DƏYİŞİKLİK: event JS funksiyasına ötürülür, səhifə reload olmur
+function addToCart(event, productId, colorId, sizeId, quantity) {
+    event.preventDefault();
 
-        colorId = colorId || null;
-        sizeId = sizeId || null;
-        quantity = quantity || 1;
-
-        var btn = event ? event.target.closest('a') : null;
-        var originalHtml = btn ? btn.innerHTML : null;
-        
-        if (btn) {
-            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
-            btn.style.pointerEvents = 'none';
-        }
-
-        $.ajax({
-            url: '@Url.Action("AddToCart", "Basket")',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                productId: productId,
-                quantity: quantity,
-                colorId: colorId,
-                sizeId: sizeId
-            }),
-            success: function(response) {
-                if (btn) {
-                    btn.innerHTML = originalHtml;
-                    btn.style.pointerEvents = 'auto';
-                }
-
-                if (response.success) {
-                    toastr.success('Product added to cart successfully!');
-                    updateCartCount(response.itemCount);
-                } else {
-                    toastr.error(response.message || 'Failed to add product');
-                }
-            },
-            error: function(xhr, status, error) {
-                if (btn) {
-                    btn.innerHTML = originalHtml;
-                    btn.style.pointerEvents = 'auto';
-                }
-                console.error('Error:', error);
-                toastr.error('An error occurred. Please try again.');
-            }
-        });
-    }
-
-    // Update cart count
-    function updateCartCount(count) {
-        $('.cart-count').text(count);
-        $('#cart-count').text(count);
-        $('.minicart-btn span').text(count);
-    }
-
-    // Quick View Modal açılışı
-    $(document).on('click', '.btn-quick-view', function(e) {
-        e.preventDefault();
-        var productId = $(this).data('id');
-        
-        $.ajax({
-            url: '@Url.Action("ProductModal", "Product")',
-            type: 'GET',
-            data: { id: productId },
-            beforeSend: function() {
-                $('#quick_view .modal-body').html('<div class="text-center p-5"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
-            },
-            success: function(response) {
-                $('#quick_view .modal-body').html(response);
-                $('#quick_view').modal('show');
-            },
-            error: function() {
-                toastr.error('Failed to load product details');
-            }
-        });
-    });
-
-    // Modal bağlananda content-i təmizlə
-    $('#quick_view').on('hidden.bs.modal', function () {
-        $(this).find('.modal-body').html('');
-    });
-
-    // Load cart count on page load
-    @if (User.Identity.IsAuthenticated)
+    @if (!User.Identity.IsAuthenticated)
     {
-        @:$(document).ready(function() {
-        @:$.ajax({
-        @:url: '@Url.Action("GetItemCount", "Basket")',
-        @:type: 'GET',
-        @:success: function(response) {
-        @:updateCartCount(response.itemCount);
-        @:}
-        @:});
-        @:});
+        @:toastr.warning('Please login to add products to cart');
+        @:setTimeout(function() { window.location.href = '@Url.Action("Login", "Account")'; }, 1500);
+        @:return;
     }
+
+    colorId = colorId || null;
+    sizeId = sizeId || null;
+    quantity = quantity || 1;
+
+    var btn = event.target.closest('a');
+    var originalHtml = btn.innerHTML;
+
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+    btn.style.pointerEvents = 'none';
+
+    $.ajax({
+        url: '@Url.Action("AddToBasket", "Basket")',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ productId, quantity, colorId, sizeId }),
+        success: function(response) {
+            btn.innerHTML = originalHtml;
+            btn.style.pointerEvents = 'auto';
+            if(response.success) {
+                toastr.success('Product added to cart successfully!');
+                updateCartCount(response.itemCount);
+            } else {
+                toastr.error(response.message || 'Failed to add product');
+            }
+        },
+        error: function() {
+            btn.innerHTML = originalHtml;
+            btn.style.pointerEvents = 'auto';
+            toastr.error('An error occurred. Please try again.');
+        }
+    });
+}
+
+function updateCartCount(count) {
+    $('.cart-count').text(count);
+    $('#cart-count').text(count);
+    $('.minicart-btn span').text(count);
+}
+
+$(document).on('click', '.btn-quick-view', function(e) {
+    e.preventDefault();
+    var productId = $(this).data('id');
+
+    $.ajax({
+        url: '@Url.Action("ProductModal", "Product")', // PartialView qaytarılmalıdır
+        type: 'GET',
+        data: { id: productId },
+        beforeSend: function() {
+            $('#quick_view .modal-body').html('<div class="text-center p-5"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
+        },
+        success: function(response) {
+            $('#quick_view .modal-body').html(response);
+            $('#quick_view').modal('show');
+        },
+        error: function() {
+            toastr.error('Failed to load product details');
+        }
+    });
+});
+
+$('#quick_view').on('hidden.bs.modal', function() {
+    $(this).find('.modal-body').html('');
+});
+
+@if(User.Identity.IsAuthenticated)
+{
+    @:$(document).ready(function() {
+    @:$.ajax({
+    @:url: '@Url.Action("GetItemCount", "Basket")',
+    @:type: 'GET',
+    @:success: function(response){ updateCartCount(response.itemCount); }
+    @:});
+    @:});
+}
 </script>
 }

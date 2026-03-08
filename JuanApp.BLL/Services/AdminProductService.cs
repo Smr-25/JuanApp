@@ -299,7 +299,7 @@ public class AdminProductService(
             var subscribers = await subscriberService.GetActiveSubscriberEmailsAsync();
             if (!subscribers.Any()) return;
 
-            var productLink = $"https://localhost:7062/Product/Details/{product.Id}";
+            var productLink = $"http://localhost:5195/Product/Details/{product.Id}";
             var templatePath = Path.Combine(env.WebRootPath, "EmailTemplates", "NewProductEmail.html");
             
             if (!File.Exists(templatePath))

@@ -1,5 +1,6 @@
 using JuanApp.BLL.Dtos;
 using JuanApp.BLL.Interfaces;
+using JuanApp.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@ public class SliderController(IAdminSliderService sliderService) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(HomeSliderDto dto, IFormFile? imageFile)
+    public async Task<IActionResult> Create(Slider dto, IFormFile? imageFile)
     {
         if (!ModelState.IsValid)
         {
@@ -43,7 +44,7 @@ public class SliderController(IAdminSliderService sliderService) : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, HomeSliderDto dto, IFormFile? imageFile)
+    public async Task<IActionResult> Edit(int id, Slider dto, IFormFile? imageFile)
     {
         if (!ModelState.IsValid)
         {

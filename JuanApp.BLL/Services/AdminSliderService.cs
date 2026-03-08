@@ -9,10 +9,10 @@ namespace JuanApp.BLL.Services;
 
 public class AdminSliderService(AppDbContext context, IWebHostEnvironment env) : IAdminSliderService
 {
-    public async Task<List<HomeSliderDto>> GetAllSlidersAsync()
+    public async Task<List<Slider>> GetAllSlidersAsync()
     {
         var sliders = await context.Sliders.ToListAsync();
-        return sliders.Select(s => new HomeSliderDto
+        return sliders.Select(s => new Slider()
         {
             Id = s.Id,
             Title = s.Title,
@@ -25,12 +25,12 @@ public class AdminSliderService(AppDbContext context, IWebHostEnvironment env) :
         }).ToList();
     }
 
-    public async Task<HomeSliderDto?> GetSliderByIdAsync(int id)
+    public async Task<Slider?> GetSliderByIdAsync(int id)
     {
         var slider = await context.Sliders.FindAsync(id);
         if (slider == null) return null;
 
-        return new HomeSliderDto
+        return new Slider()
         {
             Id = slider.Id,
             Title = slider.Title,
@@ -43,7 +43,7 @@ public class AdminSliderService(AppDbContext context, IWebHostEnvironment env) :
         };
     }
 
-    public async Task<bool> CreateSliderAsync(HomeSliderDto dto, Microsoft.AspNetCore.Http.IFormFile? imageFile)
+    public async Task<bool> CreateSliderAsync(Slider dto, Microsoft.AspNetCore.Http.IFormFile? imageFile)
     {
         var slider = new Slider
         {
@@ -60,12 +60,12 @@ public class AdminSliderService(AppDbContext context, IWebHostEnvironment env) :
             slider.ImageUrl = await SaveFileAsync(imageFile);
         }
 
-        context.Sliders.Add(slider);
+        await context.Sliders.AddAsync(slider);
         await context.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> UpdateSliderAsync(int id, HomeSliderDto dto, Microsoft.AspNetCore.Http.IFormFile? imageFile)
+    public async Task<bool> UpdateSliderAsync(int id, Slider dto, Microsoft.AspNetCore.Http.IFormFile? imageFile)
     {
         var slider = await context.Sliders.FindAsync(id);
         if (slider == null) return false;

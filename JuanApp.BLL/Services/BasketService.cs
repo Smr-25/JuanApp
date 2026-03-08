@@ -34,7 +34,7 @@ public class BasketService(AppDbContext db) : IBasketService
                 Price = bi.Price,
                 Quantity = bi.Quantity,
                 ColorName = bi.Color?.Name,
-                SizeName = bi.Size?.SizeType
+                SizeName = bi.Size?.Name
             }).ToList()
         };
     }

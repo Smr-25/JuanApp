@@ -1,4 +1,4 @@
-@model JuanApp.Core.Models.Blog
+@model JuanApp.BLL.Dtos.BlogUpdateDto
 
 @{
     ViewData["Title"] = "Edit Blog";
@@ -17,8 +17,6 @@
 
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="ViewCount" />
-    <input type="hidden" asp-for="PublishedDate" />
     
     <div class="row g-4">
         <div class="col-lg-8">
@@ -61,12 +59,12 @@
                         <input asp-for="Category" class="form-control" />
                     </div>
                     
-                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    @if (!string.IsNullOrEmpty(Model.ExistingImageUrl))
                     {
                         <div class="mb-3">
                             <label class="form-label">Current Image</label>
                             <div>
-                                <img src="/@Model.ImageUrl" alt="@Model.Title" style="max-width: 100%; border-radius: 8px;">
+                                <img src="/@Model.ExistingImageUrl" alt="@Model.Title" style="max-width: 100%; border-radius: 8px;">
                             </div>
                         </div>
                     }

@@ -61,7 +61,7 @@
                             @foreach (var color in Model.Colors)
                             {
                                 <label class="color-selection-item-@Model.Id" style="cursor: pointer; position: relative;">
-                                    <input type="radio" name="quickview-color-@Model.Id" value="@color.Name" class="color-radio-@Model.Id" style="position: absolute; opacity: 0;" />
+                                    <input type="radio" name="quickview-color-@Model.Id" value="@color.Id" class="color-radio-@Model.Id" style="position: absolute; opacity: 0;" />
                                     <div class="color-box-@Model.Id" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 2px solid #ddd; border-radius: 6px; transition: all 0.3s;">
                                         <span class="color-preview" style="width: 25px; height: 25px; background-color: @color.HexCode; border: 1px solid #ccc; border-radius: 4px; display: inline-block;"></span>
                                         <span class="color-name" style="font-size: 14px; font-weight: 500;">@color.Name</span>
@@ -81,7 +81,7 @@
                             @foreach (var size in Model.Sizes)
                             {
                                 <label class="size-selection-item-@Model.Id" style="cursor: pointer;">
-                                    <input type="radio" name="quickview-size-@Model.Id" value="@size.Name" class="size-radio-@Model.Id" style="position: absolute; opacity: 0;" />
+                                    <input type="radio" name="quickview-size-@Model.Id" value="@size.Id" class="size-radio-@Model.Id" style="position: absolute; opacity: 0;" />
                                     <div class="size-box-@Model.Id" style="min-width: 50px; padding: 10px 16px; border: 2px solid #ddd; border-radius: 6px; text-align: center; font-weight: 600; transition: all 0.3s;">
                                         @size.Name
                                     </div>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <button type="button"
-                            onclick="handleQuickViewAddToCart(@Model.Id)"
+                            onclick="handleQuickViewAddToCart(event, @Model.Id)"
                             class="btn btn-default"
                             id="quickview-btn-@Model.Id">
                         Add To Cart
@@ -119,14 +119,6 @@
                     }
                 </div>
 
-                <!-- Share Icons -->
-                <div class="share-icon">
-                    <h5 class="cat-title">Share:</h5>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
             </div>
         </div>
     </div>
@@ -134,34 +126,21 @@
 
 <script>
     $(document).ready(function() {
-        // Initialize sliders for modal
+        // Sliders
         setTimeout(function() {
             var largeSlider = $('#modal-large-slider-@Model.Id');
             var navSlider = $('#modal-nav-slider-@Model.Id');
             
             if (largeSlider.length && !largeSlider.hasClass('slick-initialized')) {
-                largeSlider.slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    fade: true,
-                    asNavFor: '#modal-nav-slider-@Model.Id'
-                });
+                largeSlider.slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '#modal-nav-slider-@Model.Id' });
             }
             
             if (navSlider.length && !navSlider.hasClass('slick-initialized')) {
-                navSlider.slick({
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    asNavFor: '#modal-large-slider-@Model.Id',
-                    dots: false,
-                    arrows: true,
-                    focusOnSelect: true
-                });
+                navSlider.slick({ slidesToShow: 4, slidesToScroll: 1, asNavFor: '#modal-large-slider-@Model.Id', dots: false, arrows: true, focusOnSelect: true });
             }
         }, 300);
 
-        // Initialize quantity buttons
+        // Quantity buttons
         var $proQty = $('#pro-qty-@Model.Id');
         var $input = $('#quickview-qty-@Model.Id');
         
@@ -171,14 +150,8 @@
         
         $proQty.find('.qtybtn').on('click', function() {
             var $button = $(this);
-            var oldValue = parseFloat($input.val());
-            var newVal;
-            
-            if ($button.hasClass('inc')) {
-                newVal = oldValue + 1;
-            } else {
-                newVal = oldValue > 1 ? oldValue - 1 : 1;
-            }
+            var oldValue = parseInt($input.val());
+            var newVal = $button.hasClass('inc') ? oldValue + 1 : (oldValue > 1 ? oldValue - 1 : 1);
             $input.val(newVal);
         });
 
@@ -195,18 +168,14 @@
         });
     });
 
-    // Handle Add to Cart from Quick View
-    function handleQuickViewAddToCart(productId) {
-        var quantity = parseInt($('#quickview-qty-' + productId).val()) || 1;
-        var color = $('input[name="quickview-color-' + productId + '"]:checked').val() || '';
-        var size = $('input[name="quickview-size-' + productId + '"]:checked').val() || '';
+    function handleQuickViewAddToCart(event, productId) {
+        if(event) event.preventDefault();
 
-        var data = {
-            productId: productId,
-            quantity: quantity,
-            selectedColor: color,
-            selectedSize: size
-        };
+        var quantity = parseInt($('#quickview-qty-' + productId).val()) || 1;
+        var color = $('input[name="quickview-color-' + productId + '"]:checked').val() || null;
+        var size = $('input[name="quickview-size-' + productId + '"]:checked').val() || null;
+
+        var data = { ProductId: productId, Quantity: quantity, ColorId: color, SizeId: size };
 
         var btn = $('#quickview-btn-' + productId);
         var originalText = btn.html();
@@ -223,11 +192,9 @@
                 if (response.success) {
                     toastr.success('Product added to cart!');
                     if (typeof updateCartCount === 'function') {
-                        updateCartCount();
+                        updateCartCount(response.itemCount);
                     }
-                    setTimeout(function() {
-                        $('#quick_view').modal('hide');
-                    }, 800);
+                    setTimeout(function() { $('#quick_view').modal('hide'); }, 800);
                 } else {
                     toastr.error(response.message || 'Failed to add product');
                 }
