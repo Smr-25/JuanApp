@@ -138,6 +138,10 @@ public class OrderService(AppDbContext context) : IOrderService
         var basket = await context.Baskets
             .Include(b => b.BasketItems)
             .ThenInclude(bi => bi.Product)
+            .Include(b => b.BasketItems)
+            .ThenInclude(bi => bi.Color)
+            .Include(b => b.BasketItems)
+            .ThenInclude(bi => bi.Size)
             .FirstOrDefaultAsync(b => b.UserId == userId);
 
         if (basket == null || !basket.BasketItems.Any())
