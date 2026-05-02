@@ -52,7 +52,7 @@ public class AdminProductService(
             query = query.Where(p => 
                 p.Name.Contains(search) || 
                 p.Description.Contains(search) ||
-                p.Category.Name.Contains(search));
+                (p.Category != null && p.Category.Name.Contains(search)));
         }
 
         var totalCount = await query.CountAsync();
@@ -71,7 +71,7 @@ public class AdminProductService(
                 InStock = p.InStock,
                 DiscountPercentage = p.DiscountPercentage,
                 IsNew = p.IsNew,
-                CategoryName = p.Category.Name
+                CategoryName = p.Category != null ? p.Category.Name : "Uncategorized"
             })
             .ToListAsync();
 

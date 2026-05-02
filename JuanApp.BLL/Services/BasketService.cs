@@ -101,7 +101,10 @@ public class BasketService(AppDbContext db) : IBasketService
             basketItem.Quantity = quantity;
         }
 
-        basketItem.Basket.UpdatedDate = DateTime.Now;
+        if (basketItem.Basket != null)
+        {
+            basketItem.Basket.UpdatedDate = DateTime.Now;
+        }
         await db.SaveChangesAsync();
         return true;
     }
@@ -115,7 +118,10 @@ public class BasketService(AppDbContext db) : IBasketService
         if (basketItem == null) return false;
 
         db.BasketItems.Remove(basketItem);
-        basketItem.Basket.UpdatedDate = DateTime.Now;
+        if (basketItem.Basket != null)
+        {
+            basketItem.Basket.UpdatedDate = DateTime.Now;
+        }
         await db.SaveChangesAsync();
         return true;
     }
