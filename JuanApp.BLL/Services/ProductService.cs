@@ -88,7 +88,7 @@ public class ProductService(AppDbContext db) : IProductService
             query = query.Where(p => 
                 p.Name.ToLower().Contains(searchTerm) || 
                 p.Description.ToLower().Contains(searchTerm) ||
-                p.Category.Name.ToLower().Contains(searchTerm)
+                (p.Category != null && p.Category.Name.ToLower().Contains(searchTerm))
             );
         }
 

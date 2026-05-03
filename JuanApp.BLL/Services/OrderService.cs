@@ -22,8 +22,8 @@ public class OrderService(AppDbContext context) : IOrderService
             Id = o.Id,
             UserId = o.UserId,
             OrderNumber = o.OrderNumber,
-            UserFullName = o.User.FullName,
-            UserEmail = o.User.Email,
+            UserFullName = o.User?.FullName ?? "Unknown User",
+            UserEmail = o.User?.Email ?? "Unknown Email",
             TotalAmount = o.TotalAmount,
             TotalPrice = o.TotalAmount,
             CreatedAt = o.OrderDate,
@@ -34,7 +34,7 @@ public class OrderService(AppDbContext context) : IOrderService
             OrderItems = o.OrderItems.Select(oi => new OrderItemDto
             {
                 Id = oi.Id,
-                ProductName = oi.Product.Name,
+                ProductName = oi.Product?.Name ?? "Unknown Product",
                 Quantity = oi.Quantity,
                 Price = oi.Price,
                 TotalPrice = oi.Price * oi.Quantity,
@@ -59,8 +59,8 @@ public class OrderService(AppDbContext context) : IOrderService
             Id = order.Id,
             UserId = order.UserId,
             OrderNumber = order.OrderNumber,
-            UserFullName = order.User.FullName,
-            UserEmail = order.User.Email,
+            UserFullName = order.User?.FullName ?? "Unknown User",
+            UserEmail = order.User?.Email ?? "Unknown Email",
             TotalAmount = order.TotalAmount,
             TotalPrice = order.TotalAmount,
             CreatedAt = order.OrderDate,
@@ -71,7 +71,7 @@ public class OrderService(AppDbContext context) : IOrderService
             OrderItems = order.OrderItems.Select(oi => new OrderItemDto
             {
                 Id = oi.Id,
-                ProductName = oi.Product.Name,
+                ProductName = oi.Product?.Name ?? "Unknown Product",
                 Quantity = oi.Quantity,
                 Price = oi.Price,
                 TotalPrice = oi.Price * oi.Quantity,
@@ -111,8 +111,8 @@ public class OrderService(AppDbContext context) : IOrderService
             Id = o.Id,
             UserId = o.UserId,
             OrderNumber = o.OrderNumber,
-            UserFullName = o.User.FullName,
-            UserEmail = o.User.Email,
+            UserFullName = o.User?.FullName ?? "Unknown User",
+            UserEmail = o.User?.Email ?? "Unknown Email",
             TotalAmount = o.TotalAmount,
             TotalPrice = o.TotalAmount,
             CreatedAt = o.OrderDate,
@@ -123,7 +123,7 @@ public class OrderService(AppDbContext context) : IOrderService
             OrderItems = o.OrderItems.Select(oi => new OrderItemDto
             {
                 Id = oi.Id,
-                ProductName = oi.Product.Name,
+                ProductName = oi.Product?.Name ?? "Unknown Product",
                 Quantity = oi.Quantity,
                 Price = oi.Price,
                 TotalPrice = oi.Price * oi.Quantity,
