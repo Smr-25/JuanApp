@@ -140,6 +140,11 @@ public class BasketController(
         }
 
         var userId = userManager.GetUserId(User);
+        if (string.IsNullOrEmpty(userId))
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
         await basketService.ClearBasketAsync(userId);
 
         return RedirectToAction("Index");
@@ -149,6 +154,12 @@ public class BasketController(
     public IActionResult Checkout()
     {
         if (!User.Identity.IsAuthenticated)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var userId = userManager.GetUserId(User);
+        if (string.IsNullOrEmpty(userId))
         {
             return RedirectToAction("Login", "Account");
         }
@@ -164,9 +175,20 @@ public class BasketController(
             return Json(new { success = false, message = "Unauthorized" });
         }
 
+        var userId = userManager.GetUserId(User);
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Json(new { success = false, message = "Invalid user" });
+        }
+
+        if (!ModelState.IsValid)
+        {
+            var errors = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors));
+            return Json(new { success = false, message = "Validation failed: " + errors });
+        }
+
         try
         {
-            var userId = userManager.GetUserId(User);
             var orderId = await orderService.CreateOrderAsync(userId, dto);
 
             if (dto.Subscribe && !string.IsNullOrEmpty(dto.Email))

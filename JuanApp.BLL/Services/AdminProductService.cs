@@ -5,6 +5,7 @@ using JuanApp.DLL.Data;
 using JuanApp.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace JuanApp.BLL.Services;
 
@@ -12,7 +13,8 @@ public class AdminProductService(
     AppDbContext context,
     IWebHostEnvironment env,
     ISubscriberService subscriberService,
-    IEmailService emailService) : IAdminProductService
+    IEmailService emailService,
+    IConfiguration configuration) : IAdminProductService
 {
     public async Task<List<ProductDto>> GetAllProductsAsync()
     {
@@ -314,7 +316,8 @@ public class AdminProductService(
             var subscribers = await subscriberService.GetActiveSubscriberEmailsAsync();
             if (!subscribers.Any()) return;
 
-            var productLink = $"http://localhost:5195/Product/Details/{product.Id}";
+            var baseUrl = configuration["AppSettings:BaseUrl"] ?? "http://localhost:5195";
+            var productLink = $"{baseUrl}/Product/Details/{product.Id}";
             var templatePath = Path.Combine(env.WebRootPath, "EmailTemplates", "NewProductEmail.html");
             
             if (!File.Exists(templatePath))

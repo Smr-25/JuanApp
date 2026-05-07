@@ -189,7 +189,22 @@ public class BlogService(AppDbContext context, IWebHostEnvironment env) : IBlogS
 
     private async Task<string> SaveImageAsync(Microsoft.AspNetCore.Http.IFormFile file)
     {
-        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+        // Validate file
+        if (file == null || file.Length == 0)
+            throw new ArgumentException("File is required");
+
+        // Check file size (max 5MB)
+        const long maxFileSize = 5 * 1024 * 1024; // 5MB
+        if (file.Length > maxFileSize)
+            throw new ArgumentException("File size cannot exceed 5MB");
+
+        // Validate file type
+        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+        var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        if (!allowedExtensions.Contains(fileExtension))
+            throw new ArgumentException("Only image files are allowed");
+
+        var fileName = Guid.NewGuid() + fileExtension;
         var uploadsFolder = Path.Combine(env.WebRootPath, "assets", "img", "blog");
         
         if (!Directory.Exists(uploadsFolder))

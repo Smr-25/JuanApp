@@ -107,13 +107,28 @@ public class AdminSliderService(AppDbContext context, IWebHostEnvironment env) :
 
     private async Task<string> SaveFileAsync(Microsoft.AspNetCore.Http.IFormFile file)
     {
+        // Validate file
+        if (file == null || file.Length == 0)
+            throw new ArgumentException("File is required");
+
+        // Check file size (max 5MB)
+        const long maxFileSize = 5 * 1024 * 1024; // 5MB
+        if (file.Length > maxFileSize)
+            throw new ArgumentException("File size cannot exceed 5MB");
+
+        // Validate file type
+        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+        var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        if (!allowedExtensions.Contains(fileExtension))
+            throw new ArgumentException("Only image files are allowed");
+
         var uploadsFolder = Path.Combine(env.WebRootPath, "uploads", "sliders");
         if (!Directory.Exists(uploadsFolder))
         {
             Directory.CreateDirectory(uploadsFolder);
         }
 
-        var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+        var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
         var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
         using (var fileStream = new FileStream(filePath, FileMode.Create))
