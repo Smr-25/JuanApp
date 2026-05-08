@@ -127,8 +127,13 @@ public class AccountController : Controller
         return Json(new { success = false, message = errors });
     }
 
-    public async Task<IActionResult> ConfirmEmail(string userEmail, string token)
+    public async Task<IActionResult> ConfirmEmail(string? userEmail, string? token)
     {
+        if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(token))
+        {
+            return BadRequest("Email or token is missing.");
+        }
+
         var result = await _accountService.ConfirmEmailAsync(userEmail, token);
         if (result.Succeeded)
         {
