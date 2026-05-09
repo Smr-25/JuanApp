@@ -39,11 +39,17 @@ public class AccountController : Controller
         if (!ModelState.IsValid)
             return View(userRegisterVm);
 
+        if (userRegisterVm?.accountRegisterDto == null || string.IsNullOrEmpty(userRegisterVm.accountRegisterDto.Email))
+        {
+            ModelState.AddModelError(string.Empty, "Email is required.");
+            return View(userRegisterVm);
+        }
+
         var result = await _accountService.RegisterAsync(userRegisterVm.accountRegisterDto);
         if (result.Succeeded)
         {
             // Subscribe if checkbox was checked
-            if (Subscribe)
+            if (Subscribe && !string.IsNullOrEmpty(userRegisterVm.accountRegisterDto.Email))
             {
                 await _subscriberService.SubscribeAsync(userRegisterVm.accountRegisterDto.Email);
             }
@@ -158,8 +164,13 @@ public class AccountController : Controller
         return RedirectToAction("Login", "Account");
     }
     
-    public async Task<IActionResult> ResetPassword(string email, string token)  // ✅ parametr sırası
+    public async Task<IActionResult> ResetPassword(string? email, string? token)
     {
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
+        {
+            return BadRequest("Email or token is missing.");
+        }
+
         var resetPasswordVm = new ResetPasswordVm
         {
             Token = token,
@@ -232,11 +243,17 @@ public class AccountController : Controller
         {
             // If the user does not have an account, then create one
             var email = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Email);
+            if (string.IsNullOrEmpty(email))
+            {
+                ModelState.AddModelError(string.Empty, "Email information is not available from the external provider.");
+                return RedirectToAction(nameof(Login));
+            }
+
             var user = new AppUser
             {
                 UserName = email,
                 Email = email,
-                FullName = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Name),
+                FullName = info.Principal.FindFirstValue(System.Security.Claims.ClaimTypes.Name) ?? email,
                 EmailConfirmed = true
             };
 
