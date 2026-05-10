@@ -10,6 +10,10 @@ public class SubscriberService(AppDbContext context) : ISubscriberService
 {
     public async Task<bool> SubscribeAsync(string email)
     {
+        // Validate email
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
+
         // Check if already subscribed
         var existing = await context.Subscribers
             .FirstOrDefaultAsync(s => s.Email == email);
@@ -63,6 +67,9 @@ public class SubscriberService(AppDbContext context) : ISubscriberService
 
     public async Task<bool> UnsubscribeAsync(string email)
     {
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
+
         var subscriber = await context.Subscribers
             .FirstOrDefaultAsync(s => s.Email == email);
         
