@@ -18,7 +18,7 @@ public class DashboardStatsDto
 public class RecentOrderDto
 {
     public int Id { get; set; }
-    public string CustomerName { get; set; } = string.Empty;
+    public string? CustomerName { get; set; } = string.Empty;
     public decimal TotalPrice { get; set; }
     public string Status { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }

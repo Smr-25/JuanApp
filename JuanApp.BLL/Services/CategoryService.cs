@@ -9,14 +9,15 @@ public class CategoryService(AppDbContext db) : ICategoryService
 {
     public async Task<List<ProductCategoryDto>> GetAllCategoriesAsync()
     {
+        var categories = await db.Categories
+            .Select(c => new ProductCategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                ProductCount = db.Products.Count(p => p.CategoryId == c.Id)
+            })
+            .ToListAsync();
         
-        var categories = await db.Categories.ToListAsync();
-        var categoryDtos = categories.Select(c => new ProductCategoryDto
-        {
-            Id = c.Id,
-            Name = c.Name,
-            ProductCount = db.Products.Count(p => p.CategoryId == c.Id)
-        }).ToList();
-        return categoryDtos;
+        return categories;
     }
 }

@@ -23,12 +23,13 @@ public class DashboardService(AppDbContext context) : IDashboardService
     public async Task<List<RecentOrderDto>> GetRecentOrdersAsync(int count = 5)
     {
         return await context.Orders
+            .Include(o => o.User)
             .OrderByDescending(o => o.OrderDate)
             .Take(count)
             .Select(o => new RecentOrderDto
             {
                 Id = o.Id,
-                CustomerName = o.User.FullName,
+                CustomerName = o.User != null ? o.User.FullName : "Unknown User",
                 TotalPrice = o.TotalAmount,
                 Status = o.Status.ToString(),
                 CreatedAt = o.OrderDate
