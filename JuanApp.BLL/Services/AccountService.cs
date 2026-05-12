@@ -3,6 +3,7 @@ using JuanApp.BLL.Interfaces;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
 
@@ -12,7 +13,8 @@ public class AccountService(
     UserManager<AppUser> userManager,
     SignInManager<AppUser> signInManager,
     IEmailService emailService,
-    ISubscriberService subscriberService) : IAccountService
+    ISubscriberService subscriberService,
+    IConfiguration configuration) : IAccountService
 {
     public async Task<IdentityResult> RegisterAsync(AccountRegisterDto accountRegisterDto)
     {
@@ -42,21 +44,26 @@ public class AccountService(
         }
 
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        var baseUrl = configuration["AppSettings:BaseUrl"] ?? "http://localhost:5000";
         var confirmationLink =
-            $"http://localhost:5195/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+            $"{baseUrl}/Account/ConfirmEmail?userEmail={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
         try
         {
-            FileStream fileStream = new FileStream("wwwroot/EmailTemplates/EmailConfirmation.html", FileMode.Open);
-            using var streamReader = new StreamReader(fileStream);
-            var emailBody = await streamReader.ReadToEndAsync();
+            var emailTemplatePath = Path.Combine(AppContext.BaseDirectory, "wwwroot", "EmailTemplates", "EmailConfirmation.html");
+            if (!File.Exists(emailTemplatePath))
+            {
+                return result;
+            }
+
+            var emailBody = await File.ReadAllTextAsync(emailTemplatePath);
             emailBody = emailBody.Replace("{{UserName}}", user.UserName);
             emailBody = emailBody.Replace("{{ConfirmationLink}}", confirmationLink);
             await emailService.SendEmailAsync(user.Email, "Confirm Your Email", emailBody);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Email sending failed: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Email sending failed: {ex.Message}");
         }
 
         return result;
@@ -120,14 +127,19 @@ public class AccountService(
         }
 
         var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        var baseUrl = configuration["AppSettings:BaseUrl"] ?? "http://localhost:5000";
         var resetLink =
-            $"http://localhost:5195/Account/ResetPassword?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+            $"{baseUrl}/Account/ResetPassword?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
 
         try
         {
-            FileStream fileStream = new FileStream("wwwroot/EmailTemplates/PasswordReset.html", FileMode.Open);
-            using var streamReader = new StreamReader(fileStream);
-            var emailBody = await streamReader.ReadToEndAsync();
+            var emailTemplatePath = Path.Combine(AppContext.BaseDirectory, "wwwroot", "EmailTemplates", "PasswordReset.html");
+            if (!File.Exists(emailTemplatePath))
+            {
+                return;
+            }
+
+            var emailBody = await File.ReadAllTextAsync(emailTemplatePath);
             emailBody = emailBody.Replace("{{userName}}", user.UserName);
             emailBody = emailBody.Replace("{{ResetLink}}", resetLink);
 
@@ -135,7 +147,7 @@ public class AccountService(
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Password reset email failed: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"Password reset email failed: {ex.Message}");
         }
     }
 

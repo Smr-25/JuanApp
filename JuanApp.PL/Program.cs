@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string env = "Mac";
+// Use environment-specific configuration
+var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile($"appsettings.{env}.json",
+    .AddJsonFile($"appsettings.{environment}.json",
         optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
