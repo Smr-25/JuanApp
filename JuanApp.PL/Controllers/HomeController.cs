@@ -1,39 +1,17 @@
 using JuanApp.BLL.Interfaces;
-using JuanApp.PL.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JuanApp.Controllers;
+namespace JuanApp.PL.Controllers;
 
-public class HomeController : Controller
+[ApiController]
+[Route("api/home")]
+public sealed class HomeController(IHomeService homeService) : ControllerBase
 {
-    private readonly ISliderService _sliderService;
-    private readonly IProductService _productService;
-    private readonly IAdvantagesService _advantageService;
-    private readonly IBlogService _blogService;
-
-    public HomeController(
-        ISliderService sliderService,
-        IProductService productService,
-        IAdvantagesService advantageService,
-        IBlogService blogService)
+    [HttpGet]
+    public async Task<IActionResult> Get()
     {
-        _sliderService = sliderService;
-        _productService = productService;
-        _advantageService = advantageService;
-        _blogService = blogService;
+        var home = await homeService.GetHomeAsync();
+        return Ok(home);
     }
-
-    public async Task<IActionResult> Index()
-    {
-        var homeVm = new HomeVm
-        {
-            Slider = await _sliderService.GetAllSlidersAsync(),
-            Product = await _productService.GetAllProductsAsync(),
-            Advantage = await _advantageService.GetAllAdvantagesAsync(),
-            Blogs = await _blogService.GetRecentBlogsAsync(3)
-        };
-
-        return View(homeVm);
-    }
-
 }
+

@@ -1,13 +1,9 @@
-﻿using JuanApp.BLL.Dtos;
-using JuanApp.Domain.Models;
+using JuanApp.BLL.Dtos;
 
 namespace JuanApp.BLL.Interfaces;
 
 public interface IProductService
 {
-    Task<HomeProductDto> GetAllProductsAsync();
-    Task<Product> GetProductByIdAsync(int productId);
-    Task<ProductDetailsDto> GetProductDetailsAsync(int productId);
-    Task<(IEnumerable<ProductDto> Products, int TotalCount)> GetFilteredProductsAsync(
-        ProductFilterDto productFilterDto);
+    Task<ProductDetailsDto?> GetBySlugAsync(string slug);
 }
+
